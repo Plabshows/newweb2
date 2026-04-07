@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Performance Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --primary: #ffb1c1;
+            --secondary: #4cd7f7;
+            --background: #0d0d0d;
+            --surface: #1a1a1a;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--background); color: white; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Gallery grid */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+        .gallery-item { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item .remove-btn {
+            position: absolute; top: 4px; right: 4px;
+            background: rgba(0,0,0,0.8); border-radius: 50%;
+            width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 12px; color: #ff6b6b;
+            transition: all 0.2s; border: 1px solid rgba(255,107,107,0.3);
+        }
+        .gallery-item .remove-btn:hover { background: rgba(255,107,107,0.3); transform: scale(1.1); }
+        .gallery-item .video-badge {
+            position: absolute; bottom: 4px; left: 4px;
+            background: rgba(0,0,0,0.8); border-radius: 4px;
+            padding: 2px 6px; font-size: 9px; color: var(--secondary);
+            font-family: 'Space Grotesk'; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* Upload drop zone */
+        .upload-zone {
+            border: 2px dashed rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(255,177,193,0.05);
+        }
+
+        /* Cover previews */
+        .cover-preview { width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; position: relative; }
+        .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .cover-preview .placeholder { color: rgba(255,255,255,0.3); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+        /* Progress bar */
+        .upload-progress { height: 3px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; }
+        .upload-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s; }
+
+        /* Loader */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { animation: spin 0.8s linear infinite; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: all 0.3s; transform: translateY(20px); opacity: 0; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: rgba(0, 200, 100, 0.15); border: 1px solid rgba(0,200,100,0.3); color: #00c864; }
+        .toast.error { background: rgba(255, 107, 107, 0.15); border: 1px solid rgba(255,107,107,0.3); color: #ff6b6b; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Auth Layer -->
+    <div id="auth-container" class="fixed inset-0 z-[100] bg-[#0d0d0d] flex items-center justify-center p-6">
+        <div class="glass-card p-8 rounded-2xl w-full max-w-md">
+            <h1 class="text-2xl font-black italic text-[#ffb1c1] font-headline mb-2 text-center tracking-tighter">PERFORMANCE LAB</h1>
+            <p class="text-white/30 text-xs text-center uppercase tracking-widest mb-8">Admin Dashboard</p>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Email</label>
+                    <input type="email" id="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all" placeholder="admin@performancelab.com">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Password</label>
+                    <input type="password" id="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all">
+                </div>
+                <button type="submit" id="login-btn" class="w-full bg-[#ffb1c1] text-black font-bold py-3 rounded-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[#ffb1c1]/20">LOGIN</button>
+                <p id="auth-error" class="text-red-400 text-xs text-center hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="hidden">
+        <nav class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl border-b border-white/5 px-8 py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <span class="text-xl font-black italic text-[#ffb1c1] tracking-tighter font-headline">PERFORMANCE LAB ADMIN</span>
+                <div class="flex items-center gap-6">
+                    <span id="user-email" class="text-xs text-white/40 font-body uppercase tracking-widest hidden md:block"></span>
+                    <button onclick="logout()" class="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-[#ffb1c1] transition-all">LOGOUT</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
+            <header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-tighter">Web Content Manager</h2>
+                    <p class="text-white/40 text-sm font-body">Manage visibility, cover photo, gallery and text for the website catalog.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="loadData()" class="flex items-center gap-2 text-white/60 hover:text-white transition-all text-sm uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-lg">refresh</span> Refresh
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filter tabs -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="setFilter('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest bg-white/10 text-white transition-all">All</button>
+                <button onclick="setFilter('app')" id="tab-app" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">App Shows</button>
+                <button onclick="setFilter('old-web')" id="tab-old-web" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">PLD Characters</button>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-white/5 border-b border-white/10">
+                            <th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline">Show / Cover</th>
+                            <th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline hidden md:table-cell">Source</th>
+                            <th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-center">Web Public</th>
+                            <th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shows-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 py-8">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeModal()"></div>
+        <div class="glass-card w-full max-w-3xl rounded-2xl relative z-10 max-h-[92vh] overflow-y-auto flex flex-col">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-[#0d0d0d]/95 backdrop-blur-xl px-8 py-5 border-b border-white/10 flex justify-between items-center z-10 rounded-t-2xl">
+                <h3 class="text-lg font-bold uppercase tracking-tight font-headline" id="modal-title">Edit Web Content</h3>
+                <button onclick="closeModal()" class="text-white/40 hover:text-white transition-all material-symbols-outlined">close</button>
+            </div>
+
+            <form id="edit-form" class="p-8 space-y-8">
+                <input type="hidden" id="edit-id">
+                <input type="hidden" id="edit-source">
+
+                <!-- SECTION: Cover Photo -->
+                <section>
+                    <h4 class="text-xs uppercase tracking-widest text-[#ffb1c1] font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">image</span> Foto de Portada
+                    </h4>
+                    <div class="cover-preview mb-3" id="cover-preview-container">
+                        <div class="placeholder" id="cover-placeholder">
+                            <span class="material-symbols-outlined text-4xl">add_photo_alternate</span>
+                            <span class="text-xs uppercase tracking-widest">Sin portada</span>
+                        </div>
+                        <img id="cover-preview-img" class="hidden" alt="Cover preview">
+                    </div>
+                    <div class="flex gap-2">
+                        <label class="flex-1 flex items-center gap-2 justify-center cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#ffb1c1]/40 rounded-lg px-4 py-3 text-sm transition-all" for="cover-upload-input">
+                            <span class="material-symbols-outlined text-base">upload</span>
+                            <span id="cover-upload-label" class="text-sm font-bold">Subir foto portada</span>
+                        </label>
+                        <button type="button" onclick="removeCover()" id="cover-remove-btn" class="hidden px-4 py-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-all text-sm font-bold">
+                            <span class="material-symbols-outlined text-base">delete</span>
+                        </button>
+                    </div>
+                    <input type="file" id="cover-upload-input" accept="image/*" class="hidden" onchange="handleCoverUpload(this)">
+                    <div class="upload-progress mt-2 hidden" id="cover-progress-wrap">
+                        <div class="upload-progress-bar" id="cover-progress-bar"></div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Text Content -->
+                <section>
+                    <h4 class="text-xs uppercase tracking-widest text-[#4cd7f7] font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">edit_note</span> Texto Web
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Título personalizado</label>
+                            <input type="text" id="web_custom_title" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all" placeholder="Si se rellena, reemplaza el título original">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Descripción web</label>
+                            <textarea id="web_description" rows="5" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all resize-y" placeholder="Descripción exclusiva para la web. Si se rellena, reemplaza la descripción del app."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Gallery -->
+                <section>
+                    <h4 class="text-xs uppercase tracking-widest text-[#ffb1c1] font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">photo_library</span> Galería Web
+                        <span class="text-white/30 font-normal normal-case tracking-normal text-[10px]">(fotos y vídeos)</span>
+                    </h4>
+
+                    <!-- Current Gallery -->
+                    <div id="gallery-grid-container" class="gallery-grid mb-4"></div>
+                    <p id="gallery-empty" class="text-white/30 text-xs text-center py-4 hidden">No hay archivos en la galería.</p>
+
+                    <!-- Upload zone -->
+                    <div class="upload-zone" id="gallery-upload-zone" onclick="document.getElementById('gallery-upload-input').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+                        <span class="material-symbols-outlined text-3xl text-white/30 mb-2 block">cloud_upload</span>
+                        <p class="text-sm text-white/60 font-bold">Haz clic o arrastra aquí para subir fotos / vídeos</p>
+                        <p class="text-xs text-white/30 mt-1">JPG, PNG, WEBP, MP4, MOV — Máx 50MB por archivo</p>
+                    </div>
+                    <input type="file" id="gallery-upload-input" accept="image/*,video/*" multiple class="hidden" onchange="handleGalleryUpload(this)">
+                    
+                    <!-- Upload queue progress -->
+                    <div id="upload-queue" class="space-y-2 mt-3"></div>
+                </section>
+
+                <!-- Save button -->
+                <div class="flex gap-4 pt-2">
+                    <button type="submit" id="save-btn" class="flex-1 bg-[#ffb1c1] text-black font-bold py-3 rounded-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base">save</span> GUARDAR CAMBIOS
+                    </button>
+                    <button type="button" onclick="closeModal()" class="px-8 border border-white/10 rounded-lg hover:bg-white/5 transition-all font-bold">CANCELAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="material-symbols-outlined text-base" id="toast-icon">check_circle</span>
+        <span id="toast-message"></span>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://nwxepstpedmxslbznejv.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const authContainer = document.getElementById('auth-container');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('login-form');
+        const tableBody = document.getElementById('shows-table-body');
+        const userEmailSpan = document.getElementById('user-email');
+
+        let allShows = [];
+        let currentFilter = 'all';
+
+        // ─── AUTH ───────────────────────────────────────────
+        async function checkSession() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) showDashboard(session.user);
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorEl = document.getElementById('auth-error');
+            const btn = document.getElementById('login-btn');
+            btn.textContent = 'Logging in...';
+            btn.disabled = true;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+            if (error) {
+                errorEl.innerText = error.message;
+                errorEl.classList.remove('hidden');
+                btn.textContent = 'LOGIN';
+                btn.disabled = false;
+            } else {
+                showDashboard(data.user);
+            }
+        });
+
+        function showDashboard(user) {
+            authContainer.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+            userEmailSpan.innerText = user.email;
+            loadData();
+        }
+
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload();
+        }
+
+        // ─── FILTER TABS ─────────────────────────────────────
+        function setFilter(f) {
+            currentFilter = f;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white/10', 'text-white');
+                btn.classList.add('text-white/40');
+            });
+            const active = document.getElementById(`tab-${f}`);
+            active.classList.add('bg-white/10', 'text-white');
+            active.classList.remove('text-white/40');
+            renderTable();
+        }
+
+        // ─── DATA ─────────────────────────────────────────────
+        async function loadData() {
+            try {
+                tableBody.innerHTML = '<tr><td colspan="4" class="p-12 text-center text-white/30 animate-pulse uppercase tracking-widest text-xs">Cargando catálogo...</td></tr>';
+                
+                const { data: acts, error: errorA } = await supabaseClient
+                    .from('acts')
+                    .select('id, name, image_url, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image');
+                const { data: chars, error: errorC } = await supabaseClient
+                    .from('pld_characters')
+                    .select('id, name, image, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image');
+
+                if (errorA || errorC) throw (errorA || errorC);
+
+                const mActs = (acts || []).map(a => ({ ...a, source: 'app', _cover: a.web_cover_image || a.image_url }));
+                const mChars = (chars || []).map(c => ({ ...c, source: 'old-web', _cover: c.web_cover_image || c.image }));
+                
+                allShows = [...mActs, ...mChars].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+                renderTable();
+            } catch (err) {
+                console.error("Load error:", err);
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-red-400 uppercase tracking-widest text-xs">Error: ${err.message}</td></tr>`;
+            }
+        }
+
+        function renderTable() {
+            tableBody.innerHTML = '';
+            const filtered = currentFilter === 'all' ? allShows : allShows.filter(s => s.source === currentFilter);
+            
+            if (filtered.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" class="p-12 text-center text-white/30 uppercase tracking-widest text-xs">No hay shows.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(show => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-white/[0.02] transition-all';
+                const name = show.name || 'Sin nombre';
+                const coverUrl = show._cover;
+                const isPublic = show.is_web_public;
+                const galleryCount = Array.isArray(show.web_gallery) ? show.web_gallery.length : 0;
+
+                tr.innerHTML = `
+                    <td class="p-4 md:p-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/5 flex-shrink-0 border border-white/10">
+                                ${coverUrl ? `<img src="${coverUrl}" class="w-full h-full object-cover" onerror="this.style.display='none'">` : `<div class="w-full h-full flex items-center justify-center text-white/20"><span class="material-symbols-outlined text-xl">image_not_supported</span></div>`}
+                            </div>
+                            <div>
+                                <div class="font-bold text-sm tracking-tight text-white/90">${name}</div>
+                                ${show.web_custom_title ? `<div class="text-[10px] text-[#ffb1c1]/60 font-normal uppercase tracking-wider mt-0.5">${show.web_custom_title}</div>` : ''}
+                                <div class="text-[10px] text-white/30 mt-0.5">${galleryCount} archivos en galería</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 md:p-6 hidden md:table-cell">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] font-bold uppercase tracking-widest text-white/40">${show.source === 'app' ? 'App Shows' : 'PLD Characters'}</span>
+                    </td>
+                    <td class="p-4 md:p-6 text-center">
+                        <label class="switch">
+                            <input type="checkbox" ${isPublic ? 'checked' : ''} onchange="togglePublic('${show.id}', '${show.source}', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td class="p-4 md:p-6 text-right">
+                        <button onclick="openModal('${show.id}', '${show.source}')" class="text-[10px] font-black uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hover:border-[#ffb1c1] hover:text-[#ffb1c1] transition-all whitespace-nowrap">
+                            <span class="material-symbols-outlined text-xs align-middle mr-1">edit</span> EDITAR
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        async function togglePublic(id, source, isPublic) {
+            const table = source === 'app' ? 'acts' : 'pld_characters';
+            const { error } = await supabaseClient.from(table).update({ is_web_public: isPublic }).eq('id', id);
+            if (error) {
+                showToast('Error: ' + error.message, 'error');
+            } else {
+                showToast(isPublic ? 'Show publicado en la web ✓' : 'Show ocultado de la web', 'success');
+                const show = allShows.find(s => s.id === id && s.source === source);
+                if (show) show.is_web_public = isPublic;
+            }
+        }
+
+        // ─── MODAL ────────────────────────────────────────────
+        let currentShow = null;
+        let pendingGallery = []; // Will hold current gallery items from DB
+        let pendingCoverUrl = null; // Currently saved cover URL
+
+        function openModal(id, source) {
+            const show = allShows.find(s => s.id === id && s.source === source);
+            if (!show) return;
+
+            currentShow = show;
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-source').value = source;
+            document.getElementById('modal-title').innerText = `Editar: ${show.name || 'Sin nombre'}`;
+            document.getElementById('web_custom_title').value = show.web_custom_title || '';
+            document.getElementById('web_description').value = show.web_description || '';
+
+            // Load gallery
+            pendingGallery = [];
+            const rawGallery = show.web_gallery;
+            if (Array.isArray(rawGallery)) pendingGallery = [...rawGallery];
+            else if (typeof rawGallery === 'string') { try { pendingGallery = JSON.parse(rawGallery); } catch(e) {} }
+            renderGalleryGrid();
+
+            // Load cover
+            pendingCoverUrl = show.web_cover_image || null;
+            renderCoverPreview(pendingCoverUrl);
+
+            // Clear upload queue
+            document.getElementById('upload-queue').innerHTML = '';
+
+            document.getElementById('edit-modal').classList.remove('hidden');
+            document.getElementById('edit-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            document.getElementById('edit-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('gallery-upload-input').value = '';
+            document.getElementById('cover-upload-input').value = '';
+        }
+
+        // ─── COVER PHOTO ─────────────────────────────────────
+        function renderCoverPreview(url) {
+            const img = document.getElementById('cover-preview-img');
+            const placeholder = document.getElementById('cover-placeholder');
+            const removeBtn = document.getElementById('cover-remove-btn');
+
+            if (url) {
+                img.src = url;
+                img.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                removeBtn.classList.remove('hidden');
+            } else {
+                img.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                removeBtn.classList.add('hidden');
+            }
+        }
+
+        async function handleCoverUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const label = document.getElementById('cover-upload-label');
+            const progressWrap = document.getElementById('cover-progress-wrap');
+            const progressBar = document.getElementById('cover-progress-bar');
+
+            label.textContent = 'Subiendo...';
+            progressWrap.classList.remove('hidden');
+            progressBar.style.width = '0%';
+
+            try {
+                const url = await uploadFile(file, 'covers', (pct) => {
+                    progressBar.style.width = pct + '%';
+                });
+                pendingCoverUrl = url;
+                renderCoverPreview(url);
+                showToast('Portada cargada ✓', 'success');
+            } catch (err) {
+                showToast('Error al subir portada: ' + err.message, 'error');
+            } finally {
+                label.textContent = 'Subir foto portada';
+                progressWrap.classList.add('hidden');
+                input.value = '';
+            }
+        }
+
+        function removeCover() {
+            pendingCoverUrl = null;
+            renderCoverPreview(null);
+        }
+
+        // ─── GALLERY ──────────────────────────────────────────
+        function renderGalleryGrid() {
+            const container = document.getElementById('gallery-grid-container');
+            const empty = document.getElementById('gallery-empty');
+            container.innerHTML = '';
+
+            if (pendingGallery.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            pendingGallery.forEach((item, idx) => {
+                const url = typeof item === 'string' ? item : item.url;
+                const isVideo = url && (url.match(/\.(mp4|webm|mov|avi)(\?|$)/i) || (item.type && item.type.startsWith('video')));
+                
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    ${isVideo
+                        ? `<video src="${url}" muted preload="metadata" class="w-full h-full object-cover"></video><div class="video-badge">VIDEO</div>`
+                        : `<img src="${url}" alt="Gallery item ${idx+1}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZpbGw9IiM1NTUiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5FUlI8L3RleHQ+PC9zdmc+'">` 
+                    }
+                    <div class="remove-btn" onclick="removeGalleryItem(${idx})">✕</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeGalleryItem(idx) {
+            pendingGallery.splice(idx, 1);
+            renderGalleryGrid();
+        }
+
+        // Drag & Drop
+        function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('dragover'); }
+        function onDragLeave(e) { e.currentTarget.classList.remove('dragover'); }
+        function onDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            if (files.length) processGalleryFiles(files);
+        }
+
+        async function handleGalleryUpload(input) {
+            const files = Array.from(input.files);
+            if (!files.length) return;
+            await processGalleryFiles(files);
+            input.value = '';
+        }
+
+        async function processGalleryFiles(files) {
+            const queue = document.getElementById('upload-queue');
+            for (const file of files) {
+                const itemId = `upload-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+                const isVideo = file.type.startsWith('video');
+                
+                const queueItem = document.createElement('div');
+                queueItem.id = itemId;
+                queueItem.className = 'bg-white/5 border border-white/10 rounded-lg px-4 py-3';
+                queueItem.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm ${isVideo ? 'text-[#4cd7f7]' : 'text-[#ffb1c1]'}">${isVideo ? 'videocam' : 'image'}</span>
+                            <span class="text-xs text-white/70 truncate max-w-[200px]">${file.name}</span>
+                        </div>
+                        <span class="text-[10px] text-white/30" id="${itemId}-status">Subiendo...</span>
+                    </div>
+                    <div class="upload-progress">
+                        <div class="upload-progress-bar" id="${itemId}-bar"></div>
+                    </div>
+                `;
+                queue.appendChild(queueItem);
+
+                try {
+                    const url = await uploadFile(file, 'gallery', (pct) => {
+                        document.getElementById(`${itemId}-bar`).style.width = pct + '%';
+                    });
+                    pendingGallery.push({ url, type: isVideo ? 'video' : 'image' });
+                    document.getElementById(`${itemId}-status`).textContent = '✓ Listo';
+                    document.getElementById(`${itemId}-status`).style.color = '#00c864';
+                    renderGalleryGrid();
+                    setTimeout(() => queueItem.remove(), 2000);
+                } catch (err) {
+                    document.getElementById(`${itemId}-status`).textContent = 'Error';
+                    document.getElementById(`${itemId}-status`).style.color = '#ff6b6b';
+                }
+            }
+        }
+
+        // ─── FILE UPLOAD TO SUPABASE STORAGE ─────────────────
+        async function uploadFile(file, folder, onProgress) {
+            const ext = file.name.split('.').pop();
+            const filename = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+            
+            // Use XHR for progress tracking
+            return new Promise(async (resolve, reject) => {
+                // Fake progress animation during upload
+                let fakeProgress = 0;
+                const progressInterval = setInterval(() => {
+                    fakeProgress = Math.min(fakeProgress + Math.random() * 15, 85);
+                    if (onProgress) onProgress(Math.round(fakeProgress));
+                }, 200);
+
+                const { data, error } = await supabaseClient.storage
+                    .from('web-media')
+                    .upload(filename, file, { upsert: false, cacheControl: '3600' });
+
+                clearInterval(progressInterval);
+                if (onProgress) onProgress(100);
+
+                if (error) {
+                    reject(error);
+                } else {
+                    const { data: { publicUrl } } = supabaseClient.storage
+                        .from('web-media')
+                        .getPublicUrl(filename);
+                    resolve(publicUrl);
+                }
+            });
+        }
+
+        // ─── SAVE FORM ────────────────────────────────────────
+        document.getElementById('edit-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const source = document.getElementById('edit-source').value;
+            const table = source === 'app' ? 'acts' : 'pld_characters';
+            const btn = document.getElementById('save-btn');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined text-base spinner">refresh</span> Guardando...';
+
+            const updates = {
+                web_custom_title: document.getElementById('web_custom_title').value || null,
+                web_description: document.getElementById('web_description').value || null,
+                web_gallery: pendingGallery,
+                web_cover_image: pendingCoverUrl || null,
+            };
+
+            const { error } = await supabaseClient.from(table).update(updates).eq('id', id);
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="material-symbols-outlined text-base">save</span> GUARDAR CAMBIOS';
+
+            if (error) {
+                showToast('Error al guardar: ' + error.message, 'error');
+            } else {
+                showToast('Cambios guardados correctamente ✓', 'success');
+                // Update local cache
+                const show = allShows.find(s => s.id === id && s.source === source);
+                if (show) {
+                    show.web_custom_title = updates.web_custom_title;
+                    show.web_description = updates.web_description;
+                    show.web_gallery = updates.web_gallery;
+                    show.web_cover_image = updates.web_cover_image;
+                    show._cover = updates.web_cover_image || show.image_url || show.image;
+                }
+                renderTable();
+                closeModal();
+            }
+        });
+
+        // ─── TOAST ────────────────────────────────────────────
+        let toastTimeout;
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toast-message');
+            const icon = document.getElementById('toast-icon');
+            
+            toast.className = `toast ${type}`;
+            msg.textContent = message;
+            icon.textContent = type === 'success' ? 'check_circle' : 'error';
+            
+            clearTimeout(toastTimeout);
+            setTimeout(() => toast.classList.add('show'), 10);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        // ─── INIT ─────────────────────────────────────────────
+        checkSession();
+    </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERFORMANCE LAB | PIONEERING ENTERTAINMENT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#2f3131",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-low": "#1b1b1b",
+                    "tertiary": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#004e5d",
+                    "inverse-primary": "#bc0053",
+                    "inverse-surface": "#e2e2e2",
+                    "outline-variant": "#5a4045",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#90003e",
+                    "primary-container": "#c50f59",
+                    "on-secondary-container": "#003f4c",
+                    "on-primary-fixed": "#3f0017",
+                    "secondary": "#4cd7f7",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary": "#66002a",
+                    "surface-variant": "#353535",
+                    "outline": "#a9888e",
+                    "on-secondary": "#003640",
+                    "tertiary-container": "#636565",
+                    "secondary-container": "#00b2d1",
+                    "on-background": "#e2e2e2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffb1c1",
+                    "surface-container-highest": "#353535",
+                    "on-surface": "#e2e2e2",
+                    "on-surface-variant": "#e2bdc3",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#e2e3e3",
+                    "secondary-fixed-dim": "#4cd7f7",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#001f26",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "inverse-on-surface": "#303030",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#ffdadf",
+                    "surface-bright": "#393939",
+                    "surface-tint": "#ffb1c1",
+                    "secondary-fixed": "#adecff",
+                    "background": "#131313",
+                    "surface-container": "#1f1f1f",
+                    "surface": "#131313",
+                    "on-error": "#690005",
+                    "primary-fixed": "#ffd9df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e2e2e2; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .kinetic-italic { font-style: italic; }
+        .glass-card { background: rgba(53, 53, 53, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(169, 136, 142, 0.15); }
+        .glass-card:hover { border-color: rgba(76, 215, 247, 0.4); }
+        .text-neon-pink { color: #ffb1c1; text-shadow: 0 0 10px rgba(255, 177, 193, 0.3); }
+        .text-neon-cyan { color: #4cd7f7; text-shadow: 0 0 10px rgba(76, 215, 247, 0.3); }
+        .mask-fade-bottom { mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+        .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: 200px; gap: 1rem; }
+        .masonry-item:nth-child(2n) { grid-row: span 2; }
+        .masonry-item:nth-child(3n) { grid-row: span 1.5; }
+        input, textarea, select { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        input:focus, textarea:focus, select:focus { border-color: #ffb1c1; outline: none; background: rgba(255, 255, 255, 0.08); }
+        select option { background-color: #1b1b1b; color: white; }
+    </style>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] px-8 py-4 max-w-[1920px] mx-auto">
+    <div class="flex flex-col gap-4">
+        <!-- Top Row: Logo -->
+        <div class="flex justify-start items-center">
+            <a href="index.html" class="block hover:scale-105 transition-transform duration-300">
+                <img src="images/logo.png" alt="PERFORMANCE LAB" class="h-12 md:h-16 w-auto" />
+            </a>
+        </div>
+        
+        <!-- Bottom Row: Navigation and Action -->
+        <div class="flex justify-between items-center w-full">
+            <div class="hidden md:flex gap-8 items-center font-headline">
+                <a class="font-bold uppercase tracking-[0.1em] text-sm text-[#ffb1c1] border-b-2 border-[#ffb1c1] pb-1 transition-all duration-300 hover:scale-105" href="index.html#origin-story">The Lab</a>
+                <a class="font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="the-elements.html">The Elements</a>
+                <a class="font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="experiences.html">Experiences</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="#booking-form" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 inline-block text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class='pt-28'>
+<section class="py-20 px-8 bg-[#111111] border-y border-white/5 relative overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="flex-shrink-0">
+<p class="font-headline text-xs font-bold uppercase tracking-[0.5em] text-white/40 border-l-2 border-primary pl-4">
+                    The Lab Difference
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-24 w-full">
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow">
+<span class="font-headline text-5xl font-bold text-neon-cyan mb-2 tracking-tighter">20+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Years of Innovation</span>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow" style="animation-delay: 200ms;">
+<span class="font-headline text-5xl font-bold text-neon-pink mb-2 tracking-tighter">500+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Concepts Executed</span>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow" style="animation-delay: 400ms;">
+<span class="font-headline text-5xl font-bold text-neon-cyan mb-2 tracking-tighter">200+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Global Clients</span>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+</section>
+<style>
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-pulse-slow {
+        animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+    </style>
+<!-- Our Origin Story -->
+<section class="py-32 px-8 bg-surface-container-lowest relative overflow-hidden">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-1/2">
+<img class="rounded-xl w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" data-alt="Monochrome artistic shot of the rocky coast of Ibiza at night with long exposure sea spray and a bright moon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJoQs7A7CA9d7mTs0NtzZx-gJIu_Klfa4jeIDUOVTh6FkBdWp38hPT0gcI7K6n4xwxiUQrosKbjr8oEMJORnHau2d44WPNdX-JmSjWBBFwKcZQd6UCo7O4PynUO-FuVKXkMCtqbybEvmHcvmbC1HpfsXUgL_IKAqg7r63SsFOxHy5jnyzl-iWqSkcDwPlwZgcVgvYp7T55P6mtoWcEX9j0ze45K3ro9XZWy-brM9Wln8WdAo1oK2qm6FKHWHuDbbH7cev-rEtPACk"/>
+</div>
+<div class="w-full md:w-1/2">
+<h2 class="font-headline text-primary font-bold tracking-widest mb-2 uppercase text-xs">THE ORIGINAL SHOW ARCHITECTS</h2>
+<p class="font-headline text-3xl md:text-4xl font-bold text-white leading-tight mb-8">
+    Born in Ibiza. <span class="kinetic-italic text-secondary">Trusted worldwide.</span>
+</p>
+<div class="space-y-6 text-on-surface/80 text-lg leading-relaxed font-body">
+    <p>
+        Performance Lab is an Ibiza-based creative entertainment agency with over 20 years of experience in nightlife and events.
+    </p>
+    <p>
+        We curate and produce performers, visual shows and immersive experiences for weddings, private events, brands, hotels and large-scale productions around the world.
+    </p>
+    <p class="text-white font-bold">
+        We don’t just book acts — we design experiences that people remember.
+    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Lab in Action (Masonry Gallery) -->
+<section class="py-24 px-8 bg-background">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-4xl font-bold text-white mb-12 text-center uppercase tracking-tighter">THE LAB IN <span class="kinetic-italic text-secondary">ACTION</span></h2>
+<div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar">
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Vibrant concert stage with pink and blue laser lights and a silhouetted crowd" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgI7EqcdbdqnC42CHQVhZumu7AUO1pDr01nZqqAo2A4sftaiejtd_aDm5p_4DWYaBMvKvPN-fbC0GqHjUm_8SBQdcBLZwSwzIK19ok4APzz4H55Utw8p7tJ8kdath62k7LsYjcxMvOtpf0yQhXuwG3Q4O3marRN9Q5FAPa-kRlXyjqF2dNi7tX2PNiust7B2OW4I8eDuItv9GYLInIRVB36mN6yCk_ufxjdV9jjZZOLyAmTePdafIP4zvKhFCfJtr14aUTNpZgeU4"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="DJ at work in a dark, atmospheric nightclub with red neon accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiEeIUlIEKmrbRLIPvX0NzmgztsFRKRb1IrVUzNrEuY79aY6YL1PJNRw5CP7Cep5jyfbdQheA8JRa21xJMoqBM5VfGKOQVJ68m7hFUvvH4vt4PTvSb2JtFBQB2MCW4pDL8R7EjmAJLzvK6TGdkWQWRox7F7bhL708Zh25iA-db0Nr0ASrlXXpdvsCSEgXbvbb5ljuKJKb-Q6QLn9GxZt7vFiPVUPyRNntBZDLuPhbvFY75z2WBlvIQC8fyhqrXWI1ckfHwWB-Lryo"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Crowd at a music festival under a starry night sky with bright stage lights in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV8urmB7dS4Rxe901t4GvLN9IT3RNcGcW9bgK48o9dXq5y5-HnhwySF49l8GXmLYpp3j-I5WyQELNpPXf-6RWeZRsagq8tAs58L0xf48OKEeimoPNr8xcEnB8ljmMR8GyPg3HHHBTWmTstXmIvHXotkEqqoWyMeTUgUDOfLTdcme7Y919IDRrKClG4MWKxgJjkUkK0h3S6WtjptPyDssbqeugzil1F80nL7jPL8-WRmrTLG1MfMrwwv01UQZAZON9uS8M6LAEihas"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Performers in mirror suits reflecting stage lights during a luxury event" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpSCuufx4ntTP4TXcsKZDyrwZ0dsGz1NNNKsX76zFH_sfgtrP7QynfGlz-TmYM-S6vIz5o8_nKLapyK4JdegHlzJfOHTHzVxEVD_y4zOEecbq-Scs9fwBNg3WXUwkPKcWUAy2cjSLECsE-X7b5qmwhrIEWnZJp1trmbGNpUMrafc_G3HkBedkkquXGHUzKo7nUcAE0eQxGsq06Bi8YUB5vaHFJi-t5fdcQulWKmzeq0-vMCgZyha7h-2MPMG5PrFKlKalRQj7XwX0"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Dramatic silhouette of a dancer against a giant circular light source" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKL-0b6B_iLQubYhP6Y6BKJ0yngru4vw2b1aZGo3hzUoOuVbC84YoIbLjr35tD0WMGdMtYCH4xlp06aM7DGzTMi6CPskg0kpncGk6qFVJp7j4Oc8NWzqLl9SfiZTmWepesj24hjh68yF-CIBAnGC4iw9AkFxK9p7cWWkgf7DbDef2nQyDSo-plEwT9aefYMcTP1rT9ZB2HgqUOrfjBEXdlfFZXqeli6vBVaBice2XoxbP1bIzvmEMyD7gtNPMbsLIpoxrjhpgtxUQ"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract shot of confetti falling in slow motion over a celebrating crowd in a dark venue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnfdG-oAV61zGVg1KNs0r5xko_ZOBe9MhHC_8y3NdbnamM4e9QsqPmjalPA_ks7Cz00TL4j76VkTwb4-NWbCV-NGmExrGMgU9-WhXvndZDlhtdpeMZkvHyij7Qq-VPKzBfSwuEX8y-mzI2ctAYSApEOnAj4QqFaVpB_z2sm7LSZmplxZ4KRftEbGM_stNJzqyq3DtaANnvppe2IcNT1aTPdU-giOffXaF1pLtOAVRtFvj0YO9CCmuP9CfRbmQREu7WCcWb74vx6Vk"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="flex-1 w-full">
+<div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div>
+<h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE <br/><span class="kinetic-italic text-primary">MAGIC.</span></h2>
+<!-- Contact Form -->
+<form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12">
+<h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="Enter your name" type="text" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="name@email.com" type="email" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white [color-scheme:dark]" type="date" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
+<select class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white bg-white/5 border border-white/10 focus:border-primary focus:bg-white/10 outline-none" required>
+    <option value="" disabled selected>Select event type</option>
+    <option value="wedding" class="bg-[#1b1b1b]">Wedding</option>
+    <option value="corporate" class="bg-[#1b1b1b]">Corporate</option>
+    <option value="club" class="bg-[#1b1b1b]">Club / Nightlife</option>
+    <option value="private" class="bg-[#1b1b1b]">Private Celebration</option>
+    <option value="other" class="bg-[#1b1b1b]">Other</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="e.g. 5000" type="number" min="0"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
+<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-white" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
+</form>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button>
+<a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a>
+</div>
+</div>
+<div class="flex-1 flex flex-col md:items-end justify-between self-stretch">
+<div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">INSTAGRAM</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">LINKEDIN</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">CONTACT</a>
+</div>
+<div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">
+                    © 2024 PERFORMANCE LAB. ALL RIGHTS RESERVED.
+                </div>
+</div>
+</div>
+</footer>
+<script src="booking-handler.js"></script>
+</body></html>

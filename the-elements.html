@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERFORMANCE LAB | PIONEERING ENTERTAINMENT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#2f3131",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-low": "#1b1b1b",
+                    "tertiary": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#004e5d",
+                    "inverse-primary": "#bc0053",
+                    "inverse-surface": "#e2e2e2",
+                    "outline-variant": "#5a4045",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#90003e",
+                    "primary-container": "#c50f59",
+                    "on-secondary-container": "#003f4c",
+                    "on-primary-fixed": "#3f0017",
+                    "secondary": "#4cd7f7",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary": "#66002a",
+                    "surface-variant": "#353535",
+                    "outline": "#a9888e",
+                    "on-secondary": "#003640",
+                    "tertiary-container": "#636565",
+                    "secondary-container": "#00b2d1",
+                    "on-background": "#e2e2e2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffb1c1",
+                    "surface-container-highest": "#353535",
+                    "on-surface": "#e2e2e2",
+                    "on-surface-variant": "#e2bdc3",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#e2e3e3",
+                    "secondary-fixed-dim": "#4cd7f7",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#001f26",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "inverse-on-surface": "#303030",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#ffdadf",
+                    "surface-bright": "#393939",
+                    "surface-tint": "#ffb1c1",
+                    "secondary-fixed": "#adecff",
+                    "background": "#131313",
+                    "surface-container": "#1f1f1f",
+                    "surface": "#131313",
+                    "on-error": "#690005",
+                    "primary-fixed": "#ffd9df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e2e2e2; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .kinetic-italic { font-style: italic; }
+        .glass-card { background: rgba(53, 53, 53, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(169, 136, 142, 0.15); }
+        .glass-card:hover { border-color: rgba(76, 215, 247, 0.4); }
+        .text-neon-pink { color: #ffb1c1; text-shadow: 0 0 10px rgba(255, 177, 193, 0.3); }
+        .text-neon-cyan { color: #4cd7f7; text-shadow: 0 0 10px rgba(76, 215, 247, 0.3); }
+        .mask-fade-bottom { mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+        .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: 200px; gap: 1rem; }
+        .masonry-item:nth-child(2n) { grid-row: span 2; }
+        .masonry-item:nth-child(3n) { grid-row: span 1.5; }
+        input, textarea, select { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        input:focus, textarea:focus, select:focus { border-color: #ffb1c1; outline: none; background: rgba(255, 255, 255, 0.08); }
+        select option { background-color: #1b1b1b; color: white; }
+    </style>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-6 max-w-[1920px] mx-auto">
+    <a href="index.html" class="text-2xl font-black italic text-[#ffb1c1] tracking-tighter font-headline hover:scale-105 transition-transform duration-300">PERFORMANCE LAB</a>
+    <div class="hidden md:flex gap-8 items-center">
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="index.html#origin-story">The Lab</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#4cd7f7] border-b-2 border-[#4cd7f7] pb-1 transition-all duration-300 hover:scale-105" href="the-elements.html">The Elements</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="experiences.html">Experiences</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="#booking-form" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 inline-block text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
+    </div>
+</nav>
+<main class='pt-28'>
+<!-- The Elements -->
+<section id="the-elements" class="py-24 px-8 bg-background relative overflow-hidden border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-12 text-center">
+            <h2 class="font-headline text-4xl font-bold text-white mb-4 uppercase tracking-tighter">THE <span class="kinetic-italic text-primary">ELEMENTS</span></h2>
+            <p class="text-on-surface-variant font-body">Browse our curated selection of world-class performers and characters.</p>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="mb-12 space-y-6">
+            <div class="max-w-xl mx-auto relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50">search</span>
+                <input type="text" id="artist-search" placeholder="Search artists, characters, acts..." class="w-full pl-12 pr-4 py-3 rounded-lg text-sm transition-all focus:border-primary focus:ring-1 focus:ring-primary text-white bg-white/5 border border-white/10">
+            </div>
+            <div id="category-filters" class="flex flex-wrap justify-center gap-3">
+                <button class="filter-btn active px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-primary text-primary bg-primary/10 transition-all hover:bg-primary/20" data-category="all">All</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Musicians">Musicians</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="DJ">DJ</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Singer">Singer</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Magic">Magic</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Dancers">Dancers</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Roaming">Roaming</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Circus">Circus</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Fire & Flow">Fire & Flow</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Water Acts">Water Acts</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Art">Art</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Actors">Actors</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-white/70 hover:border-white/30 transition-all hover:bg-white/5" data-category="Drags">Drags</button>
+            </div>
+        </div>
+
+        <div id="artists-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 min-h-[300px] content-start">
+            <!-- Dynamic Act Cards will render here -->
+        </div>
+        
+        <div id="loading-spinner" class="text-center py-12 text-white/50 col-span-full">
+            <span class="material-symbols-outlined animate-spin text-4xl text-primary block mx-auto w-fit">progress_activity</span>
+            <p class="mt-4 font-headline uppercase tracking-widest text-xs">Loading Elements...</p>
+        </div>
+    </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="flex-1 w-full">
+<div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div>
+<h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE <br/><span class="kinetic-italic text-primary">MAGIC.</span></h2>
+<!-- Contact Form -->
+<form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12">
+<h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="Enter your name" type="text" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="name@email.com" type="email" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white [color-scheme:dark]" type="date" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
+<select class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white bg-white/5 border border-white/10 focus:border-primary focus:bg-white/10 outline-none" required>
+    <option value="" disabled selected>Select event type</option>
+    <option value="wedding" class="bg-[#1b1b1b]">Wedding</option>
+    <option value="corporate" class="bg-[#1b1b1b]">Corporate</option>
+    <option value="club" class="bg-[#1b1b1b]">Club / Nightlife</option>
+    <option value="private" class="bg-[#1b1b1b]">Private Celebration</option>
+    <option value="other" class="bg-[#1b1b1b]">Other</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="e.g. 5000" type="number" min="0"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
+<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-white" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
+</form>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button>
+<a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a>
+</div>
+</div>
+<div class="flex-1 flex flex-col md:items-end justify-between self-stretch">
+<div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">INSTAGRAM</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">LINKEDIN</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">CONTACT</a>
+</div>
+<div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">
+                    © 2024 PERFORMANCE LAB. ALL RIGHTS RESERVED.
+                </div>
+</div>
+</div>
+</footer>
+<script>
+    const supabaseUrl = 'https://nwxepstpedmxslbznejv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
+    const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    let allElements = [];
+    const grid = document.getElementById('artists-grid');
+    const loading = document.getElementById('loading-spinner');
+    const searchInput = document.getElementById('artist-search');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    async function loadElements() {
+        try {
+            loading.classList.remove('hidden');
+            grid.innerHTML = '';
+            
+            // Fetch Acts from App (Filtered for Web Public)
+            const { data: acts, error: actsError } = await supabaseClient
+                .from('acts')
+                .select('id, name, category, categories, image_url, description, is_web_public, web_custom_title, web_description, web_gallery')
+                .eq('is_web_public', true);
+            
+            // Fetch Characters from Old Web (Filtered for Web Public)
+            const { data: chars, error: charsError } = await supabaseClient
+                .from('pld_characters')
+                .select('id, name, category, image, description, is_web_public, web_custom_title, web_description, web_gallery')
+                .eq('is_web_public', true);
+                
+            if (actsError) console.error("Error fetching acts:", actsError);
+            if (charsError) console.error("Error fetching characters:", charsError);
+
+            const mappedActs = (acts || []).map(act => ({
+                id: act.id,
+                name: act.web_custom_title || act.name,
+                categories: [act.category, ...(act.categories || [])].map(c => c ? String(c).toUpperCase() : ''),
+                image: (act.web_gallery && act.web_gallery.length > 0) ? act.web_gallery[0] : (act.image_url || 'https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800'),
+                description: act.web_description || act.description || '',
+                source: 'app'
+            }));
+
+            const mappedChars = (chars || []).map(char => ({
+                id: char.id,
+                name: char.web_custom_title || char.name,
+                categories: [char.category ? String(char.category).toUpperCase() : ''],
+                image: (char.web_gallery && char.web_gallery.length > 0) ? char.web_gallery[0] : (char.image || 'https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800'),
+                description: char.web_description || char.description || '',
+                source: 'old-web'
+            }));
+
+            allElements = [...mappedActs, ...mappedChars].filter(el => el.name);
+            
+            // Shuffle
+            allElements.sort(() => Math.random() - 0.5);
+            
+            renderGrid(allElements);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            if (loading) loading.classList.add('hidden');
+        }
+    }
+
+    function renderGrid(elements) {
+        grid.innerHTML = '';
+        if (elements.length === 0) {
+            grid.innerHTML = '<div class="col-span-full py-12 text-center text-white/50 font-body">No elements found matching your criteria.</div>';
+            return;
+        }
+
+        elements.forEach(el => {
+            const card = document.createElement('div');
+            card.className = 'glass-card group rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,177,193,0.15)] flex flex-col';
+            
+            const mainCat = el.categories && el.categories.length > 0 && el.categories[0] !== '' ? el.categories[0] : 'PERFORMANCE';
+            
+            card.innerHTML = `
+                <a href="show?id=${el.id}&source=${el.source}" class="block h-full flex flex-col">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="${el.image}" alt="${el.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-90"></div>
+                    </div>
+                    <div class="p-6 relative -mt-6 flex flex-col flex-grow">
+                        <span class="inline-block self-start px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-[#4cd7f7] mb-3 border border-white/5">${mainCat}</span>
+                        <h3 class="font-headline font-bold text-white text-xl mb-2 line-clamp-1">${el.name}</h3>
+                        <p class="text-on-surface/70 text-sm font-body line-clamp-3">${el.description}</p>
+                    </div>
+                </a>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterElements() {
+        const query = searchInput.value.toLowerCase();
+        const activeBtn = document.querySelector('.filter-btn.active');
+        const activeCat = activeBtn ? activeBtn.getAttribute('data-category').toUpperCase() : 'ALL';
+
+        const filtered = allElements.filter(el => {
+            const matchesQuery = el.name.toLowerCase().includes(query) || (el.description && el.description.toLowerCase().includes(query));
+            let matchesCat = true;
+            if (activeCat !== 'ALL') {
+                matchesCat = el.categories.some(cat => cat.includes(activeCat));
+            }
+            return matchesQuery && matchesCat;
+        });
+
+        renderGrid(filtered);
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterElements);
+
+    if (filterBtns) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'border-primary', 'text-primary', 'bg-primary/10');
+                    b.classList.add('border-white/10', 'text-white/70');
+                });
+                const t = e.currentTarget;
+                t.classList.remove('border-white/10', 'text-white/70');
+                t.classList.add('active', 'border-primary', 'text-primary', 'bg-primary/10');
+                
+                filterElements();
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadElements);
+</script>
+<script src="booking-handler.js"></script>
+</body></html>

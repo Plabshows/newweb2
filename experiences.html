@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EXPERIENCES | PERFORMANCE LAB</title>
+<meta name="description" content="Curating extraordinary immersive experiences in Ibiza — private villas, elite nightlife, destination weddings, and corporate masterpieces." />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-low": "#1b1b1b",
+          "surface-container-lowest": "#0e0e0e",
+          "surface-container-high": "#2a2a2a",
+          "surface-container": "#1f1f1f",
+          "surface-container-highest": "#353535",
+          "surface-variant": "#353535",
+          "on-surface": "#e2e2e2",
+          "on-surface-variant": "#e2bdc3",
+          "background": "#131313",
+          "surface": "#131313",
+          "primary": "#ffb1c1",
+          "primary-container": "#c50f59",
+          "on-primary": "#66002a",
+          "secondary": "#4cd7f7",
+          "on-secondary": "#003640",
+          "outline": "#a9888e",
+          "outline-variant": "#5a4045",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Inter"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #0d0d0d;
+    color: #e2e2e2;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  .font-headline { font-family: 'Space Grotesk', sans-serif; }
+  .kinetic-italic { font-style: italic; }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .glass-card:hover {
+    border-color: rgba(76,215,247,0.3);
+    box-shadow: 0 0 40px rgba(76,215,247,0.06);
+  }
+
+  /* Experience cards */
+  .exp-card { position: relative; border-radius: 1.25rem; overflow: hidden; cursor: pointer; }
+  .exp-card-img {
+    position: absolute; inset: 0;
+    transform-origin: center;
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .exp-card:hover .exp-card-img { transform: scale(1.08); }
+  .exp-card-glow {
+    position: absolute; inset: 0; border-radius: 1.25rem;
+    opacity: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 60px rgba(255,177,193,0.1);
+    transition: opacity 0.5s ease;
+  }
+  .exp-card:hover .exp-card-glow { opacity: 1; }
+  .exp-card-sub {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+    opacity: 0;
+  }
+  .exp-card:hover .exp-card-sub { max-height: 130px; opacity: 1; }
+
+  /* Testimonial card */
+  .testi-card {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 1.25rem;
+    transition: border-color 0.4s, transform 0.4s;
+  }
+  .testi-card:hover {
+    border-color: rgba(255,177,193,0.25);
+    transform: translateY(-4px);
+  }
+
+  /* Overline tag */
+  .tag-overline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,177,193,0.7);
+  }
+
+  /* Ambient glow blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+
+  /* Hero gradient overlay */
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(13,13,13,0.5) 0%,
+      rgba(13,13,13,0.3) 40%,
+      rgba(13,13,13,0.92) 85%,
+      #0d0d0d 100%
+    );
+  }
+
+  /* Letter animation wrapper */
+  .split-letter { display: inline-block; overflow: hidden; vertical-align: bottom; }
+  .split-letter-inner { display: inline-block; }
+
+  /* CTA button */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #ffb1c1, #c50f59);
+    color: white;
+    border-radius: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(197,15,89,0.4);
+  }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: #ffb1c1;
+    border-radius: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,177,193,0.3);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    text-decoration: none;
+  }
+  .btn-outline:hover {
+    background: rgba(255,177,193,0.08);
+    border-color: rgba(255,177,193,0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Divider line */
+  .divider {
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,177,193,0.5), transparent);
+    margin: 1.25rem auto;
+  }
+
+  /* Stars */
+  .stars { color: #ffb1c1; letter-spacing: 0.1em; font-size: 0.75rem; }
+
+  /* Scroll indicator */
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50%       { transform: translateY(8px); opacity: 1; }
+  }
+  .scroll-indicator { animation: scrollBounce 2s ease-in-out infinite; }
+
+  /* Responsive nav */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-6 max-w-[1920px] mx-auto">
+    <a href="index.html" class="text-2xl font-black italic text-[#ffb1c1] tracking-tighter font-headline hover:scale-105 transition-transform duration-300">PERFORMANCE LAB</a>
+    <div class="hidden md:flex gap-8 items-center">
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="index.html#origin-story">The Lab</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="the-elements.html">The Elements</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#ffb1c1] border-b-2 border-[#ffb1c1] pb-1 transition-all duration-300 hover:scale-105" href="experiences.html">Experiences</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="#booking-form" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 inline-block text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════════ -->
+<section id="hero" class="relative" style="height: 100vh; min-height: 700px;">
+  <!-- Background image -->
+  <div style="position:absolute;inset:0;overflow:hidden;">
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYCA_Y-JRWQ-z6IMZAz13a363o_8OI6t_G3LNA2eTrqaqS-BEMMlYYVxWXwR72-EDBF0AU1jW_4eRoRof6F3UwS_zS2IpacEH4IoBePseWEHK1mVUXKiVJxe3BW_UObAwTSuF6BJTQ8GTMwyRQZyAmApjjuvuYgxxocb09XVdY5tiTJ08TXJW9QX_9Lr0M3BT6NRjirAVqnGmCZ_atoSqL5499N2n4D6y2aBlPkOLEz83G7Wa5o6Kf3pFvL_Ra7cLO-tAmeSGnXiY"
+      alt="Performance Lab Experiences"
+      style="width:100%;height:100%;object-fit:cover;transform:scale(1.05);transform-origin:center;"
+      id="hero-bg-img"
+    />
+    <div class="hero-overlay" style="position:absolute;inset:0;"></div>
+  </div>
+
+  <!-- Ambient blobs -->
+  <div class="blob" style="width:600px;height:600px;top:-100px;left:-200px;background:radial-gradient(ellipse,rgba(197,15,89,0.12) 0%,transparent 70%);"></div>
+  <div class="blob" style="width:400px;height:400px;bottom:0;right:-100px;background:radial-gradient(ellipse,rgba(76,215,247,0.08) 0%,transparent 70%);"></div>
+
+  <!-- Hero content -->
+  <div class="relative h-full flex flex-col items-center justify-center text-center px-8" style="padding-top:80px;">
+    <div id="hero-content">
+      <p class="tag-overline mb-8 opacity-0" id="hero-tag">a touch of magic</p>
+      <h1 id="hero-title" class="font-headline font-black uppercase text-white mb-8 overflow-hidden" style="font-size:clamp(3.5rem,10vw,8rem);line-height:0.9;letter-spacing:-0.03em;">
+        EXPERIENCES
+      </h1>
+      <div class="divider opacity-0" id="hero-divider"></div>
+      <p class="font-body text-white/60 max-w-2xl mx-auto leading-relaxed opacity-0" id="hero-para" style="font-size:clamp(0.85rem,1.5vw,1rem);">
+        We combine artistic direction with flawless event logistics to transform ideas into conceptual creation. Curating special and extraordinary moments ranging from iconic party destinations, weddings, corporate events, and exclusive venues such as villas and yachts.
+      </p>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-indicator opacity-0" id="scroll-ind">
+      <div style="width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,177,193,0.8),transparent);margin:0 auto;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EXPERIENCES GRID
+═══════════════════════════════════════════ -->
+<section id="exp-grid-section" class="relative py-28" style="background:#0d0d0d;">
+  <!-- Ambient glows -->
+  <div class="blob" style="width:700px;height:700px;top:0;left:-150px;background:radial-gradient(ellipse,rgba(197,15,89,0.07) 0%,transparent 70%);"></div>
+  <div class="blob" style="width:500px;height:500px;bottom:0;right:-100px;background:radial-gradient(ellipse,rgba(76,215,247,0.05) 0%,transparent 70%);"></div>
+
+  <div class="max-w-7xl mx-auto px-8 relative">
+    <!-- Section label -->
+    <div class="text-center mb-20">
+      <p class="tag-overline mb-5">Our Specialities</p>
+      <h2 class="font-headline font-black text-white uppercase" style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;">The Four Pillars</h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Grid: 1 col mobile, 2 col tablet, 4 col desktop -->
+    <div id="exp-cards-grid" class="grid gap-5" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+
+      <!-- Card 1: Private Celebrations -->
+      <div class="exp-card" style="height:580px;">
+        <div class="exp-card-img">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuANJvivy7rIwNxCH1-ribi4T8GhMo9iKgXXO6XGRjxISFqfh9BnfkM8-7hyUHxzr_ShszXN49v3alNxLJJ2N6OtEcTdiXQtnx38HkEf2rHHXIk9e9Y0-6RKZ5J2K7VjmIfTo9AyLrJA1QzXcj4i0WGs2cMNChiUSXRoNLYz8Bxl1TElPWI0mBIreu0xziwtFWzj0hBkZ1HJstroAHCm1CXw0OHeDet3Y_PVZ34TPfCMBqaW0YVgA4Jv7KETdp6EdM9xbXJfaqM6BJE"
+            alt="Private Celebrations & Villas"
+            style="width:100%;height:100%;object-fit:cover;"
+          />
+        </div>
+        <!-- Deep gradient -->
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.92) 100%);"></div>
+        <div class="exp-card-glow"></div>
+        <!-- Content -->
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <span class="tag-overline mb-3" style="opacity:0.7;">Tailored Exclusivity</span>
+          <h3 class="font-headline font-black text-white uppercase mb-4" style="font-size:1.2rem;line-height:1.2;letter-spacing:-0.01em;">Private Celebrations<br>&amp; Villas</h3>
+          <div class="exp-card-sub">
+            <p class="font-body text-white/55 text-sm leading-relaxed mb-4">From Mediterranean cliff-side villas to superyacht decks — we craft intimate luxury productions calibrated to perfection.</p>
+            <a href="#contact" class="inline-flex items-center gap-2 text-primary font-headline text-xs uppercase tracking-widest hover:gap-3 transition-all" style="color:#ffb1c1;">
+              <span>Enquire</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Elite Nightlife -->
+      <div class="exp-card" style="height:580px;">
+        <div class="exp-card-img">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYCA_Y-JRWQ-z6IMZAz13a363o_8OI6t_G3LNA2eTrqaqS-BEMMlYYVxWXwR72-EDBF0AU1jW_4eRoRof6F3UwS_zS2IpacEH4IoBePseWEHK1mVUXKiVJxe3BW_UObAwTSuF6BJTQ8GTMwyRQZyAmApjjuvuYgxxocb09XVdY5tiTJ08TXJW9QX_9Lr0M3BT6NRjirAVqnGmCZ_atoSqL5499N2n4D6y2aBlPkOLEz83G7Wa5o6Kf3pFvL_Ra7cLO-tAmeSGnXiY"
+            alt="Elite Nightlife & Beach Clubs"
+            style="width:100%;height:100%;object-fit:cover;"
+          />
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.94) 100%);"></div>
+        <div class="exp-card-glow" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2),0 0 60px rgba(76,215,247,0.12);"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <span class="tag-overline mb-3" style="opacity:0.7;color:#4cd7f7;">Pulse of the Night</span>
+          <h3 class="font-headline font-black text-white uppercase mb-4" style="font-size:1.2rem;line-height:1.2;letter-spacing:-0.01em;">Elite Nightlife<br>&amp; Beach Clubs</h3>
+          <div class="exp-card-sub">
+            <p class="font-body text-white/55 text-sm leading-relaxed mb-4">Ibiza's most iconic clubs trust us to deliver the unexpected — resident show packages that redefine the night.</p>
+            <a href="#contact" class="inline-flex items-center gap-2 font-headline text-xs uppercase tracking-widest hover:gap-3 transition-all" style="color:#4cd7f7;">
+              <span>Enquire</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Destination Weddings -->
+      <div class="exp-card" style="height:580px;">
+        <div class="exp-card-img">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6YMfv6N0UlY7Esx76NEiMk-eEOZtHe7RMJdLP19cPjWqLvQUetOb4fGsGYYmZt-oynzhNtGpBO4ISK1Ktm__LeICW6I4zR83FbrfjwmxEhTGScAcvFl1m7mi2sxJ-OTExK6VyjwuHXcgdsAOTlXuuATXk9Q0eIz15Gxhe_JjKCmAkR03aNoR20pecGmCMvLjGVp-2cZYtVIQEKtufMaC99Q6HZaDeq5RPnrRzTHS1JtzNeUZkLtg08LqLabF4tEthGGu4picp5cY"
+            alt="Destination Weddings"
+            style="width:100%;height:100%;object-fit:cover;"
+          />
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.90) 100%);"></div>
+        <div class="exp-card-glow"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <span class="tag-overline mb-3" style="opacity:0.7;">Unforgettable Vows</span>
+          <h3 class="font-headline font-black text-white uppercase mb-4" style="font-size:1.2rem;line-height:1.2;letter-spacing:-0.01em;">Destination<br>Weddings</h3>
+          <div class="exp-card-sub">
+            <p class="font-body text-white/55 text-sm leading-relaxed mb-4">Choreographed emotion, cinematic scale. Your wedding deserves a performance no guest will ever forget.</p>
+            <a href="#contact" class="inline-flex items-center gap-2 text-primary font-headline text-xs uppercase tracking-widest hover:gap-3 transition-all" style="color:#ffb1c1;">
+              <span>Enquire</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Corporate Masterpieces -->
+      <div class="exp-card" style="height:580px;">
+        <div class="exp-card-img">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpSCuufx4ntTP4TXcsKZDyrwZ0dsGz1NNNKsX76zFH_sfgtrP7QynfGlz-TmYM-S6vIz5o8_nKLapyK4JdegHlzJfOHTHzVxEVD_y4zOEecbq-Scs9fwBNg3WXUwkPKcWUAy2cjSLECsE-X7b5qmwhrIEWnZJp1trmbGNpUMrafc_G3HkBedkkquXGHUzKo7nUcAE0eQxGsq06Bi8YUB5vaHFJi-t5fdcQulWKmzeq0-vMCgZyha7h-2MPMG5PrFKlKalRQj7XwX0"
+            alt="Corporate Masterpieces"
+            style="width:100%;height:100%;object-fit:cover;"
+          />
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.95) 100%);"></div>
+        <div class="exp-card-glow" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2),0 0 60px rgba(76,215,247,0.10);"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <span class="tag-overline mb-3" style="opacity:0.7;color:#4cd7f7;">Brand Evolution</span>
+          <h3 class="font-headline font-black text-white uppercase mb-4" style="font-size:1.2rem;line-height:1.2;letter-spacing:-0.01em;">Corporate<br>Masterpieces</h3>
+          <div class="exp-card-sub">
+            <p class="font-body text-white/55 text-sm leading-relaxed mb-4">High-impact productions that transform brand launches and incentive trips into cultural moments.</p>
+            <a href="#contact" class="inline-flex items-center gap-2 font-headline text-xs uppercase tracking-widest hover:gap-3 transition-all" style="color:#4cd7f7;">
+              <span>Enquire</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /exp-cards-grid -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS / CREDIBILITY BAR
+═══════════════════════════════════════════ -->
+<section style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="stats-item">
+        <div class="font-headline font-black text-white mb-1" style="font-size:2.5rem;line-height:1;color:#ffb1c1;">+300</div>
+        <p class="font-body text-white/40 text-xs uppercase tracking-widest">Events Produced</p>
+      </div>
+      <div class="stats-item">
+        <div class="font-headline font-black text-white mb-1" style="font-size:2.5rem;line-height:1;color:#ffb1c1;">8+</div>
+        <p class="font-body text-white/40 text-xs uppercase tracking-widest">Seasons in Ibiza</p>
+      </div>
+      <div class="stats-item">
+        <div class="font-headline font-black text-white mb-1" style="font-size:2.5rem;line-height:1;color:#4cd7f7;">16</div>
+        <p class="font-body text-white/40 text-xs uppercase tracking-widest">Venue Partners</p>
+      </div>
+      <div class="stats-item">
+        <div class="font-headline font-black text-white mb-1" style="font-size:2.5rem;line-height:1;color:#4cd7f7;">100%</div>
+        <p class="font-body text-white/40 text-xs uppercase tracking-widest">Client Satisfaction</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section id="testimonials" class="relative py-28 overflow-hidden" style="background:#0d0d0d;">
+  <!-- Ambient -->
+  <div class="blob" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(197,15,89,0.06) 0%,transparent 70%);"></div>
+
+  <div class="max-w-7xl mx-auto px-8 relative">
+    <!-- Title -->
+    <div class="text-center mb-20">
+      <p class="tag-overline mb-5">Social Proof</p>
+      <h2 id="testi-title" class="font-headline font-black text-white overflow-hidden" style="font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.02em;">Kind words from our clients</h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Testimonials grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="testi-grid">
+
+      <!-- Testi 1 -->
+      <div class="testi-card p-8 testi-item">
+        <div class="stars mb-5">★★★★★</div>
+        <blockquote class="font-body text-white/70 text-sm leading-relaxed mb-8" style="font-style:italic;">
+          "Performance Lab elevated our villa soirée beyond anything we had imagined. The aerial silk performance above the infinity pool was nothing short of architectural theatre. Our guests are still talking about it."
+        </blockquote>
+        <div class="flex items-center gap-4 pt-6" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ffb1c1,#c50f59);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span class="font-headline font-black text-white text-sm">S</span>
+          </div>
+          <div>
+            <p class="font-headline font-semibold text-white text-sm">Sofia Andersen</p>
+            <p class="font-body text-white/35 text-xs mt-0.5">Private Villa, Cap Martinet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testi 2 -->
+      <div class="testi-card p-8 testi-item" style="border-color:rgba(255,177,193,0.12);">
+        <div class="stars mb-5">★★★★★</div>
+        <blockquote class="font-body text-white/70 text-sm leading-relaxed mb-8" style="font-style:italic;">
+          "We hired Performance Lab for our brand's Mediterranean launch. The synchronised fire-water show against the sunset at Destino was a jaw-dropping fusion of art and marketing. Brand recognition off the charts."
+        </blockquote>
+        <div class="flex items-center gap-4 pt-6" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4cd7f7,#0891b2);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span class="font-headline font-black text-white text-sm">M</span>
+          </div>
+          <div>
+            <p class="font-headline font-semibold text-white text-sm">Marcus Klein</p>
+            <p class="font-body text-white/35 text-xs mt-0.5">Brand Director, Maison Blanche Group</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testi 3 -->
+      <div class="testi-card p-8 testi-item">
+        <div class="stars mb-5">★★★★★</div>
+        <blockquote class="font-body text-white/70 text-sm leading-relaxed mb-8" style="font-style:italic;">
+          "Our wedding in Ibiza was pure poetry. Performance Lab curated every artistic detail — from the surprise dragon-silk act during dinner to the choreographed gogo dancers at the reception. Absolutely flawless."
+        </blockquote>
+        <div class="flex items-center gap-4 pt-6" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f0abfc,#a855f7);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span class="font-headline font-black text-white text-sm">L</span>
+          </div>
+          <div>
+            <p class="font-headline font-semibold text-white text-sm">Lara &amp; James Whitmore</p>
+            <p class="font-body text-white/35 text-xs mt-0.5">Destination Wedding, Ibiza</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /testi-grid -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INVESTMENT FORMULAS
+═══════════════════════════════════════════ -->
+<section id="formulas" class="relative py-28 overflow-hidden" style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.05);">
+  <div class="blob" style="width:600px;height:600px;top:0;right:-100px;background:radial-gradient(ellipse,rgba(76,215,247,0.05) 0%,transparent 70%);"></div>
+  <div class="blob" style="width:500px;height:500px;bottom:0;left:-80px;background:radial-gradient(ellipse,rgba(197,15,89,0.06) 0%,transparent 70%);"></div>
+
+  <div class="max-w-6xl mx-auto px-8 relative">
+    <!-- Header -->
+    <div class="text-center mb-20">
+      <p class="tag-overline mb-5">Pricing</p>
+      <h2 class="font-headline font-black text-white uppercase" style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;">
+        INVESTMENT <span class="kinetic-italic" style="color:#ffb1c1;">FORMULAS</span>
+      </h2>
+      <div class="divider"></div>
+      <p class="font-body text-white/40 text-sm">Scalable experiences for every dimension of impact.</p>
+    </div>
+
+    <!-- Packs Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch formula-cards">
+
+      <!-- Pack M -->
+      <div class="formula-card glass-card rounded-2xl p-10 flex flex-col items-center text-center" style="opacity:0;transform:translateY(50px);">
+        <p class="tag-overline mb-3">Pack M</p>
+        <h3 class="font-headline font-bold text-white text-2xl mb-1">Essential Alchemy</h3>
+        <div class="divider" style="width:24px;margin:1rem auto;"></div>
+        <div class="mb-8">
+          <span class="font-headline font-black text-white" style="font-size:2.5rem;line-height:1;">1.200€</span>
+          <span class="font-body text-white/35 block text-xs mt-2 uppercase tracking-widest">Starting from</span>
+        </div>
+        <ul class="space-y-3 mb-10 text-sm w-full text-left font-body flex-1">
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            2 Performance Elements
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            Basic Sound Design
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            Character Curation
+          </li>
+        </ul>
+        <a href="#contact" class="btn-outline w-full justify-center" style="font-size:0.65rem;">SELECT PACK</a>
+      </div>
+
+      <!-- Pack L — Most Immersive -->
+      <div class="formula-card glass-card rounded-2xl p-10 flex flex-col items-center text-center relative" style="opacity:0;transform:translateY(50px);border-color:rgba(76,215,247,0.3);background:rgba(76,215,247,0.03);">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 font-headline font-black uppercase text-[10px] tracking-widest px-4 py-1.5 rounded-full" style="background:#4cd7f7;color:#003640;">Most Immersive</div>
+        <p class="tag-overline mb-3 mt-4" style="color:rgba(76,215,247,0.7);">Pack L</p>
+        <h3 class="font-headline font-bold text-white text-2xl mb-1">Advanced Immersion</h3>
+        <div class="divider" style="width:24px;margin:1rem auto;background:linear-gradient(90deg,transparent,rgba(76,215,247,0.5),transparent);"></div>
+        <div class="mb-8">
+          <span class="font-headline font-black text-white" style="font-size:2.5rem;line-height:1;">3.800€</span>
+          <span class="font-body text-white/35 block text-xs mt-2 uppercase tracking-widest">Up to 7.500€</span>
+        </div>
+        <ul class="space-y-3 mb-10 text-sm w-full text-left font-body flex-1">
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            5 Performance Elements
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            Light &amp; Projection Scenography
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#4cd7f7;flex-shrink:0;">check_circle</span>
+            Custom Narrative Arc
+          </li>
+        </ul>
+        <a href="#contact" class="btn-primary w-full justify-center" style="font-size:0.65rem;background:linear-gradient(135deg,#4cd7f7,#0891b2);color:#003640;">SELECT PACK</a>
+      </div>
+
+      <!-- Pack XL -->
+      <div class="formula-card glass-card rounded-2xl p-10 flex flex-col items-center text-center" style="opacity:0;transform:translateY(50px);">
+        <p class="tag-overline mb-3">Pack XL</p>
+        <h3 class="font-headline font-bold text-white text-2xl mb-1">The Masterpiece</h3>
+        <div class="divider" style="width:24px;margin:1rem auto;"></div>
+        <div class="mb-8">
+          <span class="font-headline font-black text-white" style="font-size:2.5rem;line-height:1;">7.500€</span>
+          <span class="font-body text-white/35 block text-xs mt-2 uppercase tracking-widest">Starting from</span>
+        </div>
+        <ul class="space-y-3 mb-10 text-sm w-full text-left font-body flex-1">
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#ffb1c1;flex-shrink:0;">check_circle</span>
+            Full Creative Direction
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#ffb1c1;flex-shrink:0;">check_circle</span>
+            Custom Engineering &amp; Rigging
+          </li>
+          <li class="flex items-center gap-3 text-white/60">
+            <span class="material-symbols-outlined text-base" style="color:#ffb1c1;flex-shrink:0;">check_circle</span>
+            Global Performer Roster
+          </li>
+        </ul>
+        <a href="#contact" class="btn-outline w-full justify-center" style="font-size:0.65rem;color:#ffb1c1;border-color:rgba(255,177,193,0.3);">SELECT PACK</a>
+      </div>
+
+    </div><!-- /packs grid -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FULL-WIDTH VISUAL BREAK
+═══════════════════════════════════════════ -->
+<div style="position:relative;height:320px;overflow:hidden;">
+  <img
+    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6YMfv6N0UlY7Esx76NEiMk-eEOZtHe7RMJdLP19cPjWqLvQUetOb4fGsGYYmZt-oynzhNtGpBO4ISK1Ktm__LeICW6I4zR83FbrfjwmxEhTGScAcvFl1m7mi2sxJ-OTExK6VyjwuHXcgdsAOTlXuuATXk9Q0eIz15Gxhe_JjKCmAkR03aNoR20pecGmCMvLjGVp-2cZYtVIQEKtufMaC99Q6HZaDeq5RPnrRzTHS1JtzNeUZkLtg08LqLabF4tEthGGu4picp5cY"
+    alt="Performance Lab"
+    style="width:100%;height:100%;object-fit:cover;object-position:center 30%;"
+  />
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,#0d0d0d 0%,rgba(13,13,13,0.3) 40%,rgba(13,13,13,0.3) 60%,#0d0d0d 100%);"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+    <p class="font-headline font-black text-white text-center uppercase" style="font-size:clamp(1.8rem,5vw,4rem);letter-spacing:-0.03em;opacity:0.15;">THE MAGIC IS IN THE DETAILS</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT / CTA SECTION
+═══════════════════════════════════════════ -->
+<section id="contact" class="relative py-28 overflow-hidden" style="background:#0d0d0d;">
+  <!-- Ambient glows -->
+  <div class="blob" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(197,15,89,0.10) 0%,transparent 70%);"></div>
+
+  <div class="max-w-4xl mx-auto px-8 relative">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <p class="tag-overline mb-5">Work with us</p>
+      <h2 id="cta-title" class="font-headline font-black text-white uppercase" style="font-size:clamp(2rem,4.5vw,3.5rem);letter-spacing:-0.03em;line-height:1.1;">Let&rsquo;s start working together</h2>
+      <div class="divider"></div>
+      <p class="font-body text-white/50 text-sm leading-relaxed max-w-lg mx-auto">Tell us about your vision and we'll build something extraordinary around it. Our team responds within 24 hours.</p>
+    </div>
+
+    <!-- Contact form (glass) -->
+    <div class="glass-card rounded-2xl p-8 md:p-12 mb-10" id="contact-form-card">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block font-headline text-xs uppercase tracking-widest text-white/40 mb-2">Full Name</label>
+          <input type="text" placeholder="Your name" class="w-full px-4 py-3 rounded-xl text-white text-sm font-body" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='rgba(255,177,193,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+        </div>
+        <div>
+          <label class="block font-headline text-xs uppercase tracking-widest text-white/40 mb-2">Email</label>
+          <input type="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-xl text-white text-sm font-body" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='rgba(255,177,193,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label class="block font-headline text-xs uppercase tracking-widest text-white/40 mb-2">Event Type</label>
+        <select class="w-full px-4 py-3 rounded-xl text-white text-sm font-body" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);outline:none;color:#e2e2e2;">
+          <option value="" style="background:#1b1b1b;">Select your event type</option>
+          <option value="villa" style="background:#1b1b1b;">Private Celebrations &amp; Villas</option>
+          <option value="nightlife" style="background:#1b1b1b;">Elite Nightlife &amp; Beach Clubs</option>
+          <option value="wedding" style="background:#1b1b1b;">Destination Wedding</option>
+          <option value="corporate" style="background:#1b1b1b;">Corporate Masterpiece</option>
+          <option value="other" style="background:#1b1b1b;">Other</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label class="block font-headline text-xs uppercase tracking-widest text-white/40 mb-2">Tell us about your vision</label>
+        <textarea rows="4" placeholder="Describe your event — date, location, number of guests, key ideas…" class="w-full px-4 py-3 rounded-xl text-white text-sm font-body resize-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='rgba(255,177,193,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
+      </div>
+      <button
+        class="btn-primary w-full justify-center"
+        onclick="submitContactForm(this)"
+        style="font-size:0.7rem;"
+      >
+        <span class="material-symbols-outlined text-base">send</span>
+        Send Enquiry
+      </button>
+      <div id="form-success" style="display:none;" class="mt-4 p-4 rounded-xl text-center font-body text-sm" style="background:rgba(76,215,247,0.08);border:1px solid rgba(76,215,247,0.2);color:#4cd7f7;">
+        ✓ Your enquiry has been sent. We'll be in touch within 24 hours.
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="mailto:hello@performancelab.com" class="btn-outline">
+        <span class="material-symbols-outlined text-base">mail</span>
+        Contact the Lab
+      </a>
+      <a href="https://wa.me/34600000000" target="_blank" rel="noopener" class="btn-outline" style="border-color:rgba(76,215,247,0.3);color:#4cd7f7;">
+        <span class="material-symbols-outlined text-base">chat</span>
+        WhatsApp Hub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+    <a href="index.html" class="font-headline font-black italic text-xl tracking-tighter" style="color:#ffb1c1;">PERFORMANCE LAB</a>
+    <div class="flex gap-8">
+      <a href="index.html" class="font-headline text-xs uppercase tracking-widest text-white/30 hover:text-white/70 transition-colors">Home</a>
+      <a href="the-elements.html" class="font-headline text-xs uppercase tracking-widest text-white/30 hover:text-white/70 transition-colors">Elements</a>
+      <a href="experiences.html" class="font-headline text-xs uppercase tracking-widest text-white/50 hover:text-white/70 transition-colors">Experiences</a>
+    </div>
+    <p class="font-body text-white/20 text-xs">© 2025 Performance Lab · Ibiza</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     GSAP CDN
+═══════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+(function() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Hero: staggered entrance ───────────────────────────────
+  const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+  // Build manual split on the hero H1
+  const heroH1 = document.getElementById('hero-title');
+  if (heroH1) {
+    const rawText = heroH1.textContent.trim();
+    heroH1.innerHTML = rawText.split('').map(ch =>
+      ch === ' '
+        ? '<span style="display:inline-block;width:0.35em;"> </span>'
+        : `<span class="split-letter"><span class="split-letter-inner">${ch}</span></span>`
+    ).join('');
+  }
+
+  heroTl
+    .fromTo('#hero-tag',    { opacity:0, y:16 }, { opacity:1, y:0, duration:0.7 }, 0.3)
+    .fromTo(
+      '#hero-title .split-letter-inner',
+      { y: '120%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 1, stagger: 0.04 },
+      0.6
+    )
+    .fromTo('#hero-divider',  { opacity:0, scaleX:0 }, { opacity:1, scaleX:1, duration:0.6, transformOrigin:'center' }, 1.3)
+    .fromTo('#hero-para',     { opacity:0, y:20 },     { opacity:1, y:0, duration:0.8 }, 1.5)
+    .fromTo('#scroll-ind',    { opacity:0 },           { opacity:1, duration:0.6 }, 2.0);
+
+  // Subtle parallax on hero bg
+  gsap.to('#hero-bg-img', {
+    yPercent: 20,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  // ── Experience cards: stagger scroll entrance ─────────────
+  gsap.fromTo('.exp-card',
+    { opacity: 0, y: 70 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.14,
+      scrollTrigger: {
+        trigger: '#exp-cards-grid',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // ── Stats counter-up ──────────────────────────────────────
+  gsap.fromTo('.stats-item',
+    { opacity: 0, y: 30 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.7,
+      ease: 'power2.out',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.stats-item',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // ── Testimonial title: manual SplitText ───────────────────
+  const testiH2 = document.getElementById('testi-title');
+  if (testiH2) {
+    const words = testiH2.textContent.split(' ');
+    testiH2.innerHTML = words.map(w =>
+      `<span class="split-letter" style="margin-right:0.28em;"><span class="split-letter-inner">${w}</span></span>`
+    ).join('');
+
+    gsap.fromTo(
+      '#testi-title .split-letter-inner',
+      { y: '115%', opacity: 0 },
+      {
+        y: '0%', opacity: 1,
+        duration: 0.8,
+        ease: 'power4.out',
+        stagger: 0.07,
+        scrollTrigger: {
+          trigger: '#testi-title',
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
+
+  // ── Testimonial cards: stagger ────────────────────────────
+  gsap.fromTo('.testi-item',
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      stagger: 0.16,
+      scrollTrigger: {
+        trigger: '#testi-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // ── CTA title split ───────────────────────────────────────
+  const ctaH2 = document.getElementById('cta-title');
+  if (ctaH2) {
+    const raw = ctaH2.textContent.replace(/\s+/g,' ').trim();
+    ctaH2.innerHTML = raw.split(' ').map(w =>
+      `<span class="split-letter" style="margin-right:0.22em;"><span class="split-letter-inner">${w}</span></span>`
+    ).join('');
+
+    gsap.fromTo(
+      '#cta-title .split-letter-inner',
+      { y: '115%', opacity: 0 },
+      {
+        y: '0%', opacity: 1,
+        duration: 0.85,
+        ease: 'power4.out',
+        stagger: 0.07,
+        scrollTrigger: {
+          trigger: '#cta-title',
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
+
+  // ── Pricing formula cards ─────────────────────────────────
+  gsap.to('.formula-card', {
+    opacity: 1, y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: 0.15,
+    scrollTrigger: {
+      trigger: '.formula-cards',
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // ── Contact form fade in ───────────────────────────────────
+  gsap.fromTo('#contact-form-card',
+    { opacity: 0, y: 40 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#contact-form-card',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+})();
+
+// ── Form submit handler ────────────────────────────────────
+function submitContactForm(btn) {
+  btn.disabled = true;
+  btn.innerHTML = '<span style="opacity:0.6">Sending…</span>';
+
+  setTimeout(() => {
+    const success = document.getElementById('form-success');
+    if (success) {
+      success.style.display = 'block';
+      success.style.background = 'rgba(76,215,247,0.08)';
+      success.style.border = '1px solid rgba(76,215,247,0.2)';
+      success.style.color = '#4cd7f7';
+      success.style.padding = '1rem';
+      success.style.borderRadius = '0.75rem';
+      success.style.textAlign = 'center';
+    }
+    btn.innerHTML = '<span class="material-symbols-outlined text-base">check</span> Sent!';
+    btn.style.background = 'rgba(76,215,247,0.2)';
+    btn.style.boxShadow = 'none';
+  }, 1400);
+}
+</script>
+
+</body>
+</html>

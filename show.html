@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERFORMANCE LAB | SHOW DETAIL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#2f3131",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-low": "#1b1b1b",
+                    "tertiary": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#004e5d",
+                    "inverse-primary": "#bc0053",
+                    "inverse-surface": "#e2e2e2",
+                    "outline-variant": "#5a4045",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#90003e",
+                    "primary-container": "#c50f59",
+                    "on-secondary-container": "#003f4c",
+                    "on-primary-fixed": "#3f0017",
+                    "secondary": "#4cd7f7",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary": "#66002a",
+                    "surface-variant": "#353535",
+                    "outline": "#a9888e",
+                    "on-secondary": "#003640",
+                    "tertiary-container": "#636565",
+                    "secondary-container": "#00b2d1",
+                    "on-background": "#e2e2e2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffb1c1",
+                    "surface-container-highest": "#353535",
+                    "on-surface": "#e2e2e2",
+                    "on-surface-variant": "#e2bdc3",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#e2e3e3",
+                    "secondary-fixed-dim": "#4cd7f7",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#001f26",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "inverse-on-surface": "#303030",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#ffdadf",
+                    "surface-bright": "#393939",
+                    "surface-tint": "#ffb1c1",
+                    "secondary-fixed": "#adecff",
+                    "background": "#131313",
+                    "surface-container": "#1f1f1f",
+                    "surface": "#131313",
+                    "on-error": "#690005",
+                    "primary-fixed": "#ffd9df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e2e2e2; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .kinetic-italic { font-style: italic; }
+        .glass-card { background: rgba(53, 53, 53, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(169, 136, 142, 0.15); }
+        .glass-card:hover { border-color: rgba(76, 215, 247, 0.4); }
+        .text-neon-pink { color: #ffb1c1; text-shadow: 0 0 10px rgba(255, 177, 193, 0.3); }
+        .text-neon-cyan { color: #4cd7f7; text-shadow: 0 0 10px rgba(76, 215, 247, 0.3); }
+        .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: 200px; gap: 1rem; }
+        .masonry-item:nth-child(2n) { grid-row: span 2; }
+        .masonry-item:nth-child(3n) { grid-row: span 1.5; }
+        input, textarea, select { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        input:focus, textarea:focus, select:focus { border-color: #ffb1c1; outline: none; background: rgba(255, 255, 255, 0.08); }
+        select option { background-color: #1b1b1b; color: white; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-6 max-w-[1920px] mx-auto">
+    <a href="index.html" class="text-2xl font-black italic text-[#ffb1c1] tracking-tighter font-headline hover:scale-105 transition-transform duration-300">PERFORMANCE LAB</a>
+    <div class="hidden md:flex gap-8 items-center">
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="index.html#origin-story">The Lab</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#4cd7f7] border-b-2 border-[#4cd7f7] pb-1 transition-all duration-300 hover:scale-105" href="the-elements.html">The Elements</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="experiences.html">Experiences</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="#booking-form" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 inline-block text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
+    </div>
+</nav>
+
+<main class="pt-32 pb-24 px-8 min-h-screen">
+    <div id="loading" class="text-center py-24">
+        <span class="material-symbols-outlined animate-spin text-4xl text-primary block mx-auto w-fit">progress_activity</span>
+        <p class="mt-4 font-headline uppercase tracking-widest text-xs opacity-50">Loading Show...</p>
+    </div>
+    <div id="error" class="max-w-2xl mx-auto py-24 text-center hidden">
+        <span class="material-symbols-outlined text-error text-6xl mb-4">error</span>
+        <h2 class="font-headline text-3xl font-bold text-white mb-2 uppercase">Show not found</h2>
+        <a href="the-elements.html" class="text-primary hover:underline font-body uppercase tracking-widest text-xs mt-4 inline-block">Return to The Elements</a>
+    </div>
+    
+    <div id="content" class="max-w-7xl mx-auto hidden">
+        <a href="the-elements.html" class="inline-flex items-center gap-2 text-white/50 hover:text-white mb-8 transition-colors font-headline uppercase text-xs tracking-widest">
+            <span class="material-symbols-outlined text-sm">arrow_back</span>
+            Back to Catalog
+        </a>
+        
+        <!-- Hero Detailed -->
+        <div class="flex flex-col lg:flex-row gap-12 mb-20 items-start">
+            <div class="w-full lg:w-5/12 glass-card rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl relative">
+                <img id="show-image" src="" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            </div>
+            
+            <div class="w-full lg:w-7/12 py-4">
+                <span id="show-category" class="inline-block px-4 py-1 bg-primary/20 text-primary font-bold tracking-widest uppercase text-xs rounded-full mb-6"></span>
+                <h1 id="show-name" class="font-headline text-5xl md:text-7xl font-bold text-white mb-8 uppercase tracking-tighter shadow-sm"></h1>
+                
+                <h3 class="font-headline font-bold text-white/40 uppercase tracking-widest text-xs mb-4">Description</h3>
+                <div id="show-description" class="text-on-surface/80 text-lg leading-loose font-body whitespace-pre-wrap"></div>
+                
+                <div class="mt-12 flex flex-col sm:flex-row gap-4">
+                    <a href="#booking-form" class="bg-primary text-on-primary px-8 py-4 rounded-xl font-headline font-bold uppercase tracking-[0.1em] text-sm hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(255,177,193,0.39)]">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        Book This Show
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div id="gallery-section" class="hidden border-t border-white/5 pt-16 mt-16">
+            <h2 class="font-headline text-3xl font-bold text-white mb-10 text-center uppercase tracking-tighter">MEDIA <span class="kinetic-italic text-secondary">GALLERY</span></h2>
+            
+            <!-- Video Container -->
+            <div id="video-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 hidden">
+                <!-- Videos injected here -->
+            </div>
+
+            <!-- Photos Scrolling -->
+            <div id="photo-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar hidden">
+                <!-- Photos injected here -->
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="flex-1 w-full">
+<div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div>
+<h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE <br/><span class="kinetic-italic text-primary">MAGIC.</span></h2>
+<form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12">
+<h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="Enter your name" type="text" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="name@email.com" type="email" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white [color-scheme:dark]" type="date" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
+<select class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white bg-white/5 border border-white/10 focus:border-primary focus:bg-white/10 outline-none" required>
+    <option value="" disabled selected>Select event type</option>
+    <option value="wedding" class="bg-[#1b1b1b]">Wedding</option>
+    <option value="corporate" class="bg-[#1b1b1b]">Corporate</option>
+    <option value="club" class="bg-[#1b1b1b]">Club / Nightlife</option>
+    <option value="private" class="bg-[#1b1b1b]">Private Celebration</option>
+    <option value="other" class="bg-[#1b1b1b]">Other</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="e.g. 5000" type="number" min="0"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
+<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-white" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
+</form>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button>
+<a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a>
+</div>
+</div>
+<div class="flex-1 flex flex-col md:items-end justify-between self-stretch">
+<div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">INSTAGRAM</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">LINKEDIN</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">CONTACT</a>
+</div>
+<div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">
+                    © 2024 PERFORMANCE LAB. ALL RIGHTS RESERVED.
+                </div>
+</div>
+</div>
+</footer>
+
+<script>
+    const supabaseUrl = 'https://nwxepstpedmxslbznejv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
+    const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const source = urlParams.get('source');
+
+    // Helper to get youtube embed url
+    function getYoutubeId(url) {
+        if(!url) return null;
+        let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+        return match ? match[1] : null;
+    }
+
+    async function loadShowDetails() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const source = params.get('source');
+
+        if (!id || !source) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+            return;
+        }
+
+        try {
+            let item = null;
+            let images = [];
+            let videos = [];
+            let description = '';
+            let name = '';
+            let category = '';
+            let mainImage = '';
+
+            if (source === 'app') {
+                const { data, error } = await supabaseClient.from('acts').select('*').eq('id', id).single();
+                if (error) throw error;
+                item = data;
+
+                // Visibility check
+                if (!item.is_web_public) throw new Error("Show is not public on web");
+                
+                name = item.web_custom_title || item.name;
+                category = (item.categories && item.categories.length > 0) ? item.categories[0] : item.category;
+                description = item.web_description || item.description || '';
+                
+                // Collect all media, prioritizing web cover + web gallery
+                const rawWebGallery = item.web_gallery || [];
+                const webGalleryUrls = rawWebGallery.map(g => typeof g === 'string' ? g : g.url).filter(Boolean);
+                const webGalleryVideos = rawWebGallery.filter(g => g && g.type === 'video').map(g => g.url).filter(Boolean);
+                const photoGallery = item.photos_url || [];
+                const coverImage = item.web_cover_image || item.image_url;
+                images = [coverImage, ...webGalleryUrls, ...photoGallery].filter(url => url && !url.includes('youtube') && !url.includes('vimeo') && !url.match(/\.(mp4|webm|mov)$/i));
+                images = [...new Set(images)];
+                mainImage = images[0] || coverImage;
+
+                const videoGallery = item.video_gallery || [];
+                videos = [item.video_url, ...webGalleryVideos, ...videoGallery].filter(url => url && (url.includes('youtube') || url.includes('vimeo') || url.match(/\.(mp4|webm|mov)$/i)));
+                videos = [...new Set(videos)];
+            } else {
+                const { data, error } = await supabaseClient.from('pld_characters').select('*').eq('id', id).single();
+                if (error) throw error;
+                item = data;
+
+                // Visibility check
+                if (!item.is_web_public) throw new Error("Show is not public on web");
+
+                name = item.web_custom_title || item.name;
+                category = item.category;
+                description = item.web_description || item.long_description || item.description || '';
+                
+                const rawWebGallery2 = item.web_gallery || [];
+                const webGalleryUrls2 = rawWebGallery2.map(g => typeof g === 'string' ? g : g.url).filter(Boolean);
+                const webGalleryVideos2 = rawWebGallery2.filter(g => g && g.type === 'video').map(g => g.url).filter(Boolean);
+                const oldGallery = item.gallery || [];
+                const coverImage2 = item.web_cover_image || item.image;
+                images = [coverImage2, ...webGalleryUrls2, ...oldGallery].filter(url => url && !url.includes('youtube') && !url.includes('vimeo') && !url.match(/\.(mp4|webm|mov)$/i));
+                images = [...new Set(images)];
+                mainImage = images[0] || coverImage2;
+
+                videos = [item.video_url, ...webGalleryVideos2].filter(url => url && (url.includes('youtube') || url.includes('vimeo') || url.match(/\.(mp4|webm|mov)$/i)));
+                videos = [...new Set(videos)];
+            }
+
+            // Fill Hero
+            document.getElementById('show-name').textContent = name;
+            document.getElementById('show-category').textContent = category || 'PERFORMANCE';
+            document.getElementById('show-description').textContent = description;
+            
+            const imageEl = document.getElementById('show-image');
+            imageEl.src = mainImage || 'https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800';
+            
+            let hasMedia = false;
+            
+            // Build Video Gallery
+            const videoContainer = document.getElementById('video-container');
+            if (videos.length > 0) {
+                hasMedia = true;
+                videoContainer.classList.remove('hidden');
+                let validVideos = 0;
+                videos.forEach(vUrl => {
+                    const ytId = getYoutubeId(vUrl);
+                    if (ytId) {
+                        validVideos++;
+                        const iframe = document.createElement('iframe');
+                        iframe.className = 'w-full aspect-video rounded-xl shadow-lg border border-white/10';
+                        iframe.src = `https://www.youtube.com/embed/${ytId}`;
+                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                        iframe.allowFullscreen = true;
+                        videoContainer.appendChild(iframe);
+                    }
+                });
+                if (validVideos === 0) videoContainer.classList.add('hidden');
+            }
+
+            // Build Photo Gallery
+            // Exclude the main image from the gallery if it's the only one
+            const galleryImages = images.filter(img => img !== mainImage);
+            const photoContainer = document.getElementById('photo-container');
+            if (galleryImages.length > 0) {
+                hasMedia = true;
+                photoContainer.classList.remove('hidden');
+                galleryImages.forEach(img => {
+                    const pic = document.createElement('div');
+                    pic.className = 'snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden glass-card p-1 shadow-lg group relative';
+                    pic.innerHTML = `<img src="${img}" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-700">`;
+                    photoContainer.appendChild(pic);
+                });
+            }
+
+            if (hasMedia) {
+                document.getElementById('gallery-section').classList.remove('hidden');
+            }
+
+            // Show content
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('content').classList.remove('hidden');
+
+        } catch (err) {
+            console.error('Error fetching show details:', err);
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadShowDetails);
+</script>
+<script src="booking-handler.js"></script>
+</body></html>

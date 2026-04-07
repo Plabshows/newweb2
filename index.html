@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERFORMANCE LAB | PIONEERING ENTERTAINMENT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#2f3131",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-low": "#1b1b1b",
+                    "tertiary": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#004e5d",
+                    "inverse-primary": "#bc0053",
+                    "inverse-surface": "#e2e2e2",
+                    "outline-variant": "#5a4045",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#90003e",
+                    "primary-container": "#c50f59",
+                    "on-secondary-container": "#003f4c",
+                    "on-primary-fixed": "#3f0017",
+                    "secondary": "#4cd7f7",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary": "#66002a",
+                    "surface-variant": "#353535",
+                    "outline": "#a9888e",
+                    "on-secondary": "#003640",
+                    "tertiary-container": "#636565",
+                    "secondary-container": "#00b2d1",
+                    "on-background": "#e2e2e2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffb1c1",
+                    "surface-container-highest": "#353535",
+                    "on-surface": "#e2e2e2",
+                    "on-surface-variant": "#e2bdc3",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#e2e3e3",
+                    "secondary-fixed-dim": "#4cd7f7",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#001f26",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "inverse-on-surface": "#303030",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#ffdadf",
+                    "surface-bright": "#393939",
+                    "surface-tint": "#ffb1c1",
+                    "secondary-fixed": "#adecff",
+                    "background": "#131313",
+                    "surface-container": "#1f1f1f",
+                    "surface": "#131313",
+                    "on-error": "#690005",
+                    "primary-fixed": "#ffd9df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e2e2e2; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .kinetic-italic { font-style: italic; }
+        .glass-card { background: rgba(53, 53, 53, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(169, 136, 142, 0.15); }
+        .glass-card:hover { border-color: rgba(76, 215, 247, 0.4); }
+        .text-neon-pink { color: #ffb1c1; text-shadow: 0 0 10px rgba(255, 177, 193, 0.3); }
+        .text-neon-cyan { color: #4cd7f7; text-shadow: 0 0 10px rgba(76, 215, 247, 0.3); }
+        .mask-fade-bottom { mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+        .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: 200px; gap: 1rem; }
+        .masonry-item:nth-child(2n) { grid-row: span 2; }
+        .masonry-item:nth-child(3n) { grid-row: span 1.5; }
+        input, textarea, select { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        input:focus, textarea:focus, select:focus { border-color: #ffb1c1; outline: none; background: rgba(255, 255, 255, 0.08); }
+        select option { background-color: #1b1b1b; color: white; }
+    </style>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-6 max-w-[1920px] mx-auto">
+    <a href="index.html" class="text-2xl font-black italic text-[#ffb1c1] tracking-tighter font-headline hover:scale-105 transition-transform duration-300">PERFORMANCE LAB</a>
+    <div class="hidden md:flex gap-8 items-center">
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="index.html#origin-story">The Lab</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="the-elements.html">The Elements</a>
+        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="experiences.html">Experiences</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="#booking-form" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 inline-block text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
+    </div>
+</nav>
+<!-- Hero Section -->
+<header id="hero-container" class="relative h-[120vh]">
+    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <!-- Frame-by-Frame Video Background -->
+        <div class="absolute inset-0 z-0 h-full w-full pointer-events-none bg-black">
+            <video
+                id="hero-video"
+                src="images/transition.mp4"
+                muted
+                playsinline
+                preload="auto"
+                poster="images/transition.webp"
+                class="absolute inset-0 w-full h-full object-cover brightness-[0.7] contrast-[1.1]"
+            ></video>
+            <!-- Overlay Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/20 to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-[#131313]/40 via-transparent to-transparent z-10"></div>
+            <!-- Animated Grid Decoration -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-[0.03] z-10"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div id="hero-content" class="container relative z-20 mx-auto px-6 text-center">
+            <div class="flex flex-col items-center gap-6">
+                <div class="relative max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mb-8 uppercase font-headline">
+                        We don’t provide <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">entertainment.</span>
+                        <br />
+                        We design <span class="kinetic-italic italic bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">experiences</span> people remember.
+                    </h1>
+
+                    <p class="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-primary/80 mb-12 font-headline">
+                        Live shows · Performance · Art · Technology
+                    </p>
+
+                    <div class="flex flex-col md:flex-row justify-center gap-6">
+                        <a href="#booking-form" class="group relative px-10 py-4 rounded-full bg-primary text-on-primary font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,177,193,0.4)] transition-all flex items-center justify-center gap-3">
+                            <span>Book Your Event</span>
+                            <span class="material-symbols-outlined text-sm">event</span>
+                        </a>
+                        <a href="the-elements.html" class="group relative px-10 py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs hover:bg-white/10 hover:border-primary/50 transition-all flex items-center justify-center gap-3">
+                            <span>Explore Experiences</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("hero-video");
+    const container = document.getElementById("hero-container");
+    const heroContent = document.getElementById("hero-content");
+    let videoDuration = 0;
+    
+    if (video) {
+        const initVideo = () => {
+            if (videoDuration > 0) return;
+            videoDuration = video.duration;
+            video.pause();
+            video.playbackRate = 0;
+        };
+
+        video.addEventListener("loadedmetadata", initVideo);
+        if (video.readyState >= 1) initVideo();
+
+        window.addEventListener("scroll", () => {
+            if (videoDuration && container) {
+                const rect = container.getBoundingClientRect();
+                const maxScroll = container.offsetHeight - window.innerHeight;
+                let scrollProgress = -rect.top / maxScroll;
+                
+                if (scrollProgress > 1) scrollProgress = 1;
+                if (scrollProgress < 0) scrollProgress = 0;
+                
+                requestAnimationFrame(() => {
+                    video.currentTime = scrollProgress * videoDuration;
+                });
+            }
+
+            if (heroContent && container) {
+                const rect = container.getBoundingClientRect();
+                const progress = Math.min(Math.max(-rect.top / (window.innerHeight * 0.5), 0), 1);
+                
+                const opacity = 1 - progress * 1.5;
+                const scale = 1 + (progress * 0.1);
+                const y = -(progress * 100);
+                
+                heroContent.style.opacity = Math.max(opacity, 0);
+                heroContent.style.transform = `scale(${scale}) translateY(${y}px)`;
+            }
+        }, { passive: true });
+    }
+
+    // Count-up Animation Observer
+    const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                let current = 0;
+                // Animation duration: 2 seconds. Frames: ~120 at 60fps
+                const duration = 2000;
+                const frames = duration / 16;
+                const increment = target / frames;
+                
+                function update() {
+                    current += increment;
+                    if (current < target) {
+                        el.innerText = Math.ceil(current) + '+';
+                        requestAnimationFrame(update);
+                    } else {
+                        el.innerText = target + '+';
+                    }
+                }
+                update();
+                countObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
+});
+</script>
+<section class="py-20 px-8 bg-[#111111] border-y border-white/5 relative overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="flex-shrink-0">
+<p class="font-headline text-xs font-bold uppercase tracking-[0.5em] text-white/40 border-l-2 border-primary pl-4">
+                    The Lab Difference
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-24 w-full">
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow">
+<span class="font-headline text-5xl font-bold text-neon-cyan mb-2 tracking-tighter count-up" data-target="20">0+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Years of Innovation</span>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow" style="animation-delay: 200ms;">
+<span class="font-headline text-5xl font-bold text-neon-pink mb-2 tracking-tighter count-up" data-target="500">0+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Concepts Executed</span>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col items-center md:items-start group transition-all duration-500 hover:-translate-y-1 animate-pulse-slow" style="animation-delay: 400ms;">
+<span class="font-headline text-5xl font-bold text-neon-cyan mb-2 tracking-tighter count-up" data-target="200">0+</span>
+<span class="font-headline text-[10px] uppercase tracking-[0.3em] text-white/60">Exclusive Artists</span>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+</section>
+    <style>
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-pulse-slow {
+        animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 40s linear infinite;
+        width: max-content;
+      }
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+    </style>
+
+
+<!-- Our Origin Story -->
+<section id="origin-story" class="py-32 px-8 bg-surface-container-lowest relative overflow-hidden">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-1/2">
+<img class="rounded-xl w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" data-alt="Monochrome artistic shot of the rocky coast of Ibiza at night with long exposure sea spray and a bright moon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJoQs7A7CA9d7mTs0NtzZx-gJIu_Klfa4jeIDUOVTh6FkBdWp38hPT0gcI7K6n4xwxiUQrosKbjr8oEMJORnHau2d44WPNdX-JmSjWBBFwKcZQd6UCo7O4PynUO-FuVKXkMCtqbybEvmHcvmbC1HpfsXUgL_IKAqg7r63SsFOxHy5jnyzl-iWqSkcDwPlwZgcVgvYp7T55P6mtoWcEX9j0ze45K3ro9XZWy-brM9Wln8WdAo1oK2qm6FKHWHuDbbH7cev-rEtPACk"/>
+</div>
+<div class="w-full md:w-1/2">
+<h2 class="font-headline text-primary font-bold tracking-widest mb-2 uppercase text-xs">THE ORIGINAL SHOW ARCHITECTS</h2>
+<p class="font-headline text-3xl md:text-4xl font-bold text-white leading-tight mb-8">
+    Born in Ibiza. <span class="kinetic-italic text-secondary">Trusted worldwide.</span>
+</p>
+<div class="space-y-6 text-on-surface/80 text-lg leading-relaxed font-body">
+    <p>
+        Performance Lab is an Ibiza-based creative entertainment agency with over 20 years of experience in nightlife and events.
+    </p>
+    <p>
+        We curate and produce performers, visual shows and immersive experiences for weddings, private events, brands, hotels and large-scale productions around the world.
+    </p>
+    <p class="text-white font-bold">
+        We don’t just book acts — we design experiences that people remember.
+    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Elements -->
+<section class="py-24 px-8 bg-background relative overflow-hidden border-t border-white/5" id="the-elements">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10">
+      <p class="text-primary font-headline uppercase tracking-[0.3em] text-xs mb-3">Our Toolkit</p>
+      <h2 class="font-headline text-4xl font-bold text-white mb-4 uppercase tracking-tighter">THE <span class="kinetic-italic text-primary">ELEMENTS</span></h2>
+      <p class="text-on-surface-variant font-body max-w-xl">The fundamental components of our immersive productions.</p>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- Music & Sound -->
+      <div class="elements-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:480px;">
+        <img src="images/elements_music.png" alt="Music & Sound" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <!-- Dark gradient base always visible -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <!-- Overlay on hover -->
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <!-- Content bottom -->
+        <div class="absolute bottom-0 left-0 right-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center rounded-lg">
+              <span class="material-symbols-outlined text-primary text-lg">music_note</span>
+            </div>
+            <span class="text-primary font-headline uppercase tracking-widest text-xs">Music</span>
+          </div>
+          <h3 class="font-headline font-bold text-white text-xl uppercase tracking-wide mb-3">Music & Sound</h3>
+          <ul class="space-y-1.5 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>Musicians</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>DJ</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>Singers</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Dance & Stage -->
+      <div class="elements-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:480px;">
+        <img src="images/elements_dance.png" alt="Dance & Stage" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center rounded-lg">
+              <span class="material-symbols-outlined text-secondary text-lg">theater_comedy</span>
+            </div>
+            <span class="text-secondary font-headline uppercase tracking-widest text-xs">Stage</span>
+          </div>
+          <h3 class="font-headline font-bold text-white text-xl uppercase tracking-wide mb-3">Dance & Stage</h3>
+          <ul class="space-y-1.5 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-secondary inline-block"></span>Dancers</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-secondary inline-block"></span>Gogo Dancers</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-secondary inline-block"></span>Choreography</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Circus & Special Acts -->
+      <div class="elements-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:480px;">
+        <img src="images/elements_circus.png" alt="Circus & Special Acts" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center rounded-lg">
+              <span class="material-symbols-outlined text-primary text-lg">flare</span>
+            </div>
+            <span class="text-primary font-headline uppercase tracking-widest text-xs">Circus</span>
+          </div>
+          <h3 class="font-headline font-bold text-white text-xl uppercase tracking-wide mb-3">Circus & Special Acts</h3>
+          <ul class="space-y-1.5 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>Magic, Fire, Water</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>Art, Actors</li>
+            <li class="flex items-center gap-2 text-white/80 text-sm font-body"><span class="w-1 h-1 rounded-full bg-primary inline-block"></span>Drags</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Roaming Characters -->
+      <div class="elements-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:480px;">
+        <img src="images/elements_roaming.png" alt="Roaming Characters" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center rounded-lg">
+              <span class="material-symbols-outlined text-secondary text-lg">groups</span>
+            </div>
+            <span class="text-secondary font-headline uppercase tracking-widest text-xs">Immersive</span>
+          </div>
+          <h3 class="font-headline font-bold text-white text-xl uppercase tracking-wide mb-3">Roaming Characters</h3>
+          <p class="text-white/70 text-sm font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75">Interactive performance art that moves through the crowd, blurring lines between stage and audience.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     OUR PLAYGROUND — Venues Marquee
+═══════════════════════════════════════════ -->
+<section class="py-20 border-t border-white/5 overflow-hidden" id="our-playground" style="background: #0e0e0e;">
+  <div class="max-w-7xl mx-auto px-8 mb-10">
+    <p class="text-primary font-headline uppercase tracking-[0.3em] text-xs mb-3">Trusted In Ibiza</p>
+    <h2 class="font-headline text-4xl font-bold text-white uppercase tracking-tighter">OUR <span class="kinetic-italic text-primary">PLAYGROUND</span></h2>
+  </div>
+
+  <!-- Marquee wrapper — fades on edges -->
+  <div class="relative" id="marquee-wrapper"
+       style="mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+              -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);">
+
+    <!-- Track — will be cloned by GSAP -->
+    <div id="marquee-track" class="flex items-center gap-16 whitespace-nowrap"
+         style="will-change: transform;">
+
+      <!-- Row 1 (GSAP will clone this entire row) -->
+      <div id="marquee-row" class="flex items-center gap-20 flex-shrink-0">
+
+        <div class="venue-logo flex items-center justify-center" style="height:70px; padding: 0 8px;">
+          <img src="assets/venues/pacha.svg" alt="Pacha" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:60px; padding: 0 8px;">
+          <img src="assets/venues/o-beach.svg" alt="O Beach Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:65px; padding: 0 8px;">
+          <img src="assets/venues/hard-rock.svg" alt="Hard Rock Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="flex-none w-48 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+    <img src="images/venues/hi_ibiza.png" alt="Hi Ibiza" class="max-w-[120px] max-h-[60px] object-contain">
+</div>
+        <div class="venue-logo flex items-center justify-center" style="height:50px; padding: 0 8px;">
+          <img src="assets/venues/unvrs.svg" alt="UNVRS" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:60px; padding: 0 8px;">
+          <img src="assets/venues/amnesia.svg" alt="Amnesia" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:68px; padding: 0 8px;">
+          <img src="assets/venues/cafe-mambo.svg" alt="Café Mambo" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:65px; padding: 0 8px;">
+          <img src="assets/venues/528-ibiza.svg" alt="528 Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:55px; padding: 0 8px;">
+          <img src="assets/venues/blue-marlin.svg" alt="Blue Marlin Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:60px; padding: 0 8px;">
+          <img src="assets/venues/lio.svg" alt="Lio" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:60px; padding: 0 8px;">
+          <img src="assets/venues/pikes.svg" alt="Pikes" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:75px; padding: 0 8px;">
+          <img src="assets/venues/ibiza-rocks.svg" alt="Ibiza Rocks" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:55px; padding: 0 8px;">
+          <img src="assets/venues/destino.svg" alt="Destino Pacha Resort" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:58px; padding: 0 8px;">
+          <img src="assets/venues/es-paradis.svg" alt="Es Paradis" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:60px; padding: 0 8px;">
+          <img src="assets/venues/eden.svg" alt="Eden Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+        <div class="venue-logo flex items-center justify-center" style="height:68px; padding: 0 8px;">
+          <img src="assets/venues/chinois.svg" alt="Chinois Ibiza" class="h-full w-auto object-contain"/>
+        </div>
+
+      </div><!-- /marquee-row -->
+    </div><!-- /marquee-track -->
+  </div><!-- /marquee-wrapper -->
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EXPERIENCES — Premium Glassmorphism Cards
+═══════════════════════════════════════════ -->
+<section id="experiences-section" class="relative py-28 overflow-hidden" style="background: #0d0d0d;">
+  <!-- Subtle ambient glow background -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+    <div style="position:absolute;top:20%;left:10%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(197,15,89,0.08) 0%,transparent 70%);border-radius:50%;"></div>
+    <div style="position:absolute;bottom:10%;right:5%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(76,215,247,0.05) 0%,transparent 70%);border-radius:50%;"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-8 relative">
+    <!-- Section header -->
+    <div class="text-center mb-20">
+      <p class="text-primary font-headline uppercase tracking-[0.35em] text-xs mb-5 opacity-80">What We Create</p>
+      <h2 id="exp-title" class="font-headline font-black text-white uppercase tracking-tighter overflow-hidden" style="font-size: clamp(2.8rem,6vw,5rem); line-height:1;">EXPERIENCES</h2>
+      <div class="mx-auto mt-6" style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,177,193,0.6),transparent);"></div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="exp-cards-grid">
+
+      <!-- Card 1: Private Celebrations -->
+      <div class="exp-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:560px;">
+        <!-- BG Image -->
+        <div class="exp-card-img absolute inset-0 transition-transform duration-1000 ease-out" style="will-change:transform;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuANJvivy7rIwNxCH1-ribi4T8GhMo9iKgXXO6XGRjxISFqfh9BnfkM8-7hyUHxzr_ShszXN49v3alNxLJJ2N6OtEcTdiXQtnx38HkEf2rHHXIk9e9Y0-6RKZ5J2K7VjmIfTo9AyLrJA1QzXcj4i0WGs2cMNChiUSXRoNLYz8Bxl1TElPWI0mBIreu0xziwtFWzj0hBkZ1HJstroAHCm1CXw0OHeDet3Y_PVZ34TPfCMBqaW0YVgA4Jv7KETdp6EdM9xbXJfaqM6BJE" alt="Private Celebrations" class="w-full h-full object-cover" />
+        </div>
+        <!-- Gradient overlay -->
+        <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.85) 100%);"></div>
+        <!-- Glass border glow on hover -->
+        <div class="exp-card-glow absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.18),0 0 40px rgba(255,177,193,0.08);"></div>
+        <!-- Content -->
+        <div class="absolute inset-0 flex flex-col justify-end p-8">
+          <div class="exp-card-tag font-headline uppercase tracking-[0.3em] text-xs mb-3 opacity-60" style="color:#ffb1c1;">Tailored Exclusivity</div>
+          <h3 class="font-headline font-black text-white text-xl uppercase leading-tight mb-4" style="letter-spacing:-0.01em;">Private Celebrations<br>&amp; Villas</h3>
+          <!-- Subtitle reveal line -->
+          <div class="exp-card-sub overflow-hidden" style="max-height:0;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);">
+            <p class="font-body text-white/60 text-sm leading-relaxed pb-1">Intimate luxury productions designed around you — your space, your vision, your moment.</p>
+            <a href="experiences.html" class="inline-flex items-center gap-2 text-primary font-headline text-xs uppercase tracking-widest mt-3 hover:gap-3 transition-all">
+              <span>Explore</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Elite Nightlife -->
+      <div class="exp-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:560px;">
+        <div class="exp-card-img absolute inset-0 transition-transform duration-1000 ease-out" style="will-change:transform;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYCA_Y-JRWQ-z6IMZAz13a363o_8OI6t_G3LNA2eTrqaqS-BEMMlYYVxWXwR72-EDBF0AU1jW_4eRoRof6F3UwS_zS2IpacEH4IoBePseWEHK1mVUXKiVJxe3BW_UObAwTSuF6BJTQ8GTMwyRQZyAmApjjuvuYgxxocb09XVdY5tiTJ08TXJW9QX_9Lr0M3BT6NRjirAVqnGmCZ_atoSqL5499N2n4D6y2aBlPkOLEz83G7Wa5o6Kf3pFvL_Ra7cLO-tAmeSGnXiY" alt="Elite Nightlife" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.88) 100%);"></div>
+        <div class="exp-card-glow absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.18),0 0 40px rgba(76,215,247,0.08);"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-8">
+          <div class="exp-card-tag font-headline uppercase tracking-[0.3em] text-xs mb-3 opacity-60" style="color:#4cd7f7;">Pulse of the Night</div>
+          <h3 class="font-headline font-black text-white text-xl uppercase leading-tight mb-4">Elite Nightlife<br>&amp; Beach Clubs</h3>
+          <div class="exp-card-sub overflow-hidden" style="max-height:0;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);">
+            <p class="font-body text-white/60 text-sm leading-relaxed pb-1">Curated performance packages for Ibiza's most prestigious clubs and beach clubs.</p>
+            <a href="experiences.html" class="inline-flex items-center gap-2 text-secondary font-headline text-xs uppercase tracking-widest mt-3 hover:gap-3 transition-all">
+              <span>Explore</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Destination Weddings -->
+      <div class="exp-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:560px;">
+        <div class="exp-card-img absolute inset-0 transition-transform duration-1000 ease-out" style="will-change:transform;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6YMfv6N0UlY7Esx76NEiMk-eEOZtHe7RMJdLP19cPjWqLvQUetOb4fGsGYYmZt-oynzhNtGpBO4ISK1Ktm__LeICW6I4zR83FbrfjwmxEhTGScAcvFl1m7mi2sxJ-OTExK6VyjwuHXcgdsAOTlXuuATXk9Q0eIz15Gxhe_JjKCmAkR03aNoR20pecGmCMvLjGVp-2cZYtVIQEKtufMaC99Q6HZaDeq5RPnrRzTHS1JtzNeUZkLtg08LqLabF4tEthGGu4picp5cY" alt="Destination Weddings" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.85) 100%);"></div>
+        <div class="exp-card-glow absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.18),0 0 40px rgba(255,177,193,0.10);"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-8">
+          <div class="exp-card-tag font-headline uppercase tracking-[0.3em] text-xs mb-3 opacity-60" style="color:#ffb1c1;">Unforgettable Vows</div>
+          <h3 class="font-headline font-black text-white text-xl uppercase leading-tight mb-4">Destination<br>Weddings</h3>
+          <div class="exp-card-sub overflow-hidden" style="max-height:0;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);">
+            <p class="font-body text-white/60 text-sm leading-relaxed pb-1">Choreographed emotion for your most important day. Mediterranean magic, flawlessly performed.</p>
+            <a href="experiences.html" class="inline-flex items-center gap-2 text-primary font-headline text-xs uppercase tracking-widest mt-3 hover:gap-3 transition-all">
+              <span>Explore</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Corporate Masterpieces -->
+      <div class="exp-card group relative rounded-2xl overflow-hidden cursor-pointer" style="height:560px;">
+        <div class="exp-card-img absolute inset-0 transition-transform duration-1000 ease-out" style="will-change:transform;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpSCuufx4ntTP4TXcsKZDyrwZ0dsGz1NNNKsX76zFH_sfgtrP7QynfGlz-TmYM-S6vIz5o8_nKLapyK4JdegHlzJfOHTHzVxEVD_y4zOEecbq-Scs9fwBNg3WXUwkPKcWUAy2cjSLECsE-X7b5qmwhrIEWnZJp1trmbGNpUMrafc_G3HkBedkkquXGHUzKo7nUcAE0eQxGsq06Bi8YUB5vaHFJi-t5fdcQulWKmzeq0-vMCgZyha7h-2MPMG5PrFKlKalRQj7XwX0" alt="Corporate Masterpieces" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.90) 100%);"></div>
+        <div class="exp-card-glow absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500" style="box-shadow:inset 0 0 0 1px rgba(255,255,255,0.18),0 0 40px rgba(76,215,247,0.08);"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-8">
+          <div class="exp-card-tag font-headline uppercase tracking-[0.3em] text-xs mb-3 opacity-60" style="color:#4cd7f7;">Brand Evolution</div>
+          <h3 class="font-headline font-black text-white text-xl uppercase leading-tight mb-4">Corporate<br>Masterpieces</h3>
+          <div class="exp-card-sub overflow-hidden" style="max-height:0;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);">
+            <p class="font-body text-white/60 text-sm leading-relaxed pb-1">Transform brand events into cultural moments. High-impact productions for visionary companies.</p>
+            <a href="experiences.html" class="inline-flex items-center gap-2 text-secondary font-headline text-xs uppercase tracking-widest mt-3 hover:gap-3 transition-all">
+              <span>Explore</span><span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+<!-- The Lab in Action (Masonry Gallery) -->
+<section class="py-24 px-8 bg-background">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-4xl font-bold text-white mb-12 text-center uppercase tracking-tighter">THE LAB IN <span class="kinetic-italic text-secondary">ACTION</span></h2>
+<div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar">
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Vibrant concert stage with pink and blue laser lights and a silhouetted crowd" src="https://euphonious-kelpie-cd0a27.netlify.app/images/char_mirror_family_fix_final.jpg"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="DJ at work in a dark, atmospheric nightclub with red neon accents" src="https://nwxepstpedmxslbznejv.supabase.co/storage/v1/object/public/media/avatars/80eeab5a-f391-432c-a835-9b3eaf63e0bf/banner_url-1774282662172.app/df37e876-39a9-4132-8d22-397135b8c2b7"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Crowd at a music festival under a starry night sky with bright stage lights in the background" src="https://euphonious-kelpie-cd0a27.netlify.app/images/char_teddy_monster_hero_final.jpg"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Performers in mirror suits reflecting stage lights during a luxury event" src="https://euphonious-kelpie-cd0a27.netlify.app/images/char_led_dancers_premium.png"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Dramatic silhouette of a dancer against a giant circular light source" src="https://nwxepstpedmxslbznejv.supabase.co/storage/v1/object/public/media/avatars/e007ae32-bd67-4210-84e1-7b11e2b98d49/banner_url-1774282808768.app/fadf31dd-e0b8-4a74-b714-e2bafd644cad"/>
+</div>
+<div class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px] rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract shot of confetti falling in slow motion over a celebrating crowd in a dark venue" src="https://nwxepstpedmxslbznejv.supabase.co/storage/v1/object/public/media/avatars/a5066703-1cde-4f0c-abdf-e9fe930b2c2c/banner_url-1774289183176.app/fcf36917-d828-4cac-87d3-9402e40cbf3c"/>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="flex-1 w-full">
+<div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div>
+<h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE <br/><span class="kinetic-italic text-primary">MAGIC.</span></h2>
+<!-- Contact Form -->
+<form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12">
+<h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="Enter your name" type="text" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="name@email.com" type="email" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white [color-scheme:dark]" type="date" required/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
+<select class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white bg-white/5 border border-white/10 focus:border-primary focus:bg-white/10 outline-none" required>
+    <option value="" disabled selected>Select event type</option>
+    <option value="wedding" class="bg-[#1b1b1b]">Wedding</option>
+    <option value="corporate" class="bg-[#1b1b1b]">Corporate</option>
+    <option value="club" class="bg-[#1b1b1b]">Club / Nightlife</option>
+    <option value="private" class="bg-[#1b1b1b]">Private Celebration</option>
+    <option value="other" class="bg-[#1b1b1b]">Other</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-white" placeholder="e.g. 5000" type="number" min="0"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
+<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-white" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
+</form>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button>
+<a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a>
+</div>
+</div>
+<div class="flex-1 flex flex-col md:items-end justify-between self-stretch">
+<div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">INSTAGRAM</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">LINKEDIN</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#">CONTACT</a>
+</div>
+<div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">
+                    © 2024 PERFORMANCE LAB. ALL RIGHTS RESERVED.
+                </div>
+</div>
+</div>
+</footer>
+<script src="booking-handler.js"></script>
+
+<script>
+// ─────────────────────────────────────────────
+//  AI ELEMENT FINDER — powered by Gemini
+// ─────────────────────────────────────────────
+const GEMINI_API_KEY = 'AIzaSyD-REPLACE-WITH-YOUR-KEY'; // ← Get a FREE key at: https://aistudio.google.com/app/apikey
+
+const ELEMENTS_CONTEXT = `
+You are Performance Lab's AI concierge — an expert in immersive entertainment and live shows based in Ibiza.
+Performance Lab offers these elements:
+• Music & Sound: Live musicians, DJs, singers
+• Dance & Stage: Dancers, gogo dancers, choreography
+• Circus & Special Acts: Magic, fire & water shows, artists, actors, drag performers
+• Roaming Characters: Interactive performers who move through the crowd
+
+Given a user's event description, recommend which elements would create the most impact for their event.
+Keep it concise, creative and professional — max 4 sentences. 
+Use a slight editorial/luxury tone. 
+Recommend specific elements and briefly explain why they suit the event.
+End with one enticing phrase about the experience they'll create.
+Do NOT use markdown headers or bullet points — write in flowing prose.
+`;
+
+function setAIChip(text) {
+  document.getElementById('ai-elements-input').value = text;
+  document.getElementById('ai-elements-input').focus();
+}
+
+async function askAIElements() {
+  const input = document.getElementById('ai-elements-input');
+  const query = input.value.trim();
+  if (!query) {
+    input.focus();
+    input.style.borderColor = 'rgba(255,177,193,0.6)';
+    setTimeout(() => input.style.borderColor = '', 1000);
+    return;
+  }
+
+  const responseBox  = document.getElementById('ai-elements-response');
+  const typingEl     = document.getElementById('ai-typing');
+  const answerEl     = document.getElementById('ai-answer');
+  const ctaEl        = document.getElementById('ai-cta');
+  const btn          = document.getElementById('ai-elements-btn');
+
+  // Reset state
+  responseBox.classList.remove('hidden');
+  typingEl.classList.remove('hidden');
+  answerEl.classList.add('hidden');
+  ctaEl.classList.add('hidden');
+  answerEl.innerHTML = '';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+
+  // Scroll to panel smoothly
+  responseBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: ELEMENTS_CONTEXT }] },
+          contents: [{ parts: [{ text: query }] }]
+        })
+      }
+    );
+
+    if (!res.ok) throw new Error(`API error ${res.status}`);
+    const data = await res.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No recommendation available.';
+
+    // Typewriter reveal
+    typingEl.classList.add('hidden');
+    answerEl.classList.remove('hidden');
+    await typewriterReveal(answerEl, text, 18);
+    ctaEl.classList.remove('hidden');
+
+  } catch (err) {
+    typingEl.classList.add('hidden');
+    answerEl.classList.remove('hidden');
+    answerEl.innerHTML = `<span style="color:rgba(255,177,193,0.6)">Could not connect to AI at the moment. Please describe your event via the form below and our team will curate the perfect combination for you.</span>`;
+    ctaEl.classList.remove('hidden');
+    console.warn('AI Elements error:', err);
+  } finally {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+// Typewriter effect — character by character
+function typewriterReveal(el, text, speed = 18) {
+  return new Promise(resolve => {
+    let i = 0;
+    el.innerHTML = '';
+    const interval = setInterval(() => {
+      el.innerHTML = escapeHtml(text.slice(0, i)) + '<span class="inline-block w-0.5 h-4 bg-primary/70 ml-0.5 animate-pulse"></span>';
+      i++;
+      if (i > text.length) {
+        clearInterval(interval);
+        el.innerHTML = escapeHtml(text);
+        resolve();
+      }
+    }, speed);
+  });
+}
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br>');
+}
+</script>
+
+<!-- GSAP CDN -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<script>
+// ─────────────────────────────────────────────
+//  OUR PLAYGROUND — Infinite Marquee (GSAP)
+// ─────────────────────────────────────────────
+(function initMarquee() {
+  const track  = document.getElementById('marquee-track');
+  const row    = document.getElementById('marquee-row');
+  const wrapper = document.getElementById('marquee-wrapper');
+
+  if (!track || !row) return;
+
+  // Build: clone row multiple times to fill screen + ensure seamless loop
+  const cloneCount = 4;
+  for (let i = 0; i < cloneCount; i++) {
+    const clone = row.cloneNode(true);
+    clone.removeAttribute('id');
+    track.appendChild(clone);
+  }
+
+  // All logos (original + clones)
+  const allLogos = track.querySelectorAll('.venue-logo');
+
+  // Default state: white logos at 35% opacity (grey feel)
+  gsap.set(allLogos, { opacity: 0.35, filter: 'brightness(1)' });
+
+  // Calculate the width of ONE row
+  function getRowWidth() {
+    return row.getBoundingClientRect().width + 80; // 80 = gap-20 in px
+  }
+
+  let marqueeAnim;
+  let currentSpeed = 1; // multiplier (1 = normal, 0.15 = slow on hover)
+
+  function createMarquee() {
+    const totalWidth = getRowWidth();
+
+    if (marqueeAnim) marqueeAnim.kill();
+
+    marqueeAnim = gsap.to(track, {
+      x: `-=${totalWidth}`,
+      duration: 35,              // base speed — lower = faster
+      ease: 'none',
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
+      }
+    });
+  }
+
+  createMarquee();
+  window.addEventListener('resize', createMarquee);
+
+  // ── Hover interactions ──────────────────────────────────
+  wrapper.addEventListener('mouseenter', () => {
+    gsap.to(marqueeAnim, { timeScale: 0.15, duration: 0.6, ease: 'power2.out' });
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    gsap.to(marqueeAnim, { timeScale: 1, duration: 0.8, ease: 'power2.inOut' });
+    // Restore all logos
+    gsap.to(allLogos, { opacity: 0.35, filter: 'brightness(1)', duration: 0.4 });
+  });
+
+  // Individual logo hover: highlight hovered, dim rest
+  allLogos.forEach(logo => {
+    logo.addEventListener('mouseenter', () => {
+      gsap.to(allLogos, { opacity: 0.18, filter: 'brightness(0.6)', duration: 0.3 });
+      gsap.to(logo, { opacity: 1, filter: 'brightness(1.3)', duration: 0.3 });
+      logo.style.cursor = 'pointer';
+    });
+    logo.addEventListener('mouseleave', () => {
+      gsap.to(allLogos, { opacity: 0.35, filter: 'brightness(1)', duration: 0.4 });
+    });
+  });
+
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════
+     EXPERIENCES — GSAP Animations
+     SplitText + ScrollTrigger + Hover FX
+═══════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Title: letter-by-letter reveal ────────────────────────
+  // SplitText (Club-only plugin) not available on CDN freely,
+  // so we split manually for the same effect
+  const expTitle = document.getElementById('exp-title');
+  if (expTitle) {
+    const text = expTitle.textContent.trim();
+    expTitle.innerHTML = text.split('').map(char =>
+      char === ' '
+        ? '<span style="display:inline-block;width:0.35em;"> </span>'
+        : `<span class="exp-letter" style="display:inline-block;overflow:hidden;"><span style="display:inline-block;">${char}</span></span>`
+    ).join('');
+
+    const letters = expTitle.querySelectorAll('.exp-letter > span');
+
+    gsap.fromTo(letters,
+      { y: '110%', opacity: 0 },
+      {
+        y: '0%',
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power4.out',
+        stagger: 0.045,
+        scrollTrigger: {
+          trigger: expTitle,
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
+
+  // ── Cards: staggered fade + rise ──────────────────────────
+  const expCards = document.querySelectorAll('.exp-card');
+  if (expCards.length) {
+    gsap.fromTo(expCards,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: '#exp-cards-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  }
+
+  // ── Hover FX: image zoom + glow + subtitle reveal ─────────
+  expCards.forEach(card => {
+    const img   = card.querySelector('.exp-card-img');
+    const glow  = card.querySelector('.exp-card-glow');
+    const sub   = card.querySelector('.exp-card-sub');
+    const tag   = card.querySelector('.exp-card-tag');
+
+    card.addEventListener('mouseenter', () => {
+      gsap.to(img,  { scale: 1.08, duration: 1.2, ease: 'power2.out' });
+      gsap.to(glow, { opacity: 1,  duration: 0.4, ease: 'power2.out' });
+      gsap.to(tag,  { opacity: 1,  duration: 0.3, ease: 'power2.out' });
+      if (sub) sub.style.maxHeight = '120px';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(img,  { scale: 1,   duration: 1.0, ease: 'power2.inOut' });
+      gsap.to(glow, { opacity: 0, duration: 0.4, ease: 'power2.inOut' });
+      gsap.to(tag,  { opacity: 0.6, duration: 0.3 });
+      if (sub) sub.style.maxHeight = '0';
+    });
+  });
+
+})();
+</script>
+</body></html>
+
+
+

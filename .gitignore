@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Node (if used in future)
+node_modules/
+.env
+.env.local
+.env.production
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary scripts (not needed in production)
+split_site.py
+update_galleries.py
+update_index.py
+update_links.py
+
+# Stitch/prototype files
+stitch_homepage.html

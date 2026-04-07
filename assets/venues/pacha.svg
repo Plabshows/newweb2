@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" fill="none">
+  <!-- Two cherries -->
+  <circle cx="58" cy="28" r="12" fill="white"/>
+  <circle cx="102" cy="28" r="12" fill="white"/>
+  <!-- Stems -->
+  <path d="M58 16 Q80 2 102 16" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Leaf -->
+  <ellipse cx="80" cy="6" rx="8" ry="5" fill="white" transform="rotate(-20 80 6)"/>
+  <!-- PACHA text -->
+  <text x="80" y="78" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="white" text-anchor="middle" letter-spacing="4">PACHA</text>
+</svg>
