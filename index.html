@@ -1170,7 +1170,7 @@ function escapeHtml(str) {
             card.className = 'snap-center shrink-0 w-[85vw] sm:w-[320px] aspect-[4/5] rounded-[2rem] overflow-hidden group relative flex flex-col shadow-2xl border border-white/10';
             const cat = el.cat.length ? el.cat[0].toUpperCase() : 'PERFORMANCE';
             card.innerHTML = `
-                <a href="show-details?id=${el.id}&source=${el.source}" class="block w-full h-full relative hover:border-transparent">
+                <a href="show-details.html?id=${el.id}&source=${el.source}" class="block w-full h-full relative hover:border-transparent">
                     <img src="${el.image || 'https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                     <div class="absolute inset-0 p-8 flex flex-col justify-end">

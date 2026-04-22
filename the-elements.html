@@ -400,7 +400,7 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             const mainCat = el.categories && el.categories.length > 0 && el.categories[0] !== '' ? el.categories[0] : 'PERFORMANCE';
             
             card.innerHTML = `
-                <a href="show-details?id=${el.id}&source=${el.source}" class="block h-full flex flex-col">
+                <a href="show-details.html?id=${el.id}&source=${el.source}" class="block h-full flex flex-col">
                     <div class="h-64 overflow-hidden relative">
                         <img src="${el.image}" alt="${el.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800'">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-90"></div>
