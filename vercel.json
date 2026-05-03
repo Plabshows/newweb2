@@ -13,12 +13,55 @@
 
     {
       "source": "/contact",
-      "destination": "/cindex.html#booking-form",
+      "destination": "/index.html#booking-form",
       "permanent": true
     },
     {
       "source": "/contact/",
-      "destination": "//cindex.html#booking-form",
+      "destination": "/index.html#booking-form",
+      "permanent": true
+    },
+
+    {
+      "source": "/special-acts",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+    {
+      "source": "/special-acts/",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+
+    {
+      "source": "/entertainment/:slug",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+    {
+      "source": "/entertainment/:slug/",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+
+    {
+      "source": "/services/circus",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/special-acts",
+      "destination": "/the-elements.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/dance-shows",
+      "destination": "/experiences.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/fire-painting",
+      "destination": "/the-elements.html",
       "permanent": true
     },
 
@@ -33,6 +76,7 @@
       "permanent": true
     }
   ],
+
   "rewrites": [
     {
       "source": "/experiences/:slug",
