@@ -1,59 +1,15 @@
 {
   "redirects": [
-    { "source": "/about", "destination": "/", "permanent": true },
-
-    { "source": "/stilts", "destination": "/the-elements", "permanent": true },
-    { "source": "/mermaids", "destination": "/the-elements", "permanent": true },
-    { "source": "/aerial-shows", "destination": "/the-elements", "permanent": true },
-    { "source": "/circus", "destination": "/the-elements", "permanent": true },
-    { "source": "/singer", "destination": "/the-elements", "permanent": true },
-    { "source": "/camouflage", "destination": "/the-elements", "permanent": true },
-    { "source": "/magicians", "destination": "/the-elements", "permanent": true },
-    { "source": "/breakdance", "destination": "/the-elements", "permanent": true },
-    { "source": "/violinist", "destination": "/the-elements", "permanent": true },
-    { "source": "/contemporary", "destination": "/the-elements", "permanent": true },
-    { "source": "/hostesses", "destination": "/the-elements", "permanent": true },
-    { "source": "/live-painting", "destination": "/the-elements", "permanent": true },
-    { "source": "/little-person", "destination": "/the-elements", "permanent": true },
-    { "source": "/champagne-skirt", "destination": "/the-elements", "permanent": true },
-    { "source": "/champagne-glass", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/the-humanoids", "destination": "/the-elements", "permanent": true },
-    { "source": "/the-shamans", "destination": "/the-elements", "permanent": true },
-    { "source": "/body-painting", "destination": "/the-elements", "permanent": true },
-    { "source": "/pom-pom-monsters", "destination": "/the-elements", "permanent": true },
-    { "source": "/vr-graffiti", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/gogo-dancers", "destination": "/the-elements", "permanent": true },
-    { "source": "/hedge-men", "destination": "/the-elements", "permanent": true },
-    { "source": "/breaking-bike", "destination": "/the-elements", "permanent": true },
-    { "source": "/b-boy-monkeys", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/slack-line", "destination": "/the-elements", "permanent": true },
-    { "source": "/cosmic-girls", "destination": "/the-elements", "permanent": true },
-    { "source": "/flamenco", "destination": "/the-elements", "permanent": true },
-    { "source": "/fire-shows", "destination": "/the-elements", "permanent": true },
-    { "source": "/fire-painting", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/360-video-booth", "destination": "/the-elements", "permanent": true },
-    { "source": "/boombox-man", "destination": "/the-elements", "permanent": true },
-    { "source": "/slinky-man", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/drag-artists", "destination": "/the-elements", "permanent": true },
-    { "source": "/glitter-make-up", "destination": "/the-elements", "permanent": true },
-    { "source": "/sexy-shows", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/djs", "destination": "/the-elements", "permanent": true },
-    { "source": "/djs-musicians-singers", "destination": "/the-elements", "permanent": true },
-    { "source": "/samba", "destination": "/the-elements", "permanent": true },
-
-    { "source": "/props", "destination": "/the-elements", "permanent": true },
-    { "source": "/special-acts", "destination": "/the-elements", "permanent": true },
-    { "source": "/art-shows", "destination": "/the-elements", "permanent": true },
-    { "source": "/dance-shows", "destination": "/the-elements", "permanent": true }
+    {
+      "source": "/services/:slug",
+      "destination": "/the-elements",
+      "permanent": true
+    }
   ],
-
   "rewrites": [
-    { "source": "/experiences/:slug", "destination": "/show-details.html" }
+    {
+      "source": "/experiences/:slug",
+      "destination": "/show-details.html"
+    }
   ]
 }
