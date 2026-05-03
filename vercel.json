@@ -1,6 +1,28 @@
 {
   "redirects": [
     {
+      "source": "/about-us",
+      "destination": "/the-lab.html",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/the-lab.html",
+      "permanent": true
+    },
+
+    {
+      "source": "/contact",
+      "destination": "/contact.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact.html",
+      "permanent": true
+    },
+
+    {
       "source": "/services/:slug",
       "destination": "/the-elements.html",
       "permanent": true
