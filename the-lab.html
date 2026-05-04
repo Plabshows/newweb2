@@ -11,7 +11,6 @@
 <meta name="theme-color" content="#131313">
 <meta name="description" content="Born in Ibiza, trusted worldwide. For 20+ years Performance Lab has architected immersive shows for elite venues, superyachts and luxury brands. Discover our story.">
 <link rel="canonical" href="https://performancelab.es/the-lab.html">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://generativelanguage.googleapis.com https://www.googletagmanager.com; connect-src 'self' https://*.supabase.co https://generativelanguage.googleapis.com; img-src 'self' data: https://*.supabase.co https://images.unsplash.com https://*.ytimg.com https://euphonious-kelpie-cd0a27.netlify.app; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://youtube.com;">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://performancelab.es/the-lab.html">
@@ -673,36 +672,36 @@ document.addEventListener('DOMContentLoaded', () => {
 <h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <div class="space-y-1">
-<label for="lab-booking-name" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
-<input id="lab-booking-name" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="name" placeholder="Enter your name" type="text" autoComplete="name" required/>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="name" placeholder="Enter your name" type="text" required/>
 </div>
 <div class="space-y-1">
-<label for="lab-booking-email" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
-<input id="lab-booking-email" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="email" placeholder="name@email.com" type="email" autoComplete="email" required/>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="email" placeholder="name@email.com" type="email" required/>
 </div>
 <div class="space-y-1">
-<label for="lab-booking-date" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
-<input id="lab-booking-date" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white [color-scheme:light] focus:border-primary outline-none" name="event_date" type="date" required/>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white [color-scheme:light] focus:border-primary outline-none" name="event_date" type="date" required/>
 </div>
 <div class="space-y-1">
-<label for="lab-booking-type" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
-<select id="lab-booking-type" name="event_type" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white border border-white/10 focus:border-primary outline-none" required>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
+<select name="event_type" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white border border-white/10 focus:border-primary outline-none" required>
     <option value="" disabled selected>Select event type</option>
-    <option value="Wedding" class="bg-white text-black">Wedding</option>
-    <option value="Corporate" class="bg-white text-black">Corporate</option>
-    <option value="Club / Nightlife" class="bg-white text-black">Club / Nightlife</option>
-    <option value="Private Celebration" class="bg-white text-black">Private Celebration</option>
-    <option value="Other" class="bg-white text-black">Other</option>
+    <option value="wedding" class="bg-white text-black">Wedding</option>
+    <option value="corporate" class="bg-white text-black">Corporate</option>
+    <option value="club" class="bg-white text-black">Club / Nightlife</option>
+    <option value="private" class="bg-white text-black">Private Celebration</option>
+    <option value="other" class="bg-white text-black">Other</option>
 </select>
 </div>
 </div>
 <div class="space-y-1">
-<label for="lab-booking-budget" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
-<input id="lab-booking-budget" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="budget" placeholder="e.g. 5000" type="number" min="0"/>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
+<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="budget" placeholder="e.g. 5000" type="number" min="0"/>
 </div>
 <div class="space-y-1">
-<label for="lab-booking-message" class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
-<textarea id="lab-booking-message" class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="message" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
+<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
+<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="message" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
 </div>
 <button type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
 </form>

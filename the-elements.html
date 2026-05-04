@@ -12,7 +12,6 @@
     <meta name="description" content="Explore our curated roster of elite Ibiza performers — circus acts, live bands, immersive characters, fire shows & more. Available for events worldwide. Explore the roster.">
     <link rel="canonical" href="https://performancelab.es/the-elements.html">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://generativelanguage.googleapis.com https://www.googletagmanager.com; connect-src 'self' https://*.supabase.co https://generativelanguage.googleapis.com; img-src 'self' data: https://*.supabase.co https://images.unsplash.com https://*.ytimg.com https://euphonious-kelpie-cd0a27.netlify.app; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://youtube.com;">
     
     <!-- INJECT_SCHEMA_START -->
 
@@ -977,18 +976,13 @@
                 <div id="search-container" class="relative overflow-hidden rounded-full transition-all duration-500 border border-white/10 bg-black/20 backdrop-blur-xl focus-within:border-primary/50 focus-within:shadow-[0_0_30px_rgba(255,177,193,0.15)]">
                     <div id="search-glow" class="absolute inset-0 opacity-0 transition-opacity duration-500 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 pointer-events-none"></div>
                     <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-primary transition-colors pointer-events-none z-10">auto_awesome</span>
-                    <label for="ai-search-input" class="sr-only">Search Roster with AI</label>
-                    <input type="text" id="ai-search-input" placeholder="Describe your vision... (e.g. High energy fire show for a beach club)" autoComplete="off" class="relative z-10 w-full pl-16 pr-32 py-5 bg-transparent border-none text-white placeholder:text-white/20 focus:ring-0 text-sm md:text-base outline-none">
+                    <input type="text" id="ai-search-input" placeholder="Describe your vision... (e.g. High energy fire show for a beach club)" class="relative z-10 w-full pl-16 pr-32 py-5 bg-transparent border-none text-white placeholder:text-white/20 focus:ring-0 text-sm md:text-base outline-none">
                     <button id="ai-search-btn" class="absolute right-3 top-1/2 -translate-y-1/2 px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 hover:text-white transition-all font-headline text-[10px] uppercase tracking-widest flex items-center gap-2 group/btn z-20">
                         <span id="btn-text">Search</span>
                         <i data-lucide="search" class="w-3.5 h-3.5 group-hover/btn:scale-110 transition-transform" style="stroke-width:1;"></i>
                     </button>
                 </div>
                 <div id="ai-loading-bar" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-1000 opacity-0"></div>
-            </div>
-            <!-- AI Fallback Message -->
-            <div id="ai-search-error" class="hidden text-center mt-4 text-white/40 text-[10px] uppercase tracking-widest animate-pulse">
-                AI search is temporarily unavailable. Please explore the categories or try a keyword search.
             </div>
 
             <div id="category-filters" class="flex flex-wrap justify-center gap-3">
@@ -1857,7 +1851,6 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
     const aiSearchInput = document.getElementById('ai-search-input');
     const aiSearchBtn = document.getElementById('ai-search-btn');
-    const aiSearchError = document.getElementById('ai-search-error');
     const categoryFiltersContainer = document.getElementById('category-filters');
 
     function initSupabase() {
@@ -1921,7 +1914,6 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             console.log('[AI Search] Stage 1: Starting search for:', query);
             setSearchingState(true);
             aiSearchResults = []; // Clear previous results
-            if (aiSearchError) aiSearchError.classList.add('hidden'); // Hide any previous error
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active', 'border-primary', 'text-primary', 'bg-primary/10');
@@ -1942,7 +1934,7 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             console.log('[AI Search] Stage 3: SDK available. Initializing Model...');
             const GoogleGenerativeAI = window.GoogleGenerativeAI;
             const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-3.1-pro" });
 
             const catalogue = allElements.map(el => ({
                 slug: el.slug,
@@ -1983,7 +1975,6 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             }
         } catch (error) {
             console.error('[AI Search] Global Error:', error);
-            if (aiSearchError) aiSearchError.classList.remove('hidden'); // Show fallback message to user
             
             // Enhanced diagnostic block if the model configuration fails (e.g. 404 Not Found)
             if (error.message.includes('404') || error.message.includes('not found') || error.message.includes('model')) {

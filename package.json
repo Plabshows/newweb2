@@ -1,0 +1,25 @@
+{
+  "name": "nueva-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "booking-handler.js",
+  "scripts": {
+    "generate-elements": "node generate-elements-static.js",
+    "prebuild": "node generate-elements-static.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plabshows/performance-lab-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plabshows/performance-lab-web/issues"
+  },
+  "homepage": "https://github.com/plabshows/performance-lab-web#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.1",
+    "dotenv": "^17.4.2"
+  }
+}
