@@ -971,18 +971,15 @@
         
         <!-- Search and Filters -->
         <div class="mb-12 space-y-8">
-            <!-- AI Search Bar -->
+            <!-- Search Bar -->
             <div class="max-w-2xl mx-auto relative group">
-                <div id="search-container" class="relative overflow-hidden rounded-full transition-all duration-500 border border-white/10 bg-black/20 backdrop-blur-xl focus-within:border-primary/50 focus-within:shadow-[0_0_30px_rgba(255,177,193,0.15)]">
-                    <div id="search-glow" class="absolute inset-0 opacity-0 transition-opacity duration-500 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 pointer-events-none"></div>
-                    <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-primary transition-colors pointer-events-none z-10">auto_awesome</span>
-                    <input type="text" id="ai-search-input" placeholder="Describe your vision... (e.g. High energy fire show for a beach club)" class="relative z-10 w-full pl-16 pr-32 py-5 bg-transparent border-none text-white placeholder:text-white/20 focus:ring-0 text-sm md:text-base outline-none">
-                    <button id="ai-search-btn" class="absolute right-3 top-1/2 -translate-y-1/2 px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 hover:text-white transition-all font-headline text-[10px] uppercase tracking-widest flex items-center gap-2 group/btn z-20">
-                        <span id="btn-text">Search</span>
-                        <i data-lucide="search" class="w-3.5 h-3.5 group-hover/btn:scale-110 transition-transform" style="stroke-width:1;"></i>
-                    </button>
+                <div id="search-container" class="relative overflow-hidden rounded-full transition-all duration-500 border border-white/10 bg-black/20 backdrop-blur-xl focus-within:border-primary/50">
+                    <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-primary transition-colors pointer-events-none z-10">search</span>
+                    <input type="text" id="search-input" placeholder="Search for shows, characters, or vibes..." class="relative z-10 w-full pl-16 pr-32 py-5 bg-transparent border-none text-white placeholder:text-white/20 focus:ring-0 text-sm md:text-base outline-none">
+                    <div class="absolute right-6 top-1/2 -translate-y-1/2 text-white/10 font-headline text-[10px] uppercase tracking-widest hidden md:block">
+                        Filter Results
+                    </div>
                 </div>
-                <div id="ai-loading-bar" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-1000 opacity-0"></div>
             </div>
 
             <div id="category-filters" class="flex flex-wrap justify-center gap-3">
@@ -1830,27 +1827,15 @@ function closeMobileMenu() {
 if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 </script>
 
-<!-- Google Generative AI & Lucide Icons -->
-<!-- Google Generative AI & Lucide Icons -->
+<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
-<script type="module">
-    try {
-        const { GoogleGenerativeAI } = await import("https://unpkg.com/@google/generative-ai@latest/dist/index.mjs");
-        window.GoogleGenerativeAI = GoogleGenerativeAI;
-        console.log('[AI Search] Gemini SDK loaded and attached to window.');
-    } catch (err) {
-        console.error('[AI Search] Failed to load Gemini SDK:', err);
-    }
-</script>
 <script src="categories.js"></script>
 <script>
     let supabaseClient = null;
     let allElements = [];
-    let aiSearchResults = null;
-    let isSearching = false;
+    let currentFilter = 'all';
 
-    const aiSearchInput = document.getElementById('ai-search-input');
-    const aiSearchBtn = document.getElementById('ai-search-btn');
+    const searchInput = document.getElementById('search-input');
     const categoryFiltersContainer = document.getElementById('category-filters');
 
     function initSupabase() {
@@ -1890,135 +1875,32 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
                 t.classList.remove('border-white/10', 'text-white/70');
                 t.classList.add('active', 'border-primary', 'text-primary', 'bg-primary/10');
                 
-                // Clear AI search when a category is selected
-                aiSearchResults = null;
-                if (aiSearchInput) aiSearchInput.value = '';
-                
-                filterElements();
-            });
+    function filterElements() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const activeBtn = document.querySelector('.filter-btn.active');
+        const activeCat = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+
+        const filtered = allElements.filter(el => {
+            // Category filter
+            const matchesCat = (activeCat === 'all' || el.categories.some(c => c === activeCat));
+            
+            // Text search filter (Name, Categories, and Description)
+            const searchStr = [
+                el.name,
+                el.description,
+                ...el.categories
+            ].join(' ').toLowerCase();
+            
+            const matchesSearch = !query || searchStr.includes(query);
+            
+            return matchesCat && matchesSearch;
         });
+
+        renderGrid(filtered);
     }
 
-    // ── AI Search Logic (Gemini) ─────────────────────────
-    async function performAISearch() {
-        const query = aiSearchInput.value.trim();
-        if (!query || isSearching) return;
-
-        const apiKey = "AIzaSyCxeO--HZ1VT8qWmefayuyM991YCsdS64o"; // GEMINI_API_KEY
-        if (apiKey === "VITE_GEMINI_API_KEY") {
-            console.warn("AI Search: API Key not set. Please configure VITE_GEMINI_API_KEY.");
-            return;
-        }
-
-        try {
-            console.log('[AI Search] Stage 1: Starting search for:', query);
-            setSearchingState(true);
-            aiSearchResults = []; // Clear previous results
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active', 'border-primary', 'text-primary', 'bg-primary/10');
-                btn.classList.add('border-white/10', 'text-white/70');
-            });
-            filterElements();
-
-            // Wait a moment for SDK to be ready if called very fast
-            if (!window.GoogleGenerativeAI) {
-                console.log('[AI Search] Stage 2: SDK not ready yet, waiting...');
-                await new Promise(resolve => setTimeout(resolve, 800));
-            }
-
-            if (!window.GoogleGenerativeAI) {
-                throw new Error('Gemini SDK failed to load. Please check your internet connection or CSP settings.');
-            }
-
-            console.log('[AI Search] Stage 3: SDK available. Initializing Model...');
-            const GoogleGenerativeAI = window.GoogleGenerativeAI;
-            const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-3.1-pro" });
-
-            const catalogue = allElements.map(el => ({
-                slug: el.slug,
-                name: el.name,
-                category: el.categories.join(', '),
-                description: el.description
-            }));
-
-            console.log('[AI Search] Stage 4: Sending prompt to Gemini. Elements count:', catalogue.length);
-            const prompt = `
-                You are a luxury event curator for Performance Lab Ibiza.
-                User Request: "${query}"
-                Catalogue: ${JSON.stringify(catalogue)}
-                
-                TASK: Identify the shows that best fit the user's request. 
-                FORMAT: RETURN ONLY A RAW JSON ARRAY OF STRINGS WITH THE SLUGS. 
-                CONSTRAINTS: DO NOT ADD MARKDOWN. DO NOT USE \`\`\`json. NO EXPLANATIONS. NO PREAMBLE.
-            `;
-
-            const result = await model.generateContent(prompt);
-            const responseText = result.response.text();
-            console.log('[AI Search] Stage 5: Response received. Raw content:', responseText);
-            
-            const cleanText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
-            console.log('[AI Search] Stage 6: Cleaned text:', cleanText);
-            
-            try {
-                const parsedSlugs = JSON.parse(cleanText);
-                if (Array.isArray(parsedSlugs)) {
-                    aiSearchResults = parsedSlugs.map(s => String(s).toLowerCase().trim());
-                    console.log('[AI Search] Stage 7: Parsed slugs successfully:', aiSearchResults);
-                    filterElements();
-                } else {
-                    console.warn('[AI Search] Warning: Parsed content is not an array.');
-                }
-            } catch (parseError) {
-                console.error('[AI Search] Parse Error:', parseError, 'Clean Text:', cleanText);
-            }
-        } catch (error) {
-            console.error('[AI Search] Global Error:', error);
-            
-            // Enhanced diagnostic block if the model configuration fails (e.g. 404 Not Found)
-            if (error.message.includes('404') || error.message.includes('not found') || error.message.includes('model')) {
-                console.info('[AI Search] Potential model naming issue detected. Checking available models...');
-                try {
-                    const diagGenAI = new window.GoogleGenerativeAI(apiKey);
-                    // Attempt to list models if supported by the SDK; otherwise log a path for manual verification
-                    if (typeof diagGenAI.listModels === 'function') {
-                        diagGenAI.listModels()
-                            .then(res => console.log('[AI Search] Successfully retrieved available models:', res))
-                            .catch(e => console.warn('[AI Search] Native listModels call failed. Verify your API key permissions.'));
-                    } else {
-                        console.log('[AI Search] listModels() is not available in this SDK version. Please visit https://aistudio.google.com/ to check available models.');
-                    }
-                } catch (diagError) {
-                    console.warn('[AI Search] Diagnostic attempt failed:', diagError);
-                }
-            }
-        } finally {
-            console.log('[AI Search] Search cycle finished.');
-            setSearchingState(false);
-        }
-    }
-
-    function setSearchingState(active) {
-        isSearching = active;
-        const container = document.getElementById('search-container');
-        const glow = document.getElementById('search-glow');
-        const loader = document.getElementById('ai-loading-bar');
-        const btnText = document.getElementById('btn-text');
-
-        if (active) {
-            container.classList.add('border-primary/50');
-            glow.style.opacity = '1';
-            loader.style.width = '100%';
-            loader.style.opacity = '1';
-            btnText.textContent = 'Thinking...';
-        } else {
-            container.classList.remove('border-primary/50');
-            glow.style.opacity = '0';
-            loader.style.width = '0';
-            loader.style.opacity = '0';
-            btnText.textContent = 'Search';
-        }
+    if (searchInput) {
+        searchInput.addEventListener('input', filterElements);
     }
 
     async function loadElements() {
@@ -2161,39 +2043,33 @@ if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         });
     }
 
+    // Combined filtering for categories and text search
     function filterElements() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const activeBtn = document.querySelector('.filter-btn.active');
         const activeCat = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
 
         const filtered = allElements.filter(el => {
-            // If AI search is active, use it as the primary filter
-            if (aiSearchResults) {
-                const showSlug = (el.slug || '').toLowerCase().trim();
-                return aiSearchResults.includes(showSlug);
-            }
-
-            // Traditional category filter
-            if (activeCat !== 'all') {
-                return el.categories.some(cat => cat === activeCat);
-            }
-            return true;
+            // 1. Category check
+            const matchesCat = (activeCat === 'all' || el.categories.some(c => c === activeCat));
+            
+            // 2. Text search check (indexes name, description, and all categories)
+            const searchStr = [
+                el.name,
+                el.description,
+                ...(el.categories || [])
+            ].join(' ').toLowerCase();
+            
+            const matchesSearch = !query || searchStr.includes(query);
+            
+            return matchesCat && matchesSearch;
         });
 
         renderGrid(filtered);
     }
 
-    if (aiSearchBtn) aiSearchBtn.addEventListener('click', performAISearch);
-    if (aiSearchInput) {
-        aiSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performAISearch();
-        });
-        // Clear AI results if user clears input manually
-        aiSearchInput.addEventListener('input', (e) => {
-            if (e.target.value === '' && aiSearchResults) {
-                aiSearchResults = null;
-                filterElements();
-            }
-        });
+    if (searchInput) {
+        searchInput.addEventListener('input', filterElements);
     }
 
     // Initialize
