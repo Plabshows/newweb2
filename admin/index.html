@@ -223,7 +223,7 @@
 
         // ─── DATA ─────────────────────────────────────────────
         function goToEdit(id, source, slug) {
-            window.location.href = `/experiences/${encodeURIComponent(slug)}?edit=true`;
+            window.location.href = `/show-details.html?show=${encodeURIComponent(slug)}&edit=true`;
         }
 
         async function loadData() {

@@ -76,7 +76,17 @@
       "permanent": true
     }
   ],
-
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://generativelanguage.googleapis.com https://www.googletagmanager.com; connect-src 'self' https://*.supabase.co https://generativelanguage.googleapis.com; img-src 'self' data: https://*.supabase.co https://images.unsplash.com https://*.ytimg.com https://euphonious-kelpie-cd0a27.netlify.app; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://youtube.com;"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/experiences/:slug",
