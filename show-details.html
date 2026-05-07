@@ -1,875 +1,96 @@
-<!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PERFORMANCE LAB | SHOW DETAIL</title>
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#131313">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-error-container": "#ffdad6",
-                    "on-tertiary": "#2f3131",
-                    "on-tertiary-fixed": "#1a1c1c",
-                    "on-tertiary-fixed-variant": "#454747",
-                    "surface-container-low": "#1b1b1b",
-                    "tertiary": "#c6c6c7",
-                    "on-secondary-fixed-variant": "#004e5d",
-                    "inverse-primary": "#bc0053",
-                    "inverse-surface": "#e2e2e2",
-                    "outline-variant": "#5a4045",
-                    "error": "#ffb4ab",
-                    "on-primary-fixed-variant": "#90003e",
-                    "primary-container": "#c50f59",
-                    "on-secondary-container": "#003f4c",
-                    "on-primary-fixed": "#3f0017",
-                    "secondary": "#4cd7f7",
-                    "primary-fixed-dim": "#ffb1c1",
-                    "surface-container-high": "#2a2a2a",
-                    "on-primary": "#66002a",
-                    "surface-variant": "#353535",
-                    "outline": "#a9888e",
-                    "on-secondary": "#003640",
-                    "tertiary-container": "#636565",
-                    "secondary-container": "#00b2d1",
-                    "on-background": "#e2e2e2",
-                    "surface-container-lowest": "#0e0e0e",
-                    "primary": "#ffb1c1",
-                    "surface-container-highest": "#353535",
-                    "on-surface": "#e2e2e2",
-                    "on-surface-variant": "#e2bdc3",
-                    "tertiary-fixed": "#e2e2e2",
-                    "on-tertiary-container": "#e2e3e3",
-                    "secondary-fixed-dim": "#4cd7f7",
-                    "surface-dim": "#131313",
-                    "on-secondary-fixed": "#001f26",
-                    "tertiary-fixed-dim": "#c6c6c7",
-                    "inverse-on-surface": "#303030",
-                    "error-container": "#93000a",
-                    "on-primary-container": "#ffdadf",
-                    "surface-bright": "#393939",
-                    "surface-tint": "#ffb1c1",
-                    "secondary-fixed": "#adecff",
-                    "background": "#131313",
-                    "surface-container": "#1f1f1f",
-                    "surface": "#131313",
-                    "on-error": "#690005",
-                    "primary-fixed": "#ffd9df"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
+<!DOCTYPE html><html class="dark" lang="en"><head><script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-P3RG4P3H",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><script type="text/javascript">!function(t,e,n,c,a,r,s){t[n]=t[n]||function(){(t[n].q=t[n].q||[]).push(arguments)},(r=e.createElement(c)).async=1,r.src="https://www.clarity.ms/tag/wmkhq6d3ox",(s=e.getElementsByTagName(c)[0]).parentNode.insertBefore(r,s)}(window,document,"clarity","script")</script><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"><title>PERFORMANCE LAB | SHOW DETAIL</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#131313"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#ffdad6","on-tertiary":"#2f3131","on-tertiary-fixed":"#1a1c1c","on-tertiary-fixed-variant":"#454747","surface-container-low":"#1b1b1b",tertiary:"#c6c6c7","on-secondary-fixed-variant":"#004e5d","inverse-primary":"#bc0053","inverse-surface":"#e2e2e2","outline-variant":"#5a4045",error:"#ffb4ab","on-primary-fixed-variant":"#90003e","primary-container":"#c50f59","on-secondary-container":"#003f4c","on-primary-fixed":"#3f0017",secondary:"#4cd7f7","primary-fixed-dim":"#ffb1c1","surface-container-high":"#2a2a2a","on-primary":"#66002a","surface-variant":"#353535",outline:"#a9888e","on-secondary":"#003640","tertiary-container":"#636565","secondary-container":"#00b2d1","on-background":"#e2e2e2","surface-container-lowest":"#0e0e0e",primary:"#ffb1c1","surface-container-highest":"#353535","on-surface":"#e2e2e2","on-surface-variant":"#e2bdc3","tertiary-fixed":"#e2e2e2","on-tertiary-container":"#e2e3e3","secondary-fixed-dim":"#4cd7f7","surface-dim":"#131313","on-secondary-fixed":"#001f26","tertiary-fixed-dim":"#c6c6c7","inverse-on-surface":"#303030","error-container":"#93000a","on-primary-container":"#ffdadf","surface-bright":"#393939","surface-tint":"#ffb1c1","secondary-fixed":"#adecff",background:"#131313","surface-container":"#1f1f1f",surface:"#131313","on-error":"#690005","primary-fixed":"#ffd9df"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},fontFamily:{headline:["Space Grotesk"],body:["Inter"],label:["Inter"]}}}}</script><style>body{background-color:#131313;color:#e2e2e2;font-family:Inter,sans-serif;overflow-x:hidden}.font-headline{font-family:'Space Grotesk',sans-serif}.kinetic-italic{font-style:italic}.glass-card{background:rgba(53,53,53,.5);backdrop-filter:blur(20px);border:1px solid rgba(169,136,142,.15)}.glass-card:hover{border-color:rgba(76,215,247,.4)}.text-neon-pink{color:#ffb1c1;text-shadow:0 0 10px rgba(255,177,193,.3)}.text-neon-cyan{color:#4cd7f7;text-shadow:0 0 10px rgba(76,215,247,.3)}.masonry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));grid-auto-rows:200px;gap:1rem}.masonry-item:nth-child(2n){grid-row:span 2}.masonry-item:nth-child(3n){grid-row:span 1.5}input,select,textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff}input:focus,select:focus,textarea:focus{border-color:#ffb1c1;outline:0;background:rgba(255,255,255,.08)}select option{background-color:#1b1b1b;color:#fff}.editable{position:relative;transition:all .2s;border:1px dashed transparent}.editable:focus,.editable:hover{outline:0;border-color:rgba(255,177,193,.4);background:rgba(255,255,255,.02);border-radius:8px;padding:4px;box-shadow:0 0 10px rgba(255,177,193,.1)}.cover-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;cursor:pointer;color:#fff}.cover-overlay:hover{opacity:1}.admin-delete-btn{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.8);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#ff6b6b;border:1px solid rgba(255,107,107,.3);transition:all .2s;z-index:10;opacity:0}.group:hover .admin-delete-btn{opacity:1}.admin-delete-btn:hover{background:rgba(255,107,107,.3);transform:scale(1.1)}.upload-progress{height:4px;background:rgba(255,255,255,.1);width:100%;border-radius:2px;overflow:hidden;margin-top:8px}.upload-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#ffb1c1,#4cd7f7);transition:width .3s}</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/categories.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q752859X4"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-6Q752859X4")</script></head><body class="bg-background text-on-background"><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3RG4P3H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto"><a href="/index.html" class="hover:scale-105 transition-transform duration-300"><img src="images/logo-brush.webp" alt="PERFORMANCE LAB" class="h-12 md:h-14 w-auto object-contain" fetchpriority="high"></a><div class="hidden md:flex gap-8 items-center"><a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="/the-lab.html">The Lab</a> <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#4cd7f7] border-b-2 border-[#4cd7f7] pb-1 transition-all duration-300 hover:scale-105" href="/the-elements.html">The Elements</a> <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="/experiences.html">The Experiences</a></div><div class="flex items-center gap-4"><a href="#booking-form" class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a><button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group" aria-label="Toggle menu"><span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-line1"></span> <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-line2"></span> <span class="block w-4 h-0.5 bg-[#ffb1c1] transition-all duration-300" id="ham-line3"></span></button></div></nav><div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen z-40 bg-[#0d0d0d]/97 backdrop-blur-2xl flex flex-col items-center justify-center gap-10 transform -translate-y-full transition-transform duration-500 ease-in-out"><a href="/the-lab.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-white hover:text-[#ffb1c1] transition-colors" onclick="closeMobileMenu()">The Lab</a> <a href="/the-elements.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-[#4cd7f7] transition-colors" onclick="closeMobileMenu()">The Elements</a> <a href="/experiences.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-white hover:text-[#ffb1c1] transition-colors" onclick="closeMobileMenu()">The Experiences</a> <a href="#booking-form" class="mobile-menu-link font-headline font-black text-2xl uppercase tracking-widest text-[#ffb1c1]/60 mt-4 border border-[#ffb1c1]/20 px-8 py-3 rounded-full" onclick="closeMobileMenu()">BOOK NOW</a></div><style>#hero-bg{position:fixed;inset:0;z-index:-1;background-size:cover;background-position:center top;filter:blur(60px) saturate(1.4);transform:scale(1.15);opacity:0;transition:opacity 1.2s ease}#hero-bg.loaded{opacity:.18}#hero-bg-overlay{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(19,19,19,.55) 0,rgba(19,19,19,.72) 40%,rgba(19,19,19,.95) 100%);pointer-events:none}</style><div id="hero-bg"></div><div id="hero-bg-overlay"></div><main class="pt-32 pb-24 px-8 min-h-screen"><div id="loading" class="text-center py-24"><span class="material-symbols-outlined animate-spin text-4xl text-primary block mx-auto w-fit">progress_activity</span><p class="mt-4 font-headline uppercase tracking-widest text-xs opacity-50">Loading Show...</p></div><div id="error" class="max-w-2xl mx-auto py-24 text-center hidden"><span class="material-symbols-outlined text-error text-6xl mb-4">error</span><h2 class="font-headline text-3xl font-bold text-white mb-2 uppercase">Show not found</h2><p class="text-white/60 mb-8 hidden"></p><a href="/the-elements.html" class="text-primary hover:underline font-body uppercase tracking-widest text-xs mt-4 inline-block">Return to The Elements</a></div><div id="content" class="max-w-7xl mx-auto hidden"><a href="/the-elements.html" class="inline-flex items-center gap-2 text-white/50 hover:text-white mb-8 transition-colors font-headline uppercase text-xs tracking-widest"><span class="material-symbols-outlined text-sm">arrow_back</span> Back to Catalog</a><div class="flex flex-col lg:flex-row gap-12 mb-20 items-start"><div class="w-full lg:w-5/12 glass-card rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl relative"><img id="show-image" src="" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy"><div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div></div><div class="w-full lg:w-7/12 py-4"><div id="show-categories-wrap" class="flex flex-wrap gap-2 mb-6"></div><h1 id="show-name" class="font-headline text-5xl md:text-7xl font-bold text-white mb-8 uppercase tracking-tighter shadow-sm"></h1><h3 class="font-headline font-bold text-white/40 uppercase tracking-widest text-xs mb-4">Description</h3><div id="show-description" class="text-on-surface/80 text-lg leading-loose font-body whitespace-pre-wrap"></div><div class="mt-12 flex flex-wrap gap-4"><a href="#booking-form" class="bg-primary text-on-primary px-8 py-4 rounded-xl font-headline font-bold uppercase tracking-[0.1em] text-sm hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(255,177,193,0.39)]"><span class="material-symbols-outlined">calendar_today</span> Book This Show</a><a id="next-show-btn" href="#" class="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl font-headline font-bold uppercase tracking-[0.1em] text-sm hover:bg-white/10 hover:border-white/30 transition-all duration-300 inline-flex items-center justify-center gap-2 hidden">Next Show <span class="material-symbols-outlined">arrow_forward</span></a></div></div></div><div id="gallery-section" class="hidden border-t border-white/5 pt-16 mt-16 pb-32"><h2 class="font-headline text-3xl font-bold text-white mb-10 text-center uppercase tracking-tighter">MEDIA <span class="kinetic-italic text-secondary">GALLERY</span></h2><div id="admin-gallery-controls" class="hidden text-center mb-8 flex justify-center items-center gap-4 flex-wrap"><input type="file" id="media-upload-input" accept="image/*,video/*" multiple="multiple" class="hidden"> <button id="add-media-btn" class="bg-white/5 border border-white/10 hover:border-[#4cd7f7] hover:bg-white/10 text-white px-6 py-3 rounded-xl font-headline font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined">add_photo_alternate</span> AÑADIR ARCHIVO</button> <button id="add-youtube-btn" class="bg-white/5 border border-white/10 hover:border-[#ffb1c1] hover:bg-white/10 text-white px-6 py-3 rounded-xl font-headline font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined">smart_display</span> AÑADIR VÍDEO (LINK)</button></div><div id="gallery-upload-progress" class="max-w-md mx-auto mt-4 hidden"><p class="text-xs text-secondary font-bold uppercase tracking-widest mb-2" id="gallery-upload-label">Subiendo...</p><div class="upload-progress"><div class="upload-progress-bar" id="gallery-upload-bar"></div></div></div><div id="video-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 hidden"></div><div id="photo-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar hidden"></div></div></div><div id="admin-action-bar" class="fixed bottom-0 left-0 w-full bg-[#0d0d0d]/90 backdrop-blur-xl border-t border-white/10 p-4 transform translate-y-full transition-transform duration-500 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]"><div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4"><div class="flex items-center gap-3 text-primary"><span class="material-symbols-outlined animate-pulse">edit_square</span><div><div class="font-headline font-bold uppercase tracking-widest text-sm text-primary">EDIT MODE ACTIVE</div><div class="text-[10px] text-white/50 w-full mb-0">Changes are not saved until you click the save button.</div></div></div><div class="flex gap-4 w-full md:w-auto"><a href="/admin.html" class="flex-1 md:flex-none text-center px-6 py-3 border border-white/20 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all text-white/70">Cancel</a> <button id="admin-save-btn" class="flex-1 md:flex-none text-center px-8 py-3 bg-primary text-black rounded-lg text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">save</span> GUARDAR CAMBIOS</button></div></div></div></main><footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden"><div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16"><div class="flex-1 w-full"><div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div><h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE<br><span class="kinetic-italic text-primary">MAGIC.</span></h2><form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12"><input type="hidden" name="_subject" value="New Event Brief — Performance Lab (Show Detail)"><h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label> <input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="name" placeholder="Enter your name" required></div><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label> <input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="email" placeholder="name@email.com" type="email" required></div><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label> <input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white [color-scheme:light] focus:border-primary outline-none" name="event_date" type="date" required></div><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label> <select name="event_type" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white border border-white/10 focus:border-primary outline-none" required><option value="" disabled="disabled" selected="selected">Select event type</option><option value="wedding" class="bg-white text-black">Wedding</option><option value="corporate" class="bg-white text-black">Corporate</option><option value="club" class="bg-white text-black">Club / Nightlife</option><option value="private" class="bg-white text-black">Private Celebration</option><option value="other" class="bg-white text-black">Other</option></select></div></div><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label> <input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="budget" placeholder="e.g. 5000" type="number" min="0"></div><div class="space-y-1"><label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label> <textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="message" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea></div><button type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button></form><div class="flex flex-wrap gap-4"><button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button> <a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a></div></div><div class="flex-1 flex flex-col md:items-end justify-between self-stretch"><div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12"><a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://www.instagram.com/performancelabshows" target="_blank" rel="noopener noreferrer">INSTAGRAM</a> <a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a> <a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://www.linkedin.com/company/performancelabshows" target="_blank" rel="noopener noreferrer">LINKEDIN</a> <a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#booking-form">CONTACT</a></div><div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">© 2026 PERFORMANCE LAB. ALL RIGHTS RESERVED.</div></div></div></footer><script>let supabaseClient=null;function initSupabase(){if(window.supabase&&!supabaseClient){const e="https://nwxepstpedmxslbznejv.supabase.co",t="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM";return supabaseClient=window.supabase.createClient(e,t),!0}return!!supabaseClient}const urlParams=new URLSearchParams(window.location.search),pathParts=window.location.pathname.split("/").filter(Boolean),pathSlug=pathParts.length>=2&&"experiences"===pathParts[0]?pathParts[1]:pathParts.pop(),isPathSlug=!urlParams.get("show")&&pathSlug&&"show-details.html"!==pathSlug,showParam=(urlParams.get("show")||(isPathSlug?pathSlug:"")).trim()||null;let source="";const isEditRequested="true"===urlParams.get("edit");let currentItem=null,isAdminMode=!1,editableGallery=[],originalMainImage="",pendingCoverImage=null;function getYoutubeId(e){if(!e)return null;let t="string"==typeof e?e:e.url||"";if(!t||"string"!=typeof t)return null;let r=t.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([^&?/\s]+)/);return r?r[1]:null}async function loadShowDetails(){if(!showParam)return console.error("Missing show parameter."),void showError("Missing parameters in URL. Check the debug info below.");if(initSupabase())try{let e=null,t="",r="",{data:a}=await supabaseClient.from("acts").select("*").eq("slug",showParam);if(a&&a.length>0)e=a[0],source="app";else{let{data:t}=await supabaseClient.from("pld_characters").select("*").eq("slug",showParam);if(t&&t.length>0)e=t[0],source="old-web";else{let t=showParam.replace(/-/g," "),{data:r}=await supabaseClient.from("acts").select("*").ilike("name",t);if(r&&r.length>0)e=r[0],source="app";else{let{data:r}=await supabaseClient.from("pld_characters").select("*").ilike("name",t);if(!(r&&r.length>0))throw console.error("Show not found with slug or name:",showParam),new Error("Show not found");e=r[0],source="old-web"}}}if(currentItem=e,isEditRequested){const{data:{session:e}}=await supabaseClient.auth.getSession();e&&(isAdminMode=!0)}if(!1===e.is_web_public&&!isAdminMode)return void showError("This show is currently private. Please log in as admin to view/edit it.");r=e.web_custom_title||e.name||"Untitled Show";let n=[];Array.isArray(e.categories)?n=e.categories:e.category&&(n=[e.category]),currentItem._activeCats=[...n],renderCategoryChips(n,!1),t="app"===source?e.web_description||e.description||"":e.web_description||e.long_description||e.description||"";let o=[],l=e.web_gallery;if("string"==typeof l&&l.trim())try{l=JSON.parse(l)}catch(e){l=null}if(Array.isArray(l)&&l.length>0)o=l;else if("app"===source){const t=Array.isArray(e.photos_url)?e.photos_url:[];let r=Array.isArray(e.video_gallery)?e.video_gallery:[];if(!Array.isArray(r)&&"string"==typeof e.video_gallery&&e.video_gallery.trim())try{r=JSON.parse(e.video_gallery)}catch(e){r=[]}Array.isArray(r)||(r=[]),e.video_url&&r.push(e.video_url),t.forEach(e=>{e&&o.push({url:e,type:"image"})}),r.forEach(e=>{let t="string"==typeof e?e:e&&e.url?e.url:null;t&&o.push({url:t,type:"video"})})}else{let t=e.gallery;if("string"==typeof t&&t.trim())try{t=JSON.parse(t)}catch(e){t=null}Array.isArray(t)&&t.forEach(e=>{e&&o.push({url:e,type:"image"})})}editableGallery=Array.isArray(o)?[...o]:[],pendingCoverImage=e.web_cover_image||e.image_url||e.image||"",document.getElementById("show-name").textContent=r;const s=document.getElementById("show-image"),i=document.getElementById("hero-bg"),d=pendingCoverImage||"https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800";if(s.src=d,i){const e=editableGallery.map(e=>"string"==typeof e?e:e&&e.url).filter(e=>e&&"string"==typeof e&&!e.match(/\.(mp4|webm|mov|avi)(\?|$)/i)&&!e.includes("youtube")&&!e.includes("youtu.be")),t=e.length>0?e:d?[d]:[],r=t[Math.floor(Math.random()*t.length)]||d;i.style.backgroundImage=`url('${r}')`,setTimeout(()=>i.classList.add("loaded"),120)}document.getElementById("show-description").textContent=t,renderGallery(),document.getElementById("loading").classList.add("hidden"),document.getElementById("content").classList.remove("hidden"),isAdminMode&&activateEditMode(); setupNextShowNavigation();}catch(e){console.error("Error fetching show details:",e),showError("An error occurred while loading the show: "+e.message)}else showError("Database library not loaded. Please check your connection and refresh the page.")}
+
+async function setupNextShowNavigation() {
+    try {
+        const table = source === 'app' ? 'acts' : 'pld_characters';
+        const { data: allShows } = await supabaseClient
+            .from(table)
+            .select('slug, name')
+            .eq('is_web_public', true)
+            .order('name', { ascending: true });
+
+        if (allShows && allShows.length > 1) {
+            const currentIndex = allShows.findIndex(s => s.slug === showParam);
+            if (currentIndex !== -1) {
+                const nextIndex = (currentIndex + 1) % allShows.length;
+                const nextShow = allShows[nextIndex];
+                const btn = document.getElementById('next-show-btn');
+                if (btn) {
+                    btn.href = `/show-details.html?show=${nextShow.slug}`;
+                    btn.classList.remove('hidden');
+                }
             }
-          },
-        },
-      }
-    </script>
-<style>
-        body { background-color: #131313; color: #e2e2e2; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .font-headline { font-family: 'Space Grotesk', sans-serif; }
-        .kinetic-italic { font-style: italic; }
-        .glass-card { background: rgba(53, 53, 53, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(169, 136, 142, 0.15); }
-        .glass-card:hover { border-color: rgba(76, 215, 247, 0.4); }
-        .text-neon-pink { color: #ffb1c1; text-shadow: 0 0 10px rgba(255, 177, 193, 0.3); }
-        .text-neon-cyan { color: #4cd7f7; text-shadow: 0 0 10px rgba(76, 215, 247, 0.3); }
-        .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: 200px; gap: 1rem; }
-        .masonry-item:nth-child(2n) { grid-row: span 2; }
-        .masonry-item:nth-child(3n) { grid-row: span 1.5; }
-        input, textarea, select { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
-        input:focus, textarea:focus, select:focus { border-color: #ffb1c1; outline: none; background: rgba(255, 255, 255, 0.08); }
-        select option { background-color: #1b1b1b; color: white; }
-
-        /* Edit Mode Styles */
-        .editable { position: relative; transition: all 0.2s; border: 1px dashed transparent; }
-        .editable:hover, .editable:focus { outline: none; border-color: rgba(255, 177, 193, 0.4); background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 4px; box-shadow: 0 0 10px rgba(255, 177, 193, 0.1); }
-        .cover-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; cursor: pointer; color: white; }
-        .cover-overlay:hover { opacity: 1; }
-        .admin-delete-btn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3); transition: all 0.2s; z-index: 10; opacity: 0; }
-        .group:hover .admin-delete-btn { opacity: 1; }
-        .admin-delete-btn:hover { background: rgba(255,107,107,0.3); transform: scale(1.1); }
-        .upload-progress { height: 4px; background: rgba(255,255,255,0.1); width: 100%; border-radius: 2px; overflow: hidden; margin-top: 8px; }
-        .upload-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #ffb1c1, #4cd7f7); transition: width 0.3s; }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/categories.js"></script>
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q752859X4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6Q752859X4');
-</script>
-</head>
-<body class="bg-background text-on-background">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
-    <a href="/index.html" class="hover:scale-105 transition-transform duration-300">
-        <img src="images/logo-brush.png" alt="PERFORMANCE LAB" class="h-12 md:h-14 w-auto object-contain">
-    </a>
-    <!-- Desktop menu -->
-    <div class="hidden md:flex gap-8 items-center">
-        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="/the-lab.html">The Lab</a>
-        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#4cd7f7] border-b-2 border-[#4cd7f7] pb-1 transition-all duration-300 hover:scale-105" href="/the-elements.html">The Elements</a>
-        <a class="font-headline font-bold uppercase tracking-[0.1em] text-sm text-[#e2e2e2] hover:text-[#ffb1c1] transition-all duration-300 hover:scale-105" href="/experiences.html">The Experiences</a>
-    </div>
-    <div class="flex items-center gap-4">
-        <a href="#booking-form" class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-[0.1em] text-xs hover:scale-105 active:scale-95 transition-all duration-300 text-center shadow-[0_0_20px_rgba(255,177,193,0.3)]">BOOK NOW</a>
-        <!-- Hamburger button (mobile only) -->
-        <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group" aria-label="Toggle menu">
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-line1"></span>
-            <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-line2"></span>
-            <span class="block w-4 h-0.5 bg-[#ffb1c1] transition-all duration-300" id="ham-line3"></span>
-        </button>
-    </div>
-</nav>
-
-<!-- Mobile Dropdown Menu -->
-<div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen z-40 bg-[#0d0d0d]/97 backdrop-blur-2xl flex flex-col items-center justify-center gap-10 transform -translate-y-full transition-transform duration-500 ease-in-out">
-    <a href="/the-lab.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-white hover:text-[#ffb1c1] transition-colors" onclick="closeMobileMenu()">The Lab</a>
-    <a href="/the-elements.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-[#4cd7f7] transition-colors" onclick="closeMobileMenu()">The Elements</a>
-    <a href="/experiences.html" class="mobile-menu-link font-headline font-black text-4xl uppercase tracking-tight text-white hover:text-[#ffb1c1] transition-colors" onclick="closeMobileMenu()">The Experiences</a>
-    <a href="#booking-form" class="mobile-menu-link font-headline font-black text-2xl uppercase tracking-widest text-[#ffb1c1]/60 mt-4 border border-[#ffb1c1]/20 px-8 py-3 rounded-full" onclick="closeMobileMenu()">BOOK NOW</a>
-</div>
-
-<style>
-    /* Hero background blur effect */
-    #hero-bg {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background-size: cover;
-        background-position: center top;
-        filter: blur(60px) saturate(1.4);
-        transform: scale(1.15);
-        opacity: 0;
-        transition: opacity 1.2s ease;
-    }
-    #hero-bg.loaded { opacity: 0.18; }
-    #hero-bg-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background: linear-gradient(
-            to bottom,
-            rgba(19,19,19,0.55) 0%,
-            rgba(19,19,19,0.72) 40%,
-            rgba(19,19,19,0.95) 100%
-        );
-        pointer-events: none;
-    }
-</style>
-
-<!-- Hero background image (blurred, translucent) -->
-<div id="hero-bg"></div>
-<div id="hero-bg-overlay"></div>
-
-<main class="pt-32 pb-24 px-8 min-h-screen">
-    <div id="loading" class="text-center py-24">
-        <span class="material-symbols-outlined animate-spin text-4xl text-primary block mx-auto w-fit">progress_activity</span>
-        <p class="mt-4 font-headline uppercase tracking-widest text-xs opacity-50">Loading Show...</p>
-    </div>
-    <div id="error" class="max-w-2xl mx-auto py-24 text-center hidden">
-        <span class="material-symbols-outlined text-error text-6xl mb-4">error</span>
-        <h2 class="font-headline text-3xl font-bold text-white mb-2 uppercase">Show not found</h2>
-        <p class="text-white/60 mb-8 hidden"></p>
-        <a href="/the-elements.html" class="text-primary hover:underline font-body uppercase tracking-widest text-xs mt-4 inline-block">Return to The Elements</a>
-    </div>
-    
-    <div id="content" class="max-w-7xl mx-auto hidden">
-        <a href="/the-elements.html" class="inline-flex items-center gap-2 text-white/50 hover:text-white mb-8 transition-colors font-headline uppercase text-xs tracking-widest">
-            <span class="material-symbols-outlined text-sm">arrow_back</span>
-            Back to Catalog
-        </a>
-        
-        <!-- Hero Detailed -->
-        <div class="flex flex-col lg:flex-row gap-12 mb-20 items-start">
-            <div class="w-full lg:w-5/12 glass-card rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl relative">
-                <img id="show-image" src="" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
-                <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
-            </div>
-            
-            <div class="w-full lg:w-7/12 py-4">
-                <div id="show-categories-wrap" class="flex flex-wrap gap-2 mb-6"></div>
-                <h1 id="show-name" class="font-headline text-5xl md:text-7xl font-bold text-white mb-8 uppercase tracking-tighter shadow-sm"></h1>
-                
-                <h3 class="font-headline font-bold text-white/40 uppercase tracking-widest text-xs mb-4">Description</h3>
-                <div id="show-description" class="text-on-surface/80 text-lg leading-loose font-body whitespace-pre-wrap"></div>
-                
-                <div class="mt-12 flex flex-col sm:flex-row gap-4">
-                    <a href="#booking-form" class="bg-primary text-on-primary px-8 py-4 rounded-xl font-headline font-bold uppercase tracking-[0.1em] text-sm hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(255,177,193,0.39)]">
-                        <span class="material-symbols-outlined">calendar_today</span>
-                        Book This Show
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gallery Section -->
-        <div id="gallery-section" class="hidden border-t border-white/5 pt-16 mt-16 pb-32">
-            <h2 class="font-headline text-3xl font-bold text-white mb-10 text-center uppercase tracking-tighter">MEDIA <span class="kinetic-italic text-secondary">GALLERY</span></h2>
-            
-            <div id="admin-gallery-controls" class="hidden text-center mb-8 flex justify-center items-center gap-4 flex-wrap">
-                <input type="file" id="media-upload-input" accept="image/*,video/*" multiple class="hidden">
-                <button id="add-media-btn" class="bg-white/5 border border-white/10 hover:border-[#4cd7f7] hover:bg-white/10 text-white px-6 py-3 rounded-xl font-headline font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">add_photo_alternate</span> AÑADIR ARCHIVO
-                </button>
-                <button id="add-youtube-btn" class="bg-white/5 border border-white/10 hover:border-[#ffb1c1] hover:bg-white/10 text-white px-6 py-3 rounded-xl font-headline font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">smart_display</span> AÑADIR VÍDEO (LINK)
-                </button>
-            </div>
-            <div id="gallery-upload-progress" class="max-w-md mx-auto mt-4 hidden">
-                <p class="text-xs text-secondary font-bold uppercase tracking-widest mb-2" id="gallery-upload-label">Subiendo...</p>
-                <div class="upload-progress"><div class="upload-progress-bar" id="gallery-upload-bar"></div></div>
-            </div>
-
-            <!-- Video Container -->
-            <div id="video-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 hidden">
-                <!-- Videos injected here -->
-            </div>
-
-            <!-- Photos Scrolling -->
-            <div id="photo-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar hidden">
-                <!-- Photos injected here -->
-            </div>
-        </div>
-    </div>
-    
-    <!-- Floating Admin Bar -->
-    <div id="admin-action-bar" class="fixed bottom-0 left-0 w-full bg-[#0d0d0d]/90 backdrop-blur-xl border-t border-white/10 p-4 transform translate-y-full transition-transform duration-500 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3 text-primary">
-                <span class="material-symbols-outlined animate-pulse">edit_square</span>
-                <div>
-                    <div class="font-headline font-bold uppercase tracking-widest text-sm text-primary">EDIT MODE ACTIVE</div>
-                    <div class="text-[10px] text-white/50 w-full mb-0">Changes are not saved until you click the save button.</div>
-                </div>
-            </div>
-            <div class="flex gap-4 w-full md:w-auto">
-                <a href="/admin.html" class="flex-1 md:flex-none text-center px-6 py-3 border border-white/20 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all text-white/70">Cancel</a>
-                <button id="admin-save-btn" class="flex-1 md:flex-none text-center px-8 py-3 bg-primary text-black rounded-lg text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-sm">save</span> GUARDAR CAMBIOS
-                </button>
-            </div>
-        </div>
-    </div>
-</main>
-
-<!-- Footer -->
-<footer class="bg-[#0e0e0e] w-full py-16 px-8 border-t border-white/10 overflow-hidden">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
-<div class="flex-1 w-full">
-<div class="text-xl font-bold text-white mb-4 font-headline uppercase tracking-tighter">PERFORMANCE LAB</div>
-<h2 class="font-headline text-5xl font-bold text-white mb-8">LET'S CREATE <br/><span class="kinetic-italic text-primary">MAGIC.</span></h2>
-<form id="booking-form" class="glass-card p-8 rounded-xl max-w-xl space-y-6 mb-12">
-<input type="hidden" name="_subject" value="New Event Brief — Performance Lab (Show Detail)">
-<h3 class="font-headline font-bold text-white text-2xl mb-4">Event Brief</h3>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Full Name</label>
-<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="name" placeholder="Enter your name" type="text" required/>
-</div>
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Email Address</label>
-<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="email" placeholder="name@email.com" type="email" required/>
-</div>
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Date</label>
-<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white [color-scheme:light] focus:border-primary outline-none" name="event_date" type="date" required/>
-</div>
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Event Type</label>
-<select name="event_type" class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white border border-white/10 focus:border-primary outline-none" required>
-    <option value="" disabled selected>Select event type</option>
-    <option value="wedding" class="bg-white text-black">Wedding</option>
-    <option value="corporate" class="bg-white text-black">Corporate</option>
-    <option value="club" class="bg-white text-black">Club / Nightlife</option>
-    <option value="private" class="bg-white text-black">Private Celebration</option>
-    <option value="other" class="bg-white text-black">Other</option>
-</select>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">Approximate Budget (€)</label>
-<input class="w-full px-4 py-3 rounded-lg text-sm transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="budget" placeholder="e.g. 5000" type="number" min="0"/>
-</div>
-<div class="space-y-1">
-<label class="text-[10px] uppercase tracking-widest text-white/40 font-headline font-bold">What are you looking for?</label>
-<textarea class="w-full px-4 py-3 rounded-lg text-sm h-24 transition-all text-black bg-white placeholder:text-gray-400 focus:border-primary outline-none" name="message" placeholder="Tell us about the vibe, the acts you'd like, specific requirements..." required></textarea>
-</div>
-<button type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all">SEND EVENT BRIEF</button>
-</form>
-<div class="flex flex-wrap gap-4">
-<button class="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all">CONTACT THE LAB</button>
-<a href="https://wa.me/34630787144" target="_blank" class="border border-white/20 text-white px-8 py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:border-primary transition-all inline-block text-center">WHATSAPP HUB</a>
-</div>
-</div>
-<div class="flex-1 flex flex-col md:items-end justify-between self-stretch">
-<div class="grid grid-cols-2 gap-x-16 gap-y-4 mb-12">
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://www.instagram.com/performancelabshows" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://wa.me/34630787144" target="_blank">WHATSAPP</a>
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="https://www.linkedin.com/company/performancelabshows" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-<a class="font-['Inter'] text-xs uppercase tracking-widest text-white/50 hover:text-[#4cd7f7] transition-all" href="#booking-form">CONTACT</a>
-</div>
-<div class="font-['Inter'] text-xs uppercase tracking-widest text-white/30">
-                    © 2026 PERFORMANCE LAB. ALL RIGHTS RESERVED.
-                </div>
-</div>
-</div>
-</footer>
-
-<script>
-    let supabaseClient = null;
-
-    function initSupabase() {
-        if (window.supabase && !supabaseClient) {
-            const supabaseUrl = 'https://nwxepstpedmxslbznejv.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
-            supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-            return true;
         }
-        return !!supabaseClient;
+    } catch (err) {
+        console.error("Error setting up next show navigation:", err);
     }
+}
+function renderGallery(){const e=document.getElementById("video-container"),t=document.getElementById("photo-container"),r=document.getElementById("gallery-section");e.innerHTML="",t.innerHTML="";let a=!1,n=!1;editableGallery.forEach((r,o)=>{const l="string"==typeof r?r:r.url,s=getYoutubeId(l);if(s){a=!0;const t=document.createElement("div");return t.className="w-full aspect-video rounded-xl shadow-lg border border-white/10 relative group bg-black",t.innerHTML=`\n                    <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/${s}"></iframe>\n                    ${isAdminMode?`<div class="admin-delete-btn" onclick="removeGalleryItem(${o})"><span class="material-symbols-outlined text-sm">delete</span></div>`:""}\n                `,void e.appendChild(t)}if(l&&(l.match(/\.(mp4|webm|mov|avi)(\?|$)/i)||r.type&&r.type.startsWith("video"))){a=!0;const t=document.createElement("div");t.className="relative group w-full aspect-video rounded-xl shadow-lg border border-white/10 overflow-hidden bg-black",t.innerHTML=`\n                    <video src="${l}" controls class="w-full h-full object-cover"></video>\n                    ${isAdminMode?`<div class="admin-delete-btn" onclick="removeGalleryItem(${o})"><span class="material-symbols-outlined">delete</span></div>`:""}\n                `,e.appendChild(t)}else{n=!0;const e=document.createElement("div");e.className=`snap-center shrink-0 ${isAdminMode?"w-64 h-64":"w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px]"} rounded-2xl overflow-hidden glass-card p-1 shadow-lg group relative`,e.innerHTML=`\n                    <img src="${l}" class="w-full h-full object-cover rounded-lg ${!isAdminMode&&"group-hover:scale-105 transition-transform duration-700"}" loading="lazy">\n                    ${isAdminMode?`<div class="admin-delete-btn" onclick="removeGalleryItem(${o})"><span class="material-symbols-outlined text-sm">delete</span></div>`:""}\n                `,t.appendChild(e)}});let o=[];if("app"===source){const e=Array.isArray(currentItem.video_gallery)?currentItem.video_gallery:[];o=[currentItem.video_url,...e]}else o=[currentItem.video_url];o.forEach((t,r)=>{const n=getYoutubeId(t);if(n){a=!0;const r=document.createElement("div");r.className="w-full aspect-video rounded-xl shadow-lg border border-white/10 relative group",r.innerHTML=`\n                    <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/${n}"></iframe>\n                    ${isAdminMode?`<div class="admin-delete-btn" onclick="removeYoutubeVideo('${t}')"><span class="material-symbols-outlined text-sm">delete</span></div>`:""}\n                 `,e.appendChild(r)}}),a?e.classList.remove("hidden"):e.classList.add("hidden"),n?t.classList.remove("hidden"):isAdminMode||t.classList.add("hidden"),(a||n||isAdminMode)&&r.classList.remove("hidden")}function removeGalleryItem(e){editableGallery.splice(e,1),renderGallery()}function removeYoutubeVideo(e){"app"===source?(currentItem.video_url===e&&(currentItem.video_url=null),currentItem.video_gallery&&(currentItem.video_gallery=currentItem.video_gallery.filter(t=>("string"==typeof t?t:t&&t.url?t.url:null)!==e))):currentItem.video_url===e&&(currentItem.video_url=null),renderGallery()}const ALL_CATEGORIES=window.PL_CATEGORIES||[];function renderCategoryChips(e,t){const r=document.getElementById("show-categories-wrap");if(!r)return;r.innerHTML="";const a=Array.isArray(e)?e:[];if(t){(ALL_CATEGORIES||[]).forEach(e=>{const t=a.some(t=>String(t).toLowerCase()===e.toLowerCase()),n=document.createElement("button");n.type="button",n.textContent=e,n.className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border transition-all duration-200 "+(t?"bg-primary text-black border-primary shadow-lg shadow-primary/20":"bg-white/5 text-white/50 border-white/15 hover:border-primary/50 hover:text-white"),n.onclick=()=>{currentItem._activeCats=t?a.filter(t=>t.toLowerCase()!==e.toLowerCase()):[...a,e],renderCategoryChips(currentItem._activeCats,!0)},r.appendChild(n)});const e=document.createElement("p");e.className="w-full text-[10px] text-white/30 uppercase tracking-widest font-headline mt-2",e.textContent="Selecciona una o varias categorías",r.insertBefore(e,r.firstChild)}else if(a.forEach(e=>{const t=document.createElement("span");t.textContent=String(e).toUpperCase(),t.className="inline-block px-4 py-1 bg-primary/20 text-primary font-bold tracking-widest uppercase text-xs rounded-full",r.appendChild(t)}),0===a.length){const e=document.createElement("span");e.textContent="PERFORMANCE",e.className="inline-block px-4 py-1 bg-primary/20 text-primary font-bold tracking-widest uppercase text-xs rounded-full",r.appendChild(e)}}function activateEditMode(){console.log("Activating edit mode"),document.getElementById("admin-action-bar").classList.remove("translate-y-full"),renderCategoryChips(currentItem._activeCats||[],!0);const e=document.getElementById("show-name"),t=document.getElementById("show-description");e.contentEditable="true",t.contentEditable="true",e.classList.add("editable"),t.classList.add("editable");const r=document.getElementById("show-image").parentElement,a=document.createElement("label");a.className="cover-overlay backdrop-blur-md",a.innerHTML='\n            <span class="material-symbols-outlined text-4xl mb-2">add_a_photo</span>\n            <span class="font-headline font-bold uppercase tracking-widest text-sm">Cambiar Portada</span>\n            <input type="file" class="hidden" accept="image/*" id="cover-upload">\n            <div class="upload-progress w-48 mt-4 hidden" id="cover-progress-wrap"><div class="upload-progress-bar" id="cover-progress-bar"></div></div>\n        ',r.appendChild(a),document.getElementById("cover-upload").addEventListener("change",async e=>{const t=e.target.files[0];if(!t)return;const r=document.getElementById("cover-progress-wrap"),a=document.getElementById("cover-progress-bar");r.classList.remove("hidden"),a.style.width="0%";try{const e=await uploadFile(t,"covers",e=>a.style.width=e+"%");pendingCoverImage=e,document.getElementById("show-image").src=e}catch(e){alert("Error: "+e.message)}finally{r.classList.add("hidden")}}),document.getElementById("admin-gallery-controls").classList.remove("hidden"),document.getElementById("photo-container").classList.remove("hidden");const n=document.getElementById("media-upload-input");document.getElementById("add-media-btn").addEventListener("click",()=>n.click()),n.addEventListener("change",async e=>{const t=Array.from(e.target.files);if(!t.length)return;const r=document.getElementById("gallery-upload-progress"),a=document.getElementById("gallery-upload-label"),o=document.getElementById("gallery-upload-bar");r.classList.remove("hidden");for(let e=0;e<t.length;e++){a.innerText=`Subiendo ${e+1}/${t.length} ...`,o.style.width="0%";try{const r=t[e].type.startsWith("video"),a=await uploadFile(t[e],"gallery",e=>o.style.width=e+"%");editableGallery.push({url:a,type:r?"video":"image"}),renderGallery()}catch(e){console.error(e)}}r.classList.add("hidden"),n.value=""}),document.getElementById("add-youtube-btn").addEventListener("click",()=>{const e=prompt("Pega aquí el enlace de YouTube o Vimeo:");e&&""!==e.trim()&&(editableGallery.push({url:e.trim(),type:"video"}),renderGallery())}),document.getElementById("admin-save-btn").addEventListener("click",async()=>{const e=document.getElementById("admin-save-btn");e.innerHTML='<span class="material-symbols-outlined text-sm animate-spin">refresh</span> GUARDANDO...',e.disabled=!0;try{const t=document.getElementById("show-name").innerText.trim(),r={web_custom_title:t,web_description:document.getElementById("show-description").innerText.trim(),web_cover_image:pendingCoverImage,web_gallery:editableGallery,categories:currentItem._activeCats||[]};"app"===source?(r.video_url=currentItem.video_url,r.video_gallery=currentItem.video_gallery):(r.video_url=currentItem.video_url,delete r.categories);const a="app"===source?"acts":"pld_characters",{error:n}=await supabaseClient.from(a).update(r).eq("id",currentItem.id);if(n)throw n;e.innerHTML='<span class="material-symbols-outlined text-sm">check_circle</span> GUARDADO O.K.',setTimeout(()=>window.location.href="/admin.html",1500)}catch(t){alert("Error al guardar: "+t.message),e.innerHTML="ERROR AL GUARDAR",e.disabled=!1}})}
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
-    const pathSlug = pathParts.length >= 2 && pathParts[0] === 'experiences' ? pathParts[1] : pathParts.pop();
-    const isPathSlug = !urlParams.get('show') && pathSlug && pathSlug !== 'show-details.html';
-    const showParam = (urlParams.get('show') || (isPathSlug ? pathSlug : '')).trim() || null;
-    let source = ''; // Will be determined by which table it's found in
-    const isEditRequested = urlParams.get('edit') === 'true';
-
-    // Editing State Vectors
-    let currentItem = null;
-    let isAdminMode = false;
-    let editableGallery = [];
-    let originalMainImage = '';
-    let pendingCoverImage = null;
-
-    function getYoutubeId(url) {
-        if(!url) return null;
-        let finalUrl = typeof url === 'string' ? url : (url.url || '');
-        if (!finalUrl || typeof finalUrl !== 'string') return null;
-        let match = finalUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([^&?/\s]+)/);
-        return match ? match[1] : null;
-    }
-
-    async function loadShowDetails() {
-        if (!showParam) {
-            console.error('Missing show parameter.');
-            showError("Missing parameters in URL. Check the debug info below.");
-            return;
-        }
-        
-        if (!initSupabase()) {
-            showError("Database library not loaded. Please check your connection and refresh the page.");
-            return;
-        }
-
+async function uploadFile(file, folder, onProgress) {
+    return new Promise(async (resolve, reject) => {
         try {
-            let item = null;
-            let description = '';
-            let name = '';
-
-            // First try acts by slug
-            let { data: actsBySlug } = await supabaseClient.from('acts').select('*').eq('slug', showParam);
-            if (actsBySlug && actsBySlug.length > 0) {
-                item = actsBySlug[0];
-                source = 'app';
-            } else {
-                // Try pld_characters by slug
-                let { data: charsBySlug } = await supabaseClient.from('pld_characters').select('*').eq('slug', showParam);
-                if (charsBySlug && charsBySlug.length > 0) {
-                    item = charsBySlug[0];
-                    source = 'old-web';
-                } else {
-                    // Fallback to searching by name if the database hasn't updated its slug cache yet
-                    let nameFallback = showParam.replace(/-/g, ' ');
-                    
-                    let { data: actsByName } = await supabaseClient.from('acts').select('*').ilike('name', nameFallback);
-                    if (actsByName && actsByName.length > 0) {
-                        item = actsByName[0];
-                        source = 'app';
-                    } else {
-                        let { data: charsByName } = await supabaseClient.from('pld_characters').select('*').ilike('name', nameFallback);
-                        if (charsByName && charsByName.length > 0) {
-                            item = charsByName[0];
-                            source = 'old-web';
-                        } else {
-                            console.error('Show not found with slug or name:', showParam);
-                            throw new Error('Show not found');
-                        }
-                    }
-                }
-            }
-
-            currentItem = item;
-
-            // Session check for Edit Mode
-            if (isEditRequested) {
-                const { data: { session } } = await supabaseClient.auth.getSession();
-                if (session) {
-                    isAdminMode = true;
-                }
-            }
-
-            // Public visibility check - skip check if admin
-            if (item.is_web_public === false && !isAdminMode) {
-                showError("This show is currently private. Please log in as admin to view/edit it.");
-                return;
-            }
-
-            name = item.web_custom_title || item.name || 'Untitled Show';
+            let fileToUpload = file;
+            let extension = file.name.split('.').pop() || 'bin';
             
-            // Build initial categories list safely
-            let cats = [];
-            if (Array.isArray(item.categories)) {
-                cats = item.categories;
-            } else if (item.category) {
-                cats = [item.category];
-            }
+            if (onProgress) onProgress(10);
+
+            const formData = new FormData();
+            const bucket = source === 'app' ? 'media' : 'web-media';
+            const filename = `${bucket}/${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
             
-            currentItem._activeCats = [...cats];
-            renderCategoryChips(cats, false);
-            
-            if (source === 'app') {
-                description = item.web_description || item.description || '';
-            } else {
-                description = item.web_description || item.long_description || item.description || '';
-            }
-            
-            // Build editable gallery array safely
-            let rawWebGallery = [];
-            
-            // Try to get web_gallery
-            let webGal = item.web_gallery;
-            if (typeof webGal === 'string' && webGal.trim()) {
-                try { webGal = JSON.parse(webGal); } catch(e) { webGal = null; }
-            }
-            
-            if (Array.isArray(webGal) && webGal.length > 0) {
-                rawWebGallery = webGal;
-            } else {
-                // Fallback to legacy fields
-                if (source === 'app') {
-                    const ph = Array.isArray(item.photos_url) ? item.photos_url : [];
-                    let vi = Array.isArray(item.video_gallery) ? item.video_gallery : [];
-                    
-                    // Handle case where video_gallery might be a string
-                    if (!Array.isArray(vi) && typeof item.video_gallery === 'string' && item.video_gallery.trim()) {
-                        try { vi = JSON.parse(item.video_gallery); } catch(e) { vi = []; }
-                    }
-                    if (!Array.isArray(vi)) vi = [];
+            formData.append('file', fileToUpload);
+            formData.append('filename', filename);
 
-                    if (item.video_url) vi.push(item.video_url);
-                    
-                    ph.forEach(p => { if (p) rawWebGallery.push({url: p, type: 'image'}); });
-                    vi.forEach(v => {
-                        let vUrl = typeof v === 'string' ? v : (v && v.url ? v.url : null);
-                        if (vUrl) rawWebGallery.push({url: vUrl, type: 'video'});
-                    });
-                } else {
-                    let og = item.gallery;
-                    if (typeof og === 'string' && og.trim()) {
-                        try { og = JSON.parse(og); } catch(e) { og = null; }
-                    }
-                    if (Array.isArray(og)) {
-                        og.forEach(p => { if (p) rawWebGallery.push({url: p, type: 'image'}); });
-                    }
-                }
-            }
-            
-            editableGallery = Array.isArray(rawWebGallery) ? [...rawWebGallery] : [];
-            pendingCoverImage = item.web_cover_image || item.image_url || item.image || '';
-
-            // Fill Hero
-            document.getElementById('show-name').textContent = name;
-            
-            const imageEl = document.getElementById('show-image');
-            const heroBg  = document.getElementById('hero-bg');
-            const coverSrc = pendingCoverImage || 'https://images.unsplash.com/photo-1598387181032-a3103ea7362a?auto=format&fit=crop&q=80&w=800';
-            imageEl.src = coverSrc;
-            
-            // Set hero background safely
-            if (heroBg) {
-                const galleryImages = editableGallery
-                    .map(g => typeof g === 'string' ? g : (g && g.url))
-                    .filter(u => u && typeof u === 'string'
-                        && !u.match(/\.(mp4|webm|mov|avi)(\?|$)/i)
-                        && !u.includes('youtube')
-                        && !u.includes('youtu.be'));
-                const pool = galleryImages.length > 0 ? galleryImages : (coverSrc ? [coverSrc] : []);
-                const bgSrc = pool[Math.floor(Math.random() * pool.length)] || coverSrc;
-                heroBg.style.backgroundImage = `url('${bgSrc}')`;
-                setTimeout(() => heroBg.classList.add('loaded'), 120);
-            }
-            
-            document.getElementById('show-description').textContent = description;
-            renderGallery();
-
-            // Show content
-            document.getElementById('loading').classList.add('hidden');
-            document.getElementById('content').classList.remove('hidden');
-
-            if (isAdminMode) activateEditMode();
-
-        } catch (err) {
-            console.error('Error fetching show details:', err);
-            showError("An error occurred while loading the show: " + err.message);
-        }
-    }
-
-    function renderGallery() {
-        const videoContainer = document.getElementById('video-container');
-        const photoContainer = document.getElementById('photo-container');
-        const gallerySection = document.getElementById('gallery-section');
-        
-        videoContainer.innerHTML = '';
-        photoContainer.innerHTML = '';
-        
-        let hasVideos = false;
-        let hasPhotos = false;
-        
-        // Render editable gallery
-        editableGallery.forEach((item, idx) => {
-            const url = typeof item === 'string' ? item : item.url;
-            const ytId = getYoutubeId(url);
-            
-            if (ytId) {
-                hasVideos = true;
-                const iframeWrap = document.createElement('div');
-                iframeWrap.className = 'w-full aspect-video rounded-xl shadow-lg border border-white/10 relative group bg-black';
-                iframeWrap.innerHTML = `
-                    <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/${ytId}"></iframe>
-                    ${isAdminMode ? `<div class="admin-delete-btn" onclick="removeGalleryItem(${idx})"><span class="material-symbols-outlined text-sm">delete</span></div>` : ''}
-                `;
-                videoContainer.appendChild(iframeWrap);
-                return;
-            }
-
-            const isVideo = url && (url.match(/\.(mp4|webm|mov|avi)(\?|$)/i) || (item.type && item.type.startsWith('video')));
-            
-            if (isVideo) {
-                hasVideos = true;
-                const wrap = document.createElement('div');
-                wrap.className = 'relative group w-full aspect-video rounded-xl shadow-lg border border-white/10 overflow-hidden bg-black';
-                wrap.innerHTML = `
-                    <video src="${url}" controls class="w-full h-full object-cover"></video>
-                    ${isAdminMode ? `<div class="admin-delete-btn" onclick="removeGalleryItem(${idx})"><span class="material-symbols-outlined">delete</span></div>` : ''}
-                `;
-                videoContainer.appendChild(wrap);
-            } else {
-                hasPhotos = true;
-                const pic = document.createElement('div');
-                pic.className = `snap-center shrink-0 ${isAdminMode ? 'w-64 h-64' : 'w-[85vw] md:w-[60vw] lg:w-[40vw] h-[50vh] md:h-[500px]'} rounded-2xl overflow-hidden glass-card p-1 shadow-lg group relative`;
-                pic.innerHTML = `
-                    <img src="${url}" class="w-full h-full object-cover rounded-lg ${!isAdminMode && 'group-hover:scale-105 transition-transform duration-700'}">
-                    ${isAdminMode ? `<div class="admin-delete-btn" onclick="removeGalleryItem(${idx})"><span class="material-symbols-outlined text-sm">delete</span></div>` : ''}
-                `;
-                photoContainer.appendChild(pic);
-            }
-        });
-        
-        // Check for old youtube videos
-        let fallbackVideos = [];
-        if (source === 'app') {
-            const vGal = Array.isArray(currentItem.video_gallery) ? currentItem.video_gallery : [];
-            fallbackVideos = [currentItem.video_url, ...vGal];
-        } else {
-            fallbackVideos = [currentItem.video_url];
-        }
-        
-        fallbackVideos.forEach((vUrl, idx) => {
-             const ytId = getYoutubeId(vUrl);
-             if (ytId) {
-                 hasVideos = true;
-                 const iframeWrap = document.createElement('div');
-                 iframeWrap.className = 'w-full aspect-video rounded-xl shadow-lg border border-white/10 relative group';
-                 iframeWrap.innerHTML = `
-                    <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/${ytId}"></iframe>
-                    ${isAdminMode ? `<div class="admin-delete-btn" onclick="removeYoutubeVideo('${vUrl}')"><span class="material-symbols-outlined text-sm">delete</span></div>` : ''}
-                 `;
-                 videoContainer.appendChild(iframeWrap);
-             }
-        });
-
-        if (hasVideos) {
-            videoContainer.classList.remove('hidden');
-        } else {
-            videoContainer.classList.add('hidden');
-        }
-        
-        if (hasPhotos) {
-            photoContainer.classList.remove('hidden');
-        } else {
-            if (!isAdminMode) photoContainer.classList.add('hidden');
-        }
-        
-        if (hasVideos || hasPhotos || isAdminMode) {
-            gallerySection.classList.remove('hidden');
-        }
-    }
-
-    function removeGalleryItem(index) {
-        editableGallery.splice(index, 1);
-        renderGallery();
-    }
-
-    function removeYoutubeVideo(url) {
-        if (source === 'app') {
-            if (currentItem.video_url === url) currentItem.video_url = null;
-            if (currentItem.video_gallery) {
-                currentItem.video_gallery = currentItem.video_gallery.filter(v => {
-                    let vUrl = typeof v === 'string' ? v : (v && v.url ? v.url : null);
-                    return vUrl !== url;
-                });
-            }
-        } else {
-            if (currentItem.video_url === url) currentItem.video_url = null;
-        }
-        renderGallery();
-    }
-
-    // Render category chips
-    const ALL_CATEGORIES = window.PL_CATEGORIES || [];
-    
-    function renderCategoryChips(active, editMode) {
-        const wrap = document.getElementById('show-categories-wrap');
-        if (!wrap) return;
-        wrap.innerHTML = '';
-        
-        const activeArray = Array.isArray(active) ? active : [];
-
-        if (editMode) {
-            (ALL_CATEGORIES || []).forEach(cat => {
-                const isActive = activeArray.some(a => String(a).toLowerCase() === cat.toLowerCase());
-                const chip = document.createElement('button');
-                chip.type = 'button';
-                chip.textContent = cat;
-                chip.className = `px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border transition-all duration-200 ${isActive ? 'bg-primary text-black border-primary shadow-lg shadow-primary/20' : 'bg-white/5 text-white/50 border-white/15 hover:border-primary/50 hover:text-white'}`;
-                chip.onclick = () => {
-                    if (isActive) {
-                        currentItem._activeCats = activeArray.filter(c => c.toLowerCase() !== cat.toLowerCase());
-                    } else {
-                        currentItem._activeCats = [...activeArray, cat];
-                    }
-                    renderCategoryChips(currentItem._activeCats, true);
-                };
-                wrap.appendChild(chip);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData
             });
-            const lbl = document.createElement('p');
-            lbl.className = 'w-full text-[10px] text-white/30 uppercase tracking-widest font-headline mt-2';
-            lbl.textContent = 'Selecciona una o varias categorías';
-            wrap.insertBefore(lbl, wrap.firstChild);
-        } else {
-            activeArray.forEach(cat => {
-                const chip = document.createElement('span');
-                chip.textContent = String(cat).toUpperCase();
-                chip.className = 'inline-block px-4 py-1 bg-primary/20 text-primary font-bold tracking-widest uppercase text-xs rounded-full';
-                wrap.appendChild(chip);
-            });
-            if (activeArray.length === 0) {
-                const chip = document.createElement('span');
-                chip.textContent = 'PERFORMANCE';
-                chip.className = 'inline-block px-4 py-1 bg-primary/20 text-primary font-bold tracking-widest uppercase text-xs rounded-full';
-                wrap.appendChild(chip);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Upload failed');
             }
+
+            const data = await response.json();
+            
+            if (onProgress) onProgress(100);
+            
+            console.log('Uploaded to Vercel Blob:', data.url);
+            resolve(data.url);
+        } catch (error) {
+            console.error('Upload error:', error);
+            reject(error);
         }
-    }
+    });
+}
 
-    // --- Admin Edit Mode Logic ---
-    function activateEditMode() {
-        console.log("Activating edit mode");
-        document.getElementById('admin-action-bar').classList.remove('translate-y-full');
-        
-        // Re-render categories as editable chips
-        renderCategoryChips(currentItem._activeCats || [], true);
-        
-        // Editable Text Fields
-        const nameEl = document.getElementById('show-name');
-        const descEl = document.getElementById('show-description');
-        nameEl.contentEditable = "true";
-        descEl.contentEditable = "true";
-        nameEl.classList.add('editable');
-        descEl.classList.add('editable');
-        
-        // Cover Image Upload
-        const photoWrapper = document.getElementById('show-image').parentElement;
-        const coverOverlay = document.createElement('label');
-        coverOverlay.className = 'cover-overlay backdrop-blur-md';
-        coverOverlay.innerHTML = `
-            <span class="material-symbols-outlined text-4xl mb-2">add_a_photo</span>
-            <span class="font-headline font-bold uppercase tracking-widest text-sm">Cambiar Portada</span>
-            <input type="file" class="hidden" accept="image/*" id="cover-upload">
-            <div class="upload-progress w-48 mt-4 hidden" id="cover-progress-wrap"><div class="upload-progress-bar" id="cover-progress-bar"></div></div>
-        `;
-        photoWrapper.appendChild(coverOverlay);
-        
-        document.getElementById('cover-upload').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if(!file) return;
-            const pbWrap = document.getElementById('cover-progress-wrap');
-            const pb = document.getElementById('cover-progress-bar');
-            pbWrap.classList.remove('hidden');
-            pb.style.width = '0%';
-            
-            try {
-                const url = await uploadFile(file, 'covers', (pct) => pb.style.width = pct + '%');
-                pendingCoverImage = url;
-                document.getElementById('show-image').src = url;
-            } catch(er) {
-                alert("Error: " + er.message);
-            } finally {
-                pbWrap.classList.add('hidden');
-            }
-        });
-
-        // Gallery Controls
-        document.getElementById('admin-gallery-controls').classList.remove('hidden');
-        document.getElementById('photo-container').classList.remove('hidden');
-        
-        const mediaInput = document.getElementById('media-upload-input');
-        document.getElementById('add-media-btn').addEventListener('click', () => mediaInput.click());
-        mediaInput.addEventListener('change', async (e) => {
-            const files = Array.from(e.target.files);
-            if (!files.length) return;
-            
-            const pWrap = document.getElementById('gallery-upload-progress');
-            const lbl = document.getElementById('gallery-upload-label');
-            const bar = document.getElementById('gallery-upload-bar');
-            pWrap.classList.remove('hidden');
-            
-            for (let i=0; i<files.length; i++) {
-                lbl.innerText = `Subiendo ${i+1}/${files.length} ...`;
-                bar.style.width = '0%';
-                try {
-                    const isVid = files[i].type.startsWith('video');
-                    const url = await uploadFile(files[i], 'gallery', (pct) => bar.style.width = pct + '%');
-                    editableGallery.push({url, type: isVid ? 'video' : 'image'});
-                    renderGallery();
-                } catch(er) {
-                    console.error(er);
+async function optimizeImage(file, maxWidth, quality) {
+    if (!file.type.startsWith('image/')) return file;
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                if (width > maxWidth) {
+                    height = (maxWidth / width) * height;
+                    width = maxWidth;
                 }
-            }
-            pWrap.classList.add('hidden');
-            mediaInput.value = '';
-        });
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                canvas.toBlob((blob) => {
+                    resolve(blob || file);
+                }, 'image/webp', quality);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
-        document.getElementById('add-youtube-btn').addEventListener('click', () => {
-            const ytUrl = prompt("Pega aquí el enlace de YouTube o Vimeo:");
-            if (ytUrl && ytUrl.trim() !== '') {
-                editableGallery.push({url: ytUrl.trim(), type: 'video'});
-                renderGallery();
-            }
-        });
-
-        // Save Button Action
-        document.getElementById('admin-save-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('admin-save-btn');
-            btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">refresh</span> GUARDANDO...';
-            btn.disabled = true;
-            
-            try {
-                const newTitle = document.getElementById('show-name').innerText.trim();
-                const newDesc = document.getElementById('show-description').innerText.trim();
-                
-                const updates = {
-                    web_custom_title: newTitle,
-                    web_description: newDesc,
-                    web_cover_image: pendingCoverImage,
-                    web_gallery: editableGallery,
-                    categories: currentItem._activeCats || []
-                };
-
-                if (source === 'app') {
-                    updates.video_url = currentItem.video_url;
-                    updates.video_gallery = currentItem.video_gallery;
-                } else {
-                    updates.video_url = currentItem.video_url;
-                    delete updates.categories; // Column does not exist in pld_characters
-                }
-                
-                const table = source === 'app' ? 'acts' : 'pld_characters';
-                const { error } = await supabaseClient.from(table).update(updates).eq('id', currentItem.id);
-                if (error) throw error;
-                
-                btn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> GUARDADO O.K.';
-                setTimeout(() => window.location.href = '/admin.html', 1500);
-            } catch(err) {
-                alert("Error al guardar: " + err.message);
-                btn.innerHTML = 'ERROR AL GUARDAR';
-                btn.disabled = false;
-            }
-        });
-    }
-
-    // File Upload via Supabase Storage
-    async function uploadFile(file, folder, onProgress) {
-        const ext = file.name.split('.').pop();
-        const filename = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        
-        return new Promise(async (resolve, reject) => {
-            let fp = 0;
-            const pInt = setInterval(() => { fp = Math.min(fp + 15, 85); if(onProgress) onProgress(fp); }, 200);
-            const { data, error } = await supabaseClient.storage.from('web-media').upload(filename, file, { upsert: false });
-            clearInterval(pInt);
-            if(onProgress) onProgress(100);
-            if (error) reject(error);
-            else {
-                const { data: { publicUrl } } = supabaseClient.storage.from('web-media').getPublicUrl(filename);
-                resolve(publicUrl);
-            }
-        });
-    }
-
-    function showError(customMsg) {
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('error').classList.remove('hidden');
-        const p = document.querySelector('#error p');
-        p.style.display = 'block';
-        p.style.color = '#ffb1c1';
-        p.innerHTML = `${customMsg || 'The performance you are looking for might have been moved or deleted.'}<br><br><div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 20px; font-family: monospace; font-size: 12px; color: #4cd7f7;">Debug info:<br>Slug: [${showParam}]<br>Source: [${source}]</div>`;
-    }
-
-    document.addEventListener('DOMContentLoaded', loadShowDetails);
-</script>
-<script src="/booking-handler.js"></script>
-<!-- WhatsApp Floating Button -->
-<a id="wa-float" href="https://wa.me/34630787144?text=Hi!%20I%27m%20interested%20in%20booking%20Performance%20Lab" target="_blank" rel="noopener noreferrer"
-   aria-label="Contact us on WhatsApp"
-   style="position:fixed;bottom:28px;right:28px;z-index:9999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);opacity:0;transform:scale(0.8);transition:opacity 0.4s ease,transform 0.4s ease,box-shadow 0.2s;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white">
-    <path d="M16 2C8.28 2 2 8.28 2 16c0 2.44.66 4.73 1.8 6.72L2 30l7.52-1.96A13.94 13.94 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.5c-2.2 0-4.28-.6-6.06-1.64l-.44-.26-4.46 1.16 1.2-4.34-.28-.46A11.42 11.42 0 0 1 4.5 16C4.5 9.6 9.6 4.5 16 4.5S27.5 9.6 27.5 16 22.4 27.5 16 27.5zm6.34-8.54c-.34-.18-2.02-1-2.34-1.12-.32-.1-.56-.18-.78.18-.22.34-.88 1.12-1.08 1.34-.2.22-.4.24-.74.08-.34-.18-1.44-.54-2.74-1.72-1.02-.92-1.7-2.04-1.9-2.38-.2-.34-.02-.52.14-.7.16-.16.34-.4.52-.6.18-.2.24-.34.34-.56.12-.22.06-.42-.02-.6-.08-.18-.78-1.88-1.06-2.58-.28-.68-.56-.58-.78-.6H9.9c-.2 0-.52.08-.8.4-.26.32-1.02 1-1.02 2.44s1.04 2.84 1.18 3.04c.16.2 2.04 3.12 4.94 4.36.7.3 1.24.48 1.66.62.7.22 1.34.18 1.84.1.56-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.18-1.38-.08-.12-.3-.2-.64-.36z"/>
-  </svg>
-</a>
-<script>
-  setTimeout(function() {
-    var wa = document.getElementById('wa-float');
-    if (wa) { wa.style.opacity = '1'; wa.style.transform = 'scale(1)'; }
-  }, 3000);
-  document.getElementById('wa-float').addEventListener('mouseenter', function() {
-    this.style.boxShadow = '0 6px 28px rgba(37,211,102,0.6)';
-    this.style.transform = 'scale(1.1)';
-  });
-  document.getElementById('wa-float').addEventListener('mouseleave', function() {
-    this.style.boxShadow = '0 4px 20px rgba(37,211,102,0.4)';
-    this.style.transform = 'scale(1)';
-  });
-</script>
-</body></html>
+function showError(e){document.getElementById("loading").classList.add("hidden"),document.getElementById("error").classList.remove("hidden");const t=document.querySelector("#error p");t.style.display="block",t.style.color="#ffb1c1",t.innerHTML=`${e||"The performance you are looking for might have been moved or deleted."}<br><br><div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 20px; font-family: monospace; font-size: 12px; color: #4cd7f7;">Debug info:<br>Slug: [${showParam}]<br>Source: [${source}]</div>`}document.addEventListener("DOMContentLoaded",loadShowDetails)</script><script src="/booking-handler.js"></script><a id="wa-float" href="https://wa.me/34630787144?text=Hi!%20I%27m%20interested%20in%20booking%20Performance%20Lab" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:9999;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);opacity:0;transform:scale(.8);transition:opacity .4s ease,transform .4s ease,box-shadow .2s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white"><path d="M16 2C8.28 2 2 8.28 2 16c0 2.44.66 4.73 1.8 6.72L2 30l7.52-1.96A13.94 13.94 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.5c-2.2 0-4.28-.6-6.06-1.64l-.44-.26-4.46 1.16 1.2-4.34-.28-.46A11.42 11.42 0 0 1 4.5 16C4.5 9.6 9.6 4.5 16 4.5S27.5 9.6 27.5 16 22.4 27.5 16 27.5zm6.34-8.54c-.34-.18-2.02-1-2.34-1.12-.32-.1-.56-.18-.78.18-.22.34-.88 1.12-1.08 1.34-.2.22-.4.24-.74.08-.34-.18-1.44-.54-2.74-1.72-1.02-.92-1.7-2.04-1.9-2.38-.2-.34-.02-.52.14-.7.16-.16.34-.4.52-.6.18-.2.24-.34.34-.56.12-.22.06-.42-.02-.6-.08-.18-.78-1.88-1.06-2.58-.28-.68-.56-.58-.78-.6H9.9c-.2 0-.52.08-.8.4-.26.32-1.02 1-1.02 2.44s1.04 2.84 1.18 3.04c.16.2 2.04 3.12 4.94 4.36.7.3 1.24.48 1.66.62.7.22 1.34.18 1.84.1.56-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.18-1.38-.08-.12-.3-.2-.64-.36z"/></svg></a><script>setTimeout(function(){var e=document.getElementById("wa-float");e&&(e.style.opacity="1",e.style.transform="scale(1)")},3e3),document.getElementById("wa-float").addEventListener("mouseenter",function(){this.style.boxShadow="0 6px 28px rgba(37,211,102,0.6)",this.style.transform="scale(1.1)"}),document.getElementById("wa-float").addEventListener("mouseleave",function(){this.style.boxShadow="0 4px 20px rgba(37,211,102,0.4)",this.style.transform="scale(1)"})</script></body></html>
