@@ -410,10 +410,9 @@ document.addEventListener('DOMContentLoaded', initArchitectsGSAP);
 <div id="lab-action-carousel" class="hidden flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar"></div>
 </div>
 </section>
+<!-- Use centralized Supabase config -->
+<script src="assets/js/supabase-config.js"></script>
 <script>
-    <!-- Use centralized Supabase config -->
-    <script src="assets/js/supabase-config.js"></script>
-    <script>
     (async function loadLabInAction() {
         if (!window.supabaseClient) {
             console.error('[PL] Supabase client not initialized');
