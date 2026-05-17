@@ -225,6 +225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </style>
     <!-- Supabase JS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
 </head>
 <body class="bg-background text-on-background">
 <!-- Google Tag Manager (noscript) -->
@@ -787,12 +788,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const loading  = document.getElementById('home-lab-loading');
 
     try {
-        // Reuse existing supabaseClient if available, otherwise create one
-        const sb = (typeof supabaseClient !== 'undefined') ? supabaseClient :
-            window.supabase.createClient(
-                'https://nwxepstpedmxslbznejv.supabase.co',
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM'
-            );
+        // Use the global supabaseClient from assets/js/supabase-config.js
+        if (!window.supabaseClient) {
+            console.error('[PL] Global supabaseClient not found.');
+            loading.closest('section').style.display = 'none';
+            return;
+        }
+        const sb = window.supabaseClient;
 
         const [{ data: acts }, { data: chars }] = await Promise.all([
             sb.from('acts').select('slug, name, web_custom_title, image_url, web_cover_image, web_gallery').eq('is_web_public', true),
@@ -1245,7 +1247,8 @@ function escapeHtml(str) {
 })();
 </script>
 <script>
-    const supabaseClient = window.supabase.createClient('https://nwxepstpedmxslbznejv.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM');
+    // Use global client from supabase-config.js
+    const supabaseClient = window.supabaseClient;
 
     let homeElementsData = [];
     const scrollContainer = document.getElementById('home-artists-scroll');
@@ -1381,18 +1384,18 @@ function escapeHtml(str) {
 
   // Dynamic Elements Images
   (async function initElementsImages() {
-      const SB_URL = 'https://nwxepstpedmxslbznejv.supabase.co';
-      const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
+      // Use global client
+      const sb = window.supabaseClient;
+      if (!sb) return;
       
       const config = {
           'elements-img-music': ['Musicians', 'DJ', 'Singers', 'Singer', 'Music'],
-          'elements-img-stage': 'https://nwxepstpedmxslbznejv.supabase.co/storage/v1/render/image/public/web-media/covers/1777034514667-inux0b2ow1j.jpeg',
-?format=jpg          'elements-img-circus': 'https://nwxepstpedmxslbznejv.supabase.co/storage/v1/render/image/public/web-media/covers/1777047313724-k9gtje5boor.PNG',
-?format=jpg          'elements-img-immersive': 'https://nwxepstpedmxslbznejv.supabase.co/storage/v1/render/image/public/web-media/covers/1777042995818-zw837q03q1m.jpg'
-?format=jpg      };
+          'elements-img-stage': ['Stage', 'Shows', 'Stage Shows', 'Production'],
+          'elements-img-circus': ['Circus', 'Acrobats', 'Aerial', 'Fire'],
+          'elements-img-immersive': ['Immersive', 'Characters', 'Roaming']
+      };
 
       try {
-          const sb = window.supabase.createClient(SB_URL, SB_KEY);
           const [{data:acts},{data:chars}] = await Promise.all([
               sb.from('acts').select('slug,category,web_cover_image,image_url').eq('is_web_public', true),
               sb.from('pld_characters').select('slug,category,web_cover_image,image').eq('is_web_public', true)

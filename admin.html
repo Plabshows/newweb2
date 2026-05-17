@@ -1,1 +1,620 @@
-<!DOCTYPE html><html lang="en"><head><script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-P3RG4P3H",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><script type="text/javascript">!function(t,e,n,c,a,r,s){t[n]=t[n]||function(){(t[n].q=t[n].q||[]).push(arguments)},(r=e.createElement(c)).async=1,r.src="https://www.clarity.ms/tag/wmkhq6d3ox",(s=e.getElementsByTagName(c)[0]).parentNode.insertBefore(r,s)}(window,document,"clarity","script")</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Dashboard | Performance Lab</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/@supabase/supabase-js@2"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><style>:root{--primary:#ffb1c1;--secondary:#4cd7f7;--background:#0d0d0d;--surface:#1a1a1a}body{font-family:Inter,sans-serif;background:var(--background);color:#fff}.font-headline{font-family:'Space Grotesk',sans-serif}.glass-card{background:rgba(255,255,255,.03);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}.switch{position:relative;display:inline-block;width:40px;height:20px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#333;transition:.4s;border-radius:20px}.slider:before{position:absolute;content:"";height:16px;width:16px;left:2px;bottom:2px;background-color:#fff;transition:.4s;border-radius:50%}input:checked+.slider{background-color:var(--primary)}input:checked+.slider:before{transform:translateX(20px)}.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}.gallery-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}.gallery-item img,.gallery-item video{width:100%;height:100%;object-fit:cover}.gallery-item .remove-btn{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.8);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:#ff6b6b;transition:all .2s;border:1px solid rgba(255,107,107,.3)}.gallery-item .remove-btn:hover{background:rgba(255,107,107,.3);transform:scale(1.1)}.gallery-item .video-badge{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.8);border-radius:4px;padding:2px 6px;font-size:9px;color:var(--secondary);font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:.05em}.upload-zone{border:2px dashed rgba(255,255,255,.15);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .3s}.upload-zone.dragover,.upload-zone:hover{border-color:var(--primary);background:rgba(255,177,193,.05)}.cover-preview{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;position:relative}.cover-preview img{width:100%;height:100%;object-fit:cover}.cover-preview .placeholder{color:rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;gap:8px}.upload-progress{height:3px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}.upload-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:width .3s}@keyframes spin{to{transform:rotate(360deg)}}.spinner{animation:spin .8s linear infinite}.toast{position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;transition:all .3s;transform:translateY(20px);opacity:0}.toast.show{transform:translateY(0);opacity:1}.toast.success{background:rgba(0,200,100,.15);border:1px solid rgba(0,200,100,.3);color:#00c864}.toast.error{background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:#ff6b6b}</style></head><body class="min-h-screen"><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3RG4P3H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="auth-container" class="fixed inset-0 z-[100] bg-[#0d0d0d] flex items-center justify-center p-6"><div class="glass-card p-8 rounded-2xl w-full max-w-md"><h1 class="text-2xl font-black italic text-[#ffb1c1] font-headline mb-2 text-center tracking-tighter">PERFORMANCE LAB</h1><p class="text-white/30 text-xs text-center uppercase tracking-widest mb-8">Admin Dashboard</p><form id="login-form" class="space-y-4"><div><label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Email</label> <input type="email" id="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all" placeholder="admin@performancelab.com"></div><div><label class="block text-xs uppercase tracking-widest text-white/50 mb-2">Password</label> <input type="password" id="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all"></div><button type="submit" id="login-btn" class="w-full bg-[#ffb1c1] text-black font-bold py-3 rounded-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[#ffb1c1]/20">LOGIN</button><p id="auth-error" class="text-red-400 text-xs text-center hidden"></p></form></div></div><div id="dashboard" class="hidden"><nav class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl border-b border-white/5 px-8 py-4"><div class="max-w-7xl mx-auto flex justify-between items-center"><span class="text-xl font-black italic text-[#ffb1c1] tracking-tighter font-headline">PERFORMANCE LAB ADMIN</span><div class="flex items-center gap-6"><span id="user-email" class="text-xs text-white/40 font-body uppercase tracking-widest hidden md:block"></span> <button onclick="logout()" class="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-[#ffb1c1] transition-all">LOGOUT</button></div></div></nav><main class="pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto"><header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4"><div><h2 class="font-headline text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-tighter">Web Content Manager</h2><p class="text-white/40 text-sm font-body">Manage visibility, cover photo, gallery and text for the website catalog.</p></div><div class="flex gap-4"><button onclick="loadData()" class="flex items-center gap-2 text-white/60 hover:text-white transition-all text-sm uppercase tracking-widest"><span class="material-symbols-outlined text-lg">refresh</span> Refresh</button></div></header><div class="flex gap-2 mb-6"><button onclick='setFilter("all")' id="tab-all" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest bg-white/10 text-white transition-all">All</button> <button onclick='setFilter("app")' id="tab-app" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">App Shows</button> <button onclick='setFilter("old-web")' id="tab-old-web" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">PLD Characters</button></div><div class="glass-card rounded-2xl overflow-hidden"><table class="w-full text-left border-collapse"><thead><tr class="bg-white/5 border-b border-white/10"><th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline">Show / Cover</th><th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline hidden md:table-cell">Source</th><th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-center">Web Public</th><th class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-right">Actions</th></tr></thead><tbody id="shows-table-body"></tbody></table></div></main></div><div id="toast" class="toast"><span class="material-symbols-outlined text-base" id="toast-icon">check_circle</span> <span id="toast-message"></span></div><script>const SUPABASE_URL="https://nwxepstpedmxslbznejv.supabase.co",SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM",supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY),authContainer=document.getElementById("auth-container"),dashboard=document.getElementById("dashboard"),loginForm=document.getElementById("login-form"),tableBody=document.getElementById("shows-table-body"),userEmailSpan=document.getElementById("user-email");let toastTimeout,allShows=[],currentFilter="all";async function checkSession(){const{data:{session:e}}=await supabaseClient.auth.getSession();e&&showDashboard(e.user)}function showDashboard(e){authContainer.classList.add("hidden"),dashboard.classList.remove("hidden"),userEmailSpan.innerText=e.email,loadData()}async function logout(){await supabaseClient.auth.signOut(),window.location.reload()}function setFilter(e){currentFilter=e,document.querySelectorAll(".tab-btn").forEach(e=>{e.classList.remove("bg-white/10","text-white"),e.classList.add("text-white/40")});const t=document.getElementById(`tab-${e}`);t.classList.add("bg-white/10","text-white"),t.classList.remove("text-white/40"),renderTable()}function goToEdit(e,t,s){window.location.href=`/show-details.html?show=${encodeURIComponent(s)}&edit=true`}async function loadData(){try{tableBody.innerHTML='<tr><td colspan="4" class="p-12 text-center text-white/30 animate-pulse uppercase tracking-widest text-xs">Cargando catálogo...</td></tr>';const{data:e,error:t}=await supabaseClient.from("acts").select("id, slug, name, description, image_url, photos_url, video_url, video_gallery, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image"),{data:s,error:a}=await supabaseClient.from("pld_characters").select("id, slug, name, description, long_description, image, gallery, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image");if(t||a)throw t||a;const n=(e||[]).map(e=>({...e,source:"app",_cover:e.web_cover_image||e.image_url})),o=(s||[]).map(e=>({...e,source:"old-web",_cover:e.web_cover_image||e.image}));allShows=[...n,...o].sort((e,t)=>e.is_web_public===t.is_web_public?(e.name||"").localeCompare(t.name||""):e.is_web_public?-1:1),renderTable()}catch(e){console.error("Load error:",e),tableBody.innerHTML=`<tr><td colspan="4" class="p-12 text-center text-red-400 uppercase tracking-widest text-xs">Error: ${e.message}</td></tr>`}}function renderTable(){tableBody.innerHTML="",allShows.sort((e,t)=>{const s=!!e.is_web_public;return s===!!t.is_web_public?(e.name||"").localeCompare(t.name||""):s?-1:1});const e="all"===currentFilter?allShows:allShows.filter(e=>e.source===currentFilter);0!==e.length?e.forEach(e=>{const t=document.createElement("tr");t.className="border-b border-white/5 hover:bg-white/[0.02] transition-all";const s=e.name||"Sin nombre",a=e._cover,n=e.is_web_public,o=Array.isArray(e.web_gallery)?e.web_gallery.length:0;t.innerHTML=`\n                    <td class="p-4 md:p-6">\n                        <div class="flex items-center gap-4">\n                            <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/5 flex-shrink-0 border border-white/10">\n                                ${a?`<img src="${a}" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy">`:'<div class="w-full h-full flex items-center justify-center text-white/20"><span class="material-symbols-outlined text-xl">image_not_supported</span></div>'}\n                            </div>\n                            <div>\n                                <div class="font-bold text-sm tracking-tight text-white/90">${s}</div>\n                                ${e.web_custom_title?`<div class="text-[10px] text-[#ffb1c1]/60 font-normal uppercase tracking-wider mt-0.5">${e.web_custom_title}</div>`:""}\n                                <div class="text-[10px] text-white/30 mt-0.5">${o} archivos en galería</div>\n                            </div>\n                        </div>\n                    </td>\n                    <td class="p-4 md:p-6 hidden md:table-cell">\n                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] font-bold uppercase tracking-widest text-white/40">${"app"===e.source?"App Shows":"PLD Characters"}</span>\n                    </td>\n                    <td class="p-4 md:p-6 text-center">\n                        <label class="switch">\n                            <input type="checkbox" ${n?"checked":""} onchange="togglePublic('${e.id}', '${e.source}', this.checked)">\n                            <span class="slider"></span>\n                        </label>\n                    </td>\n                    <td class="p-4 md:p-6 text-right">\n                        <div class="flex justify-end items-center gap-2">\n                        <button onclick="goToEdit('${e.id}', '${e.source}', '${e.slug||e.id}')" class="text-[10px] font-black uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hover:border-[#ffb1c1] hover:text-[#ffb1c1] transition-all whitespace-nowrap flex items-center gap-1.5">\n                            <span class="material-symbols-outlined text-xs">edit</span> EDITAR\n                        </button>\n                            <button onclick="confirmDelete('${e.id}', '${e.source}', '${s.replace(/'/g,"\\'")}')" class="text-[10px] font-black uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hover:border-red-500 hover:text-red-500 transition-all whitespace-nowrap flex items-center gap-1.5 text-white/30">\n                                <span class="material-symbols-outlined text-xs">delete</span> BORRAR\n                            </button>\n                        </div>\n                    </td>\n                `,tableBody.appendChild(t)}):tableBody.innerHTML='<tr><td colspan="4" class="p-12 text-center text-white/30 uppercase tracking-widest text-xs">No hay shows.</td></tr>'}async function togglePublic(e,t,s){const a="app"===t?"acts":"pld_characters",{error:n}=await supabaseClient.from(a).update({is_web_public:s}).eq("id",e);if(n)showToast("Error: "+n.message,"error");else{showToast(s?"Show publicado en la web ✓":"Show ocultado de la web","success");const a=allShows.find(s=>s.id===e&&s.source===t);a&&(a.is_web_public=s)}}async function confirmDelete(e,t,s){if(confirm(`¿Estás seguro de que quieres BORRAR permanentemente el show "${s}"?\n\nEsta acción no se puede deshacer.`)){const s="app"===t?"acts":"pld_characters",{error:a}=await supabaseClient.from(s).delete().eq("id",e);a?showToast("Error al borrar: "+a.message,"error"):(showToast("Show eliminado correctamente","success"),allShows=allShows.filter(s=>!(s.id===e&&s.source===t)),renderTable())}}function showToast(e,t="success"){const s=document.getElementById("toast"),a=document.getElementById("toast-message"),n=document.getElementById("toast-icon");s.className=`toast ${t}`,a.textContent=e,n.textContent="success"===t?"check_circle":"error",clearTimeout(toastTimeout),setTimeout(()=>s.classList.add("show"),10),toastTimeout=setTimeout(()=>s.classList.remove("show"),3500)}loginForm.addEventListener("submit",async e=>{e.preventDefault();const t=document.getElementById("email").value,s=document.getElementById("password").value,a=document.getElementById("auth-error"),n=document.getElementById("login-btn");n.textContent="Logging in...",n.disabled=!0;const{data:o,error:r}=await supabaseClient.auth.signInWithPassword({email:t,password:s});r?(a.innerText=r.message,a.classList.remove("hidden"),n.textContent="LOGIN",n.disabled=!1):showDashboard(o.user)}),checkSession()</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      window.addEventListener('error', function(e) {
+          const errDiv = document.createElement('div');
+          errDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#ff0000;color:#fff;z-index:99999;padding:20px;font-family:monospace;white-space:pre-wrap;';
+          errDiv.innerHTML = `<h3>🚨 JS Error</h3><p>${e.message}</p><p>Line: ${e.lineno}</p>`;
+          document.body.appendChild(errDiv);
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+          const errDiv = document.createElement('div');
+          errDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#ff0000;color:#fff;z-index:99999;padding:20px;font-family:monospace;white-space:pre-wrap;';
+          errDiv.innerHTML = `<h3>🚨 Promise Error</h3><p>${e.reason}</p>`;
+          document.body.appendChild(errDiv);
+      });
+
+      !(function (e, t, a, n) {
+        ((e[n] = e[n] || []),
+          e[n].push({ "gtm.start": new Date().getTime(), event: "gtm.js" }));
+        var g = t.getElementsByTagName(a)[0],
+          m = t.createElement(a);
+        ((m.async = !0),
+          (m.src = "https://www.googletagmanager.com/gtm.js?id=GTM-P3RG4P3H"),
+          g.parentNode.insertBefore(m, g));
+      })(window, document, "script", "dataLayer");
+    </script>
+    <script type="text/javascript">
+      !(function (t, e, n, c, a, r, s) {
+        ((t[n] =
+          t[n] ||
+          function () {
+            (t[n].q = t[n].q || []).push(arguments);
+          }),
+          ((r = e.createElement(c)).async = 1),
+          (r.src = "https://www.clarity.ms/tag/wmkhq6d3ox"),
+          (s = e.getElementsByTagName(c)[0]).parentNode.insertBefore(r, s));
+      })(window, document, "clarity", "script");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Dashboard | Performance Lab</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      :root {
+        --primary: #ffb1c1;
+        --secondary: #4cd7f7;
+        --background: #0d0d0d;
+        --surface: #1a1a1a;
+      }
+      body {
+        font-family: Inter, sans-serif;
+        background: var(--background);
+        color: #fff;
+      }
+      .font-headline {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #333;
+        transition: 0.4s;
+        border-radius: 20px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: #fff;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--primary);
+      }
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+      }
+      .gallery-item {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .gallery-item img,
+      .gallery-item video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gallery-item .remove-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        color: #ff6b6b;
+        transition: all 0.2s;
+        border: 1px solid rgba(255, 107, 107, 0.3);
+      }
+      .gallery-item .remove-btn:hover {
+        background: rgba(255, 107, 107, 0.3);
+        transform: scale(1.1);
+      }
+      .gallery-item .video-badge {
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 9px;
+        color: var(--secondary);
+        font-family: "Space Grotesk";
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .upload-zone {
+        border: 2px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .upload-zone.dragover,
+      .upload-zone:hover {
+        border-color: var(--primary);
+        background: rgba(255, 177, 193, 0.05);
+      }
+      .cover-preview {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .cover-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cover-preview .placeholder {
+        color: rgba(255, 255, 255, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .upload-progress {
+        height: 3px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .upload-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: width 0.3s;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .spinner {
+        animation: spin 0.8s linear infinite;
+      }
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast.success {
+        background: rgba(0, 200, 100, 0.15);
+        border: 1px solid rgba(0, 200, 100, 0.3);
+        color: #00c864;
+      }
+      .toast.error {
+        background: rgba(255, 107, 107, 0.15);
+        border: 1px solid rgba(255, 107, 107, 0.3);
+        color: #ff6b6b;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-P3RG4P3H"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <div
+      id="auth-container"
+      class="fixed inset-0 z-[100] bg-[#0d0d0d] flex items-center justify-center p-6"
+    >
+      <div class="glass-card p-8 rounded-2xl w-full max-w-md">
+        <h1
+          class="text-2xl font-black italic text-[#ffb1c1] font-headline mb-2 text-center tracking-tighter"
+        >
+          PERFORMANCE LAB
+        </h1>
+        <p
+          class="text-white/30 text-xs text-center uppercase tracking-widest mb-8"
+        >
+          Admin Dashboard
+        </p>
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label
+              class="block text-xs uppercase tracking-widest text-white/50 mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              required
+              class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all"
+              placeholder="admin@performancelab.com"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-xs uppercase tracking-widest text-white/50 mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              required
+              class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-[#ffb1c1] outline-none transition-all"
+            />
+          </div>
+          <button
+            type="submit"
+            id="login-btn"
+            class="w-full bg-[#ffb1c1] text-black font-bold py-3 rounded-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[#ffb1c1]/20"
+          >
+            LOGIN
+          </button>
+          <p
+            id="auth-error"
+            class="text-red-400 text-xs text-center hidden"
+          ></p>
+        </form>
+      </div>
+    </div>
+    <div id="dashboard" class="hidden">
+      <nav
+        class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl border-b border-white/5 px-8 py-4"
+      >
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          <span
+            class="text-xl font-black italic text-[#ffb1c1] tracking-tighter font-headline"
+            >PERFORMANCE LAB ADMIN</span
+          >
+          <div class="flex items-center gap-6">
+            <span
+              id="user-email"
+              class="text-xs text-white/40 font-body uppercase tracking-widest hidden md:block"
+            ></span>
+            <button
+              onclick="logout()"
+              class="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-[#ffb1c1] transition-all"
+            >
+              LOGOUT
+            </button>
+          </div>
+        </div>
+      </nav>
+      <main class="pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <header
+          class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4"
+        >
+          <div>
+            <h2
+              class="font-headline text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-tighter"
+            >
+              Web Content Manager
+            </h2>
+            <p class="text-white/40 text-sm font-body">
+              Manage visibility, cover photo, gallery and text for the website
+              catalog.
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <button
+              onclick="loadData()"
+              class="flex items-center gap-2 text-white/60 hover:text-white transition-all text-sm uppercase tracking-widest"
+            >
+              <span class="material-symbols-outlined text-lg">refresh</span>
+              Refresh</button
+            ><button
+              onclick="createNewShow()"
+              class="bg-[#ffb1c1] text-black px-6 py-2 rounded-lg font-bold uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#ffb1c1]/20 flex items-center gap-2 ml-4"
+            >
+              <span class="material-symbols-outlined text-sm">add</span> Crear
+              Show
+            </button>
+          </div>
+        </header>
+        <div class="flex gap-2 mb-6">
+          <button
+            onclick="setFilter('all')"
+            id="tab-all"
+            class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest bg-white/10 text-white transition-all"
+          >
+            All
+          </button>
+          <button
+            onclick="setFilter('app')"
+            id="tab-app"
+            class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all"
+          >
+            App Shows
+          </button>
+          <button
+            onclick="setFilter('old-web')"
+            id="tab-old-web"
+            class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all"
+          >
+            PLD Characters
+          </button>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-white/5 border-b border-white/10">
+                <th
+                  class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline"
+                >
+                  Show / Cover
+                </th>
+                <th
+                  class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline hidden md:table-cell"
+                >
+                  Source
+                </th>
+                <th
+                  class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-center"
+                >
+                  Web Public
+                </th>
+                <th
+                  class="p-4 md:p-6 text-xs uppercase tracking-[0.2em] text-white/40 font-headline text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody id="shows-table-body"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+    <div id="toast" class="toast">
+      <span class="material-symbols-outlined text-base" id="toast-icon"
+        >check_circle</span
+      >
+      <span id="toast-message"></span>
+    </div>
+    <script src="/assets/js/supabase-config.js?v=2"></script>
+    <script>
+      const authContainer = document.getElementById("auth-container"),
+        dashboard = document.getElementById("dashboard"),
+        loginForm = document.getElementById("login-form"),
+        tableBody = document.getElementById("shows-table-body"),
+        userEmailSpan = document.getElementById("user-email");
+      let toastTimeout,
+        allShows = [],
+        currentFilter = "all";
+      async function checkSession() {
+        const {
+          data: { session: e },
+        } = await supabaseClient.auth.getSession();
+        e && showDashboard(e.user);
+      }
+      function showDashboard(e) {
+        (authContainer.classList.add("hidden"),
+          dashboard.classList.remove("hidden"),
+          (userEmailSpan.innerText = e.email),
+          loadData());
+      }
+      async function logout() {
+        (await supabaseClient.auth.signOut(), window.location.reload());
+      }
+      function setFilter(e) {
+        ((currentFilter = e),
+          document.querySelectorAll(".tab-btn").forEach((e) => {
+            (e.classList.remove("bg-white/10", "text-white"),
+              e.classList.add("text-white/40"));
+          }));
+        const t = document.getElementById(`tab-${e}`);
+        (t.classList.add("bg-white/10", "text-white"),
+          t.classList.remove("text-white/40"),
+          renderTable());
+      }
+      function goToEdit(e, t, s) {
+        window.location.href = `/show-details.html?show=${encodeURIComponent(s)}&edit=true`;
+      }
+      async function createNewShow() {
+        const e = prompt("Introduce el título del nuevo show:");
+        if (!e) return;
+        const t =
+          e
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)+/g, "") || `show-${Date.now()}`;
+        const { error: s } = await supabaseClient
+          .from("acts")
+          .insert([
+            { name: e, slug: t, is_web_public: !1, web_custom_title: e },
+          ]);
+        s
+          ? showToast("Error al crear: " + s.message, "error")
+          : (showToast("Show creado", "success"), loadData());
+      }
+      async function loadData() {
+        try {
+          tableBody.innerHTML =
+            '<tr><td colspan="4" class="p-12 text-center text-white/30 animate-pulse uppercase tracking-widest text-xs">Cargando catálogo...</td></tr>';
+          const { data: e, error: t } = await supabaseClient
+              .from("acts")
+              .select(
+                "id, slug, name, description, image_url, photos_url, video_url, video_gallery, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image",
+              ),
+            { data: s, error: a } = await supabaseClient
+              .from("pld_characters")
+              .select(
+                "id, slug, name, description, long_description, image, gallery, is_web_public, web_custom_title, web_description, web_gallery, web_cover_image",
+              );
+          if (t || a) throw t || a;
+          const n = (e || []).map((e) => ({
+              ...e,
+              source: "app",
+              _cover: e.web_cover_image || e.image_url,
+            })),
+            o = (s || []).map((e) => ({
+              ...e,
+              source: "old-web",
+              _cover: e.web_cover_image || e.image,
+            }));
+          ((allShows = [...n, ...o].sort((e, t) =>
+            e.is_web_public === t.is_web_public
+              ? (e.name || "").localeCompare(t.name || "")
+              : e.is_web_public
+                ? -1
+                : 1,
+          )),
+            renderTable());
+        } catch (e) {
+          (console.error("Load error:", e),
+            (tableBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-red-400 uppercase tracking-widest text-xs">Error: ${e.message}</td></tr>`));
+        }
+      }
+      function renderTable() {
+        ((tableBody.innerHTML = ""),
+          allShows.sort((e, t) => {
+            const s = !!e.is_web_public;
+            return s === !!t.is_web_public
+              ? (e.name || "").localeCompare(t.name || "")
+              : s
+                ? -1
+                : 1;
+          }));
+        const e =
+          "all" === currentFilter
+            ? allShows
+            : allShows.filter((e) => e.source === currentFilter);
+        0 !== e.length
+          ? e.forEach((e) => {
+              const t = document.createElement("tr");
+              t.className =
+                "border-b border-white/5 hover:bg-white/[0.02] transition-all";
+              const s = e.name || "Sin nombre",
+                a = e._cover,
+                n = e.is_web_public,
+                o = Array.isArray(e.web_gallery) ? e.web_gallery.length : 0;
+              ((t.innerHTML = `\n                    <td class="p-4 md:p-6">\n                        <div class="flex items-center gap-4">\n                            <div class="w-12 h-12 rounded-lg overflow-hidden bg-white/5 flex-shrink-0 border border-white/10">\n                                ${a ? `<img src="${a}" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy">` : '<div class="w-full h-full flex items-center justify-center text-white/20"><span class="material-symbols-outlined text-xl">image_not_supported</span></div>'}\n                            </div>\n                            <div>\n                                <div class="font-bold text-sm tracking-tight text-white/90">${s}</div>\n                                ${e.web_custom_title ? `<div class="text-[10px] text-[#ffb1c1]/60 font-normal uppercase tracking-wider mt-0.5">${e.web_custom_title}</div>` : ""}\n                                <div class="text-[10px] text-white/30 mt-0.5">${o} archivos en galería</div>\n                            </div>\n                        </div>\n                    </td>\n                    <td class="p-4 md:p-6 hidden md:table-cell">\n                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] font-bold uppercase tracking-widest text-white/40">${"app" === e.source ? "App Shows" : "PLD Characters"}</span>\n                    </td>\n                    <td class="p-4 md:p-6 text-center">\n                        <label class="switch">\n                            <input type="checkbox" ${n ? "checked" : ""} onchange="togglePublic('${e.id}', '${e.source}', this.checked)">\n                            <span class="slider"></span>\n                        </label>\n                    </td>\n                    <td class="p-4 md:p-6 text-right">\n                        <div class="flex justify-end items-center gap-2">\n                        <button onclick="goToEdit('${e.id}', '${e.source}', '${e.slug || e.id}')" class="text-[10px] font-black uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hover:border-[#ffb1c1] hover:text-[#ffb1c1] transition-all whitespace-nowrap flex items-center gap-1.5">\n                            <span class="material-symbols-outlined text-xs">edit</span> EDITAR\n                        </button>\n                            <button onclick="confirmDelete('${e.id}', '${e.source}', '${s.replace(/'/g, "\\'")}')" class="text-[10px] font-black uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hover:border-red-500 hover:text-red-500 transition-all whitespace-nowrap flex items-center gap-1.5 text-white/30">\n                                <span class="material-symbols-outlined text-xs">delete</span> BORRAR\n                            </button>\n                        </div>\n                    </td>\n                `),
+                tableBody.appendChild(t));
+            })
+          : (tableBody.innerHTML =
+              '<tr><td colspan="4" class="p-12 text-center text-white/30 uppercase tracking-widest text-xs">No hay shows.</td></tr>');
+      }
+      async function togglePublic(e, t, s) {
+        const a = "app" === t ? "acts" : "pld_characters",
+          { error: n } = await supabaseClient
+            .from(a)
+            .update({ is_web_public: s })
+            .eq("id", e);
+        if (n) showToast("Error: " + n.message, "error");
+        else {
+          showToast(
+            s ? "Show publicado en la web ✓" : "Show ocultado de la web",
+            "success",
+          );
+          const a = allShows.find((s) => s.id === e && s.source === t);
+          a && (a.is_web_public = s);
+        }
+      }
+      async function confirmDelete(e, t, s) {
+        if (
+          confirm(
+            `¿Estás seguro de que quieres BORRAR permanentemente el show "${s}"?\n\nEsta acción no se puede deshacer.`,
+          )
+        ) {
+          const s = "app" === t ? "acts" : "pld_characters",
+            { error: a } = await supabaseClient.from(s).delete().eq("id", e);
+          a
+            ? showToast("Error al borrar: " + a.message, "error")
+            : (showToast("Show eliminado correctamente", "success"),
+              (allShows = allShows.filter(
+                (s) => !(s.id === e && s.source === t),
+              )),
+              renderTable());
+        }
+      }
+      function showToast(e, t = "success") {
+        const s = document.getElementById("toast"),
+          a = document.getElementById("toast-message"),
+          n = document.getElementById("toast-icon");
+        ((s.className = `toast ${t}`),
+          (a.textContent = e),
+          (n.textContent = "success" === t ? "check_circle" : "error"),
+          clearTimeout(toastTimeout),
+          setTimeout(() => s.classList.add("show"), 10),
+          (toastTimeout = setTimeout(() => s.classList.remove("show"), 3500)));
+      }
+      (loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const t = document.getElementById("email").value,
+          s = document.getElementById("password").value,
+          a = document.getElementById("auth-error"),
+          n = document.getElementById("login-btn");
+        ((n.textContent = "Logging in..."), (n.disabled = !0));
+        const { data: o, error: r } =
+          await supabaseClient.auth.signInWithPassword({
+            email: t,
+            password: s,
+          });
+        r
+          ? ((a.innerText = r.message),
+            a.classList.remove("hidden"),
+            (n.textContent = "LOGIN"),
+            (n.disabled = !1))
+          : showDashboard(o.user);
+      }),
+        checkSession());
+    </script>
+  </body>
+</html>

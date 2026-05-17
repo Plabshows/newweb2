@@ -12,12 +12,9 @@ import urllib.parse
 import urllib.error
 
 # ── Config ────────────────────────────────────────────────────────────────────
-SUPABASE_URL = "https://nwxepstpedmxslbznejv.supabase.co"
-SUPABASE_KEY = (
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0."
-    "l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM"
-)
+# NOTE: Update these with your NEW Supabase credentials from .env
+SUPABASE_URL = "https://szckmpiboisngkgeukga.supabase.co"
+SUPABASE_KEY = "sb_publishable_lgiYJfsIQPseUmggHG7IeQ_8hyxXwMj"
 
 # Destino: carpeta en tu escritorio
 DEST = os.path.expanduser("~/Desktop/Performance Lab — Acts Backup")

@@ -411,10 +411,15 @@ document.addEventListener('DOMContentLoaded', initArchitectsGSAP);
 </div>
 </section>
 <script>
-(async function loadLabInAction() {
-    const SUPABASE_URL = 'https://nwxepstpedmxslbznejv.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53eGVwc3RwZWRteHNsYnpuZWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MDQ4NTQsImV4cCI6MjA4Njk4MDg1NH0.l4zN1IAwDXsMbkRW3qzN0fc-jB69KPbKV8rQpn13reM';
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    <!-- Use centralized Supabase config -->
+    <script src="assets/js/supabase-config.js"></script>
+    <script>
+    (async function loadLabInAction() {
+        if (!window.supabaseClient) {
+            console.error('[PL] Supabase client not initialized');
+            return;
+        }
+        const sb = window.supabaseClient;
 
     const carousel = document.getElementById('lab-action-carousel');
     const loading  = document.getElementById('lab-action-loading');
