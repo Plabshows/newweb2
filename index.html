@@ -1405,8 +1405,11 @@ function escapeHtml(str) {
 
           Object.keys(config).forEach(imgId => {
               const val = config[imgId];
+              const element = document.getElementById(imgId);
+              if (!element) return; // Skip if the element doesn't exist in the page
+
               if (typeof val === 'string') {
-                  document.getElementById(imgId).src = val;
+                  element.src = val;
               } else {
                   const cats = val;
                   const matches = pool.filter(item => {
@@ -1418,7 +1421,7 @@ function escapeHtml(str) {
                       const randomMatch = matches[Math.floor(Math.random() * matches.length)];
                       const imgUrl = randomMatch.web_cover_image || randomMatch.image_url || randomMatch.image;
                       if (imgUrl) {
-                          document.getElementById(imgId).src = imgUrl;
+                          element.src = imgUrl;
                       }
                   }
               }
